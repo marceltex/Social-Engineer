@@ -12,4 +12,4 @@ This is the repository for the social engineering detection Android app develope
 
 **Java version used:** Java 8 update 92
 
-**Project web site:** https://www.social-engineer.co.za
+**Project web site:** http://www.social-engineer.co.za
