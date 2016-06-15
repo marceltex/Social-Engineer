@@ -11,3 +11,5 @@ This is the repository for the social engineering detection Android app develope
 **Gradle used to build app:** Gradle 2.1.2
 
 **Java version used:** Java 8 update 92
+
+**Project web site:** https://www.social-engineer.co.za
