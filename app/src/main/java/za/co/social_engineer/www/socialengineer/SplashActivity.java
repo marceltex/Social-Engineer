@@ -16,7 +16,6 @@ public class SplashActivity extends AppCompatActivity {
     private static final String DISPLAYED = "DISPLAYED";
 
     // Activity object required so that the splash activity can be finished from the SEADM activity.
-    // Splash activity needs to be finished to prevents app from returning to splash if user pushes the back button.
     public static Activity splash;
 
     private boolean hasBeenDisplayed = false; // Boolean to keep track of whether the splash has been displayed or not
@@ -24,7 +23,7 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
+
         getSupportActionBar().hide();
 
         setContentView(R.layout.activity_splash);

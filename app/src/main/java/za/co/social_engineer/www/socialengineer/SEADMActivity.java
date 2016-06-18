@@ -9,5 +9,7 @@ public class SEADMActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seadm);
+
+        SplashActivity.splash.finish(); // Finish Splash Activity, so that if user presses back button, it is not displayed
     }
 }
