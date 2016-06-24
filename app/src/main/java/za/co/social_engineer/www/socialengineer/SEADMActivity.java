@@ -5,7 +5,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 /**
  * Activity to guide the user through the SEADMv2 to detect whether the user is the victim of a social
@@ -15,8 +14,6 @@ import android.view.View;
  */
 
 public class SEADMActivity extends AppCompatActivity {
-
-    final View coordinatorLayoutView = findViewById(R.id.snackbar_position);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +38,7 @@ public class SEADMActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        Snackbar snackbar = Snackbar.make(coordinatorLayoutView, "Todo...", Snackbar.LENGTH_LONG);
+        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), "Todo...", Snackbar.LENGTH_LONG);
 
         switch (id) {
             case R.id.menu_item_help:
