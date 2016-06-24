@@ -1,29 +1,22 @@
 package za.co.social_engineer.www.socialengineer;
 
-import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
+import android.view.View;
 
 /**
  * Activity to guide the user through the SEADMv2 to detect whether the user is the victim of a social
  * engineering attack or not.
- * <p/>
+ *
  * Created by Marcel Teixeira on 2016/06/19
  */
 
 public class SEADMActivity extends AppCompatActivity {
 
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
+    final View coordinatorLayoutView = findViewById(R.id.snackbar_position);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +24,6 @@ public class SEADMActivity extends AppCompatActivity {
         setContentView(R.layout.activity_seadm);
 
         SplashActivity.splash.finish(); // Finish Splash Activity, so that if user presses back button, it is not displayed
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     @Override
@@ -51,49 +41,15 @@ public class SEADMActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        Snackbar snackbar = Snackbar.make(coordinatorLayoutView, "Todo...", Snackbar.LENGTH_LONG);
+
         switch (id) {
             case R.id.menu_item_help:
-                Snackbar snackbar = Snackbar.make();
+            case R.id.menu_item_about:
+                snackbar.show();
+                break;
         }
-    }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "SEADM Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app URL is correct.
-                Uri.parse("android-app://za.co.social_engineer.www.socialengineer/http/host/path")
-        );
-        AppIndex.AppIndexApi.start(client, viewAction);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "SEADM Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app URL is correct.
-                Uri.parse("android-app://za.co.social_engineer.www.socialengineer/http/host/path")
-        );
-        AppIndex.AppIndexApi.end(client, viewAction);
-        client.disconnect();
+        return super.onOptionsItemSelected(item);
     }
 }
