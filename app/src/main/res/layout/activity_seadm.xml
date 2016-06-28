@@ -10,7 +10,7 @@
     tools:context="za.co.social_engineer.www.socialengineer.SEADMActivity">
 
     <FrameLayout
-        android:id="@+id/question"
+        android:id="@+id/question_frame_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </FrameLayout>
