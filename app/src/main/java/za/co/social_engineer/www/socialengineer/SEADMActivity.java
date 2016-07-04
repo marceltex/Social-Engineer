@@ -21,6 +21,9 @@ public class SEADMActivity extends AppCompatActivity {
         setContentView(R.layout.activity_seadm);
 
         SplashActivity.splash.finish(); // Finish Splash Activity, so that if user presses back button, it is not displayed
+
+        DatabaseHandler databaseHandler = new DatabaseHandler("moutonf.co.za", "3306", "SEPTT",
+                "septt", "toor");
     }
 
     @Override

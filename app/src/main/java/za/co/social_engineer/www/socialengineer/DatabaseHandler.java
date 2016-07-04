@@ -37,6 +37,8 @@ public class DatabaseHandler {
 
             ResultSet rs = stmnt.executeQuery("SELECT * FROM questions");
 
+            conn.close();
+
             return rs;
         } catch(Exception e) {
             e.printStackTrace();
