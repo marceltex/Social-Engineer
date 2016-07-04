@@ -2,5 +2,8 @@
     <string name="app_name">Social Engineer</string>
     <string name="help">Help</string>
     <string name="about">About</string>
+    <string name="yes_btn_text">Yes</string>
+    <string name="no_btn_text">No</string>
+
     <string name="sample_question">Do you understand what is being requested?</string>
 </resources>

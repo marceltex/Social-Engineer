@@ -24,6 +24,8 @@ public class SEADMActivity extends AppCompatActivity {
 
         DatabaseHandler databaseHandler = new DatabaseHandler("moutonf.co.za", "3306", "SEPTT",
                 "septt", "toor");
+
+
     }
 
     @Override
