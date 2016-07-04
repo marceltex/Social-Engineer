@@ -26,23 +26,18 @@ public class DatabaseHandler {
         this.password = password;
     }
 
-    public ResultSet getAll() {
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
+    public ResultSet getAll() throws Exception {
+        Class.forName("com.mysql.jdbc.Driver");
 
-            Connection conn = DriverManager.getConnection("jdbc:mysql://" + databaseUrl + ":" +
-                    databasePort + "/" + databaseName, username, password);
+        Connection conn = DriverManager.getConnection("jdbc:mysql://" + databaseUrl + ":" +
+                databasePort + "/" + databaseName, username, password);
 
-            Statement stmnt = conn.createStatement();
+        Statement stmnt = conn.createStatement();
 
-            ResultSet rs = stmnt.executeQuery("SELECT * FROM questions");
+        ResultSet rs = stmnt.executeQuery("SELECT * FROM questions");
 
-            conn.close();
+        conn.close();
 
-            return rs;
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+        return rs;
     }
 }
