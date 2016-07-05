@@ -23,8 +23,10 @@ public class SEADMActivity extends AppCompatActivity {
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 
+        // Required to allow the app to process network requests on the main thread
+        // Todo: This must change before final version is released. All network transactions should
+        // be done with an AsyncTask
         StrictMode.setThreadPolicy(policy);
-
         SplashActivity.splash.finish(); // Finish Splash Activity, so that if user presses back button, it is not displayed
 
         yesButton = (Button) findViewById(R.id.button_yes);
