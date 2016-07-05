@@ -13,3 +13,7 @@ This is the repository for the social engineering detection Android app develope
 **Java version used:** Java 8 update 92
 
 **Project web site:** http://www.social-engineer.co.za
+
+## External Libraries Used:
+
+**MySQL JDBC Driver 3.0.17** - http://dev.mysql.com/downloads/file/?id=13460
