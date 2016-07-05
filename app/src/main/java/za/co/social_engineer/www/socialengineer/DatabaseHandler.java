@@ -1,9 +1,6 @@
 package za.co.social_engineer.www.socialengineer;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 
 /**
  * Class used to manage database CRUD
@@ -26,7 +23,7 @@ public class DatabaseHandler {
         this.password = password;
     }
 
-    public ResultSet getAll() throws Exception {
+    public ResultSet getFirstQuestion() throws Exception {
         Class.forName("com.mysql.jdbc.Driver");
 
         Connection conn = DriverManager.getConnection("jdbc:mysql://" + databaseUrl + ":" +
@@ -34,7 +31,7 @@ public class DatabaseHandler {
 
         Statement stmnt = conn.createStatement();
 
-        ResultSet rs = stmnt.executeQuery("SELECT * FROM questions");
+        ResultSet rs = stmnt.executeQuery("SELECT * FROM questions WHERE id = 2");
 
         conn.close();
 
