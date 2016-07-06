@@ -101,8 +101,23 @@ public class DatabaseHandler {
         Statement stmnt = conn.createStatement();
 
         ResultSet stateTransition = stmnt.executeQuery("SELECT * FROM " + TABLE_STATE_TRANSITIONS +
-                " WHERE ");
+                " WHERE " + KEY_STATE + " = " + currentState + " AND " + KEY_MATCH + " = " + nextState);
+
+        int questionSet = stateTransition.getInt(4);
+
+        ResultSet nextQuestion = null;
+
+        // If state doesn't change return next question in current state
+        if (questionSet == currentState) {
+            nextQuestion = stmnt.executeQuery("SELECT * FROM " + TABLE_QUESTIONS + " WHERE "
+                    + KEY_ID + " = " + (questionId++));
+        } else {
+            nextQuestion = stmnt.executeQuery("SELECT * FROM " + TABLE_QUESTIONS + " WHERE "
+                    + KEY_QUESTION_SET + " = " + questionSet + " ORDER BY " + KEY_ID);
+        }
 
         conn.close();
+
+        return nextQuestion;
     }
 }
