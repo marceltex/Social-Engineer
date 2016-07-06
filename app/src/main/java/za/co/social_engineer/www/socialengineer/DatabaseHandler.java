@@ -9,6 +9,13 @@ import java.sql.*;
  */
 public class DatabaseHandler {
 
+    private static final String QUESTIONS_TABLE = "questions";
+    private static final String STATE_TRANSITIONS_TABLE = "stateTransitions";
+    private static final String STATE_TABLE = "State";
+    private static final String COMPLEX_QUESTIONS_TABLE = "complexQuestions";
+
+    private static final int FIRST_QUESTION_ID = 2;
+
     private String databaseUrl;
     private String databasePort;
     private String databaseName;
@@ -38,11 +45,12 @@ public class DatabaseHandler {
 
         Statement stmnt = conn.createStatement();
 
-        ResultSet rs = stmnt.executeQuery("SELECT * FROM questions WHERE id = 2");
+        ResultSet firstQuestion = stmnt.executeQuery("SELECT * FROM " + QUESTIONS_TABLE +
+                " WHERE id = " + FIRST_QUESTION_ID);
 
         conn.close();
 
-        return rs;
+        return firstQuestion;
     }
 
     /**
@@ -55,6 +63,15 @@ public class DatabaseHandler {
      * @throws Exception If connection to database could not be established
      */
     public ResultSet getNextQuestion(int questionId, int currentState, int nextState) throws Exception {
+        Class.forName("com.mysql.jdbc.Driver");
 
+        Connection conn = DriverManager.getConnection("jdbc:mysql://" + databaseUrl + ":" +
+                databasePort + "/" + databaseName, username, password);
+
+        Statement stmnt = conn.createStatement();
+
+        ResultSet stateTransition = stmnt.executeQuery("SELECT * FROM stateTransitions");
+
+        conn.close();
     }
 }
