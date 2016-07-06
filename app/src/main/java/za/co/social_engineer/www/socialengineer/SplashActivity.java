@@ -13,7 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private static final String TAG = "Splash_Activity";
+    private static final String TAG = "SplashActivity";
     private static final String DISPLAYED = "DISPLAYED";
 
     // Activity object required so that the splash activity can be finished from the SEADM activity.

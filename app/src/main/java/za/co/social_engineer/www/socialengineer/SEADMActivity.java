@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 
 public class SEADMActivity extends AppCompatActivity {
 
-    private static final String TAG = "SEADM_Activity";
+    private static final String TAG = "SEADMActivity";
 
     private Button yesButton;
     private Button noButton;
