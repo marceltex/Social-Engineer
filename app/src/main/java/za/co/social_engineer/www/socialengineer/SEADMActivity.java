@@ -18,6 +18,8 @@ public class SEADMActivity extends AppCompatActivity {
 
     private TextView questionTextView;
 
+    private ResultSet currentQuestion; // Question currently being displayed
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,16 +38,16 @@ public class SEADMActivity extends AppCompatActivity {
 
         questionTextView = (TextView) findViewById(R.id.text_view_question);
 
-        DatabaseHandler databaseHandler = new DatabaseHandler("moutonf.co.za", "3306", "SEPTT",
+        final DatabaseHandler databaseHandler = new DatabaseHandler("moutonf.co.za", "3306", "SEPTT",
                 "septt", "toor");
 
         // Set text of questionTextView to the string of the first question of the SEADM
         try {
-            ResultSet rs = databaseHandler.getFirstQuestion();
+            currentQuestion = databaseHandler.getFirstQuestion();
 
-            rs.next();
+            currentQuestion.next();
 
-            questionTextView.setText(rs.getString(3));
+            questionTextView.setText(currentQuestion.getString(3));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -53,14 +55,34 @@ public class SEADMActivity extends AppCompatActivity {
         yesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                try {
+                    int questionId = currentQuestion.getInt(1);
+                    int currentState = currentQuestion.getInt(2);
+                    int nextState = currentQuestion.getInt(5);
 
+                    currentQuestion = databaseHandler.getNextQuestion(questionId, currentState, nextState);
+
+                    questionTextView.setText(currentQuestion.getString(3));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
 
         noButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                try {
+                    int questionId = currentQuestion.getInt(1);
+                    int currentState = currentQuestion.getInt(2);
+                    int nextState = currentQuestion.getInt(7);
 
+                    currentQuestion = databaseHandler.getNextQuestion(questionId, currentState, nextState);
+
+                    questionTextView.setText(currentQuestion.getString(3));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
     }

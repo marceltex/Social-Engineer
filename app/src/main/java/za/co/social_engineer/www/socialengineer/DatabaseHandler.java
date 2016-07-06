@@ -105,7 +105,7 @@ public class DatabaseHandler {
 
         int questionSet = stateTransition.getInt(4);
 
-        ResultSet nextQuestion = null;
+        ResultSet nextQuestion;
 
         // If state doesn't change return next question in current state
         if (questionSet == currentState) {
