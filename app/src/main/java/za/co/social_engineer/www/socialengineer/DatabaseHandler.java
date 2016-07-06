@@ -23,6 +23,13 @@ public class DatabaseHandler {
         this.password = password;
     }
 
+    /**
+     * Method to get the first question from the questions table  of the SEPTT databaseand return it
+     * as a ResultSet
+     *
+     * @return ResultSet containing the first question to be asked
+     * @throws Exception If connection to database could not be established
+     */
     public ResultSet getFirstQuestion() throws Exception {
         Class.forName("com.mysql.jdbc.Driver");
 
