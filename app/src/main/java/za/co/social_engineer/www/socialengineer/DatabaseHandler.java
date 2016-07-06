@@ -9,10 +9,40 @@ import java.sql.*;
  */
 public class DatabaseHandler {
 
-    private static final String QUESTIONS_TABLE = "questions";
-    private static final String STATE_TRANSITIONS_TABLE = "stateTransitions";
-    private static final String STATE_TABLE = "State";
-    private static final String COMPLEX_QUESTIONS_TABLE = "complexQuestions";
+    private static final String TAG = "DatabaseHandler";
+
+    // Table names
+    private static final String TABLE_QUESTIONS = "questions";
+    private static final String TABLE_STATE_TRANSITIONS = "stateTransitions";
+    private static final String TABLE_STATE = "State";
+    private static final String TABLE_COMPLEX_QUESTIONS = "complexQuestions";
+
+    // Common column names
+    private static final String KEY_ID = "id";
+    private static final String KEY_QUESTION_SET = "questionSet";
+
+    // Questions table column names
+    private static final String KEY_QUESTION = "question";
+    private static final String KEY_OPTION_A = "optionA";
+    private static final String KEY_RETURN_A = "returnA";
+    private static final String KEY_OPTION_B = "optionB";
+    private static final String KEY_RETURN_B = "returnB";
+    private static final String KEY_IS_SKIPPABLE = "isSkippable";
+    private static final String KEY_IS_COUNT = "isCount";
+    private static final String KEY_IS_FINAL_COUNT = "isFinalCount";
+
+    // State transitions table column names
+    private static final String KEY_STATE = "state";
+    private static final String KEY_MATCH = "match";
+    private static final String KEY_TRANSITION = "transition";
+
+    // State table column names
+    private static final String KEY_NAME = "name";
+
+    // Complex table column names
+    private static final String KEY_QUESTIONS = "questions";
+    private static final String KEY_COUNT = "count";
+    private static final String KEY_RETURN = "return";
 
     private static final int FIRST_QUESTION_ID = 2;
 
@@ -45,8 +75,8 @@ public class DatabaseHandler {
 
         Statement stmnt = conn.createStatement();
 
-        ResultSet firstQuestion = stmnt.executeQuery("SELECT * FROM " + QUESTIONS_TABLE +
-                " WHERE id = " + FIRST_QUESTION_ID);
+        ResultSet firstQuestion = stmnt.executeQuery("SELECT * FROM " + TABLE_QUESTIONS +
+                " WHERE " + KEY_ID + " = " + FIRST_QUESTION_ID);
 
         conn.close();
 
@@ -70,7 +100,8 @@ public class DatabaseHandler {
 
         Statement stmnt = conn.createStatement();
 
-        ResultSet stateTransition = stmnt.executeQuery("SELECT * FROM stateTransitions");
+        ResultSet stateTransition = stmnt.executeQuery("SELECT * FROM " + TABLE_STATE_TRANSITIONS +
+                " WHERE ");
 
         conn.close();
     }
