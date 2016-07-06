@@ -24,10 +24,10 @@ public class DatabaseHandler {
     }
 
     /**
-     * Method to get the first question from the questions table  of the SEPTT databaseand return it
-     * as a ResultSet
+     * Method to get the first question from the questions table  of the SEPTT database and return it
+     * as a ResultSet.
      *
-     * @return ResultSet containing the first question to be asked
+     * @return ResultSet containing the first question to be displayed
      * @throws Exception If connection to database could not be established
      */
     public ResultSet getFirstQuestion() throws Exception {
@@ -43,5 +43,18 @@ public class DatabaseHandler {
         conn.close();
 
         return rs;
+    }
+
+    /**
+     * Method to determine and return a ResultSet with the next question that must be displayed.
+     *
+     * @param questionId QuestionID of the question that is currently displayed to the user
+     * @param currentState State that the current question is in
+     * @param nextState State that must be transitioned to
+     * @return ResultSet containing the next question to be displayed
+     * @throws Exception If connection to database could not be established
+     */
+    public ResultSet getNextQuestion(int questionId, int currentState, int nextState) throws Exception {
+
     }
 }
