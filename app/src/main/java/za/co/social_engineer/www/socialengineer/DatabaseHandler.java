@@ -33,7 +33,7 @@ public class DatabaseHandler {
 
     // State transitions table column names
     private static final String KEY_STATE = "state";
-    private static final String KEY_MATCH = "match";
+    private static final String KEY_MATCH = "`match`";
     private static final String KEY_TRANSITION = "transition";
 
     // State table column names
@@ -76,7 +76,7 @@ public class DatabaseHandler {
         Statement stmnt = conn.createStatement();
 
         ResultSet firstQuestion = stmnt.executeQuery("SELECT * FROM " + TABLE_QUESTIONS +
-                " WHERE " + KEY_ID + " = " + FIRST_QUESTION_ID);
+                " WHERE " + KEY_ID + " = " + FIRST_QUESTION_ID + ";");
 
         conn.close();
 
@@ -93,6 +93,8 @@ public class DatabaseHandler {
      * @throws Exception If connection to database could not be established
      */
     public ResultSet getNextQuestion(int questionId, int currentState, int nextState) throws Exception {
+        ResultSet nextQuestion = null;
+
         Class.forName("com.mysql.jdbc.Driver");
 
         Connection conn = DriverManager.getConnection("jdbc:mysql://" + databaseUrl + ":" +
@@ -101,21 +103,21 @@ public class DatabaseHandler {
         Statement stmnt = conn.createStatement();
 
         ResultSet stateTransition = stmnt.executeQuery("SELECT * FROM " + TABLE_STATE_TRANSITIONS +
-                " WHERE " + KEY_STATE + " = " + currentState + " AND " + KEY_MATCH + " = " + nextState);
+                " WHERE " + KEY_STATE + " = " + currentState + " AND " + KEY_MATCH + " = " +
+                nextState + ";");
 
-        int questionSet = stateTransition.getInt(4);
+        if (stateTransition.next()) {
+            int questionSet = stateTransition.getInt(4);
 
-        ResultSet nextQuestion;
-
-        // If state doesn't change return next question in current state
-        if (questionSet == currentState) {
-            nextQuestion = stmnt.executeQuery("SELECT * FROM " + TABLE_QUESTIONS + " WHERE "
-                    + KEY_ID + " = " + (questionId++));
-        } else {
-            nextQuestion = stmnt.executeQuery("SELECT * FROM " + TABLE_QUESTIONS + " WHERE "
-                    + KEY_QUESTION_SET + " = " + questionSet + " ORDER BY " + KEY_ID);
+            // If state doesn't change return next question in current state
+            if (questionSet == currentState) {
+                nextQuestion = stmnt.executeQuery("SELECT * FROM " + TABLE_QUESTIONS + " WHERE "
+                        + KEY_ID + " = " + (questionId++) + ";");
+            } else {
+                nextQuestion = stmnt.executeQuery("SELECT * FROM " + TABLE_QUESTIONS + " WHERE "
+                        + KEY_QUESTION_SET + " = " + questionSet + " ORDER BY " + KEY_ID + ";");
+            }
         }
-
         conn.close();
 
         return nextQuestion;
