@@ -45,9 +45,9 @@ public class SEADMActivity extends AppCompatActivity {
         try {
             currentQuestion = databaseHandler.getFirstQuestion();
 
-            currentQuestion.next();
-
-            questionTextView.setText(currentQuestion.getString(3));
+            if (currentQuestion.next()) {
+                questionTextView.setText(currentQuestion.getString(3));
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -62,7 +62,9 @@ public class SEADMActivity extends AppCompatActivity {
 
                     currentQuestion = databaseHandler.getNextQuestion(questionId, currentState, nextState);
 
-                    questionTextView.setText(currentQuestion.getString(3));
+                    if (currentQuestion.next()) {
+                        questionTextView.setText(currentQuestion.getString(3));
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -79,7 +81,9 @@ public class SEADMActivity extends AppCompatActivity {
 
                     currentQuestion = databaseHandler.getNextQuestion(questionId, currentState, nextState);
 
-                    questionTextView.setText(currentQuestion.getString(3));
+                    if (currentQuestion.next()) {
+                        questionTextView.setText(currentQuestion.getString(3));
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
