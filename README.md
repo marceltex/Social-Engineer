@@ -4,7 +4,7 @@ This is the repository for the social engineering detection Android app develope
 
 **Minimum Android version required:** Android 4.0.3 (Ice Cream Sandwich) (API 15)
 
-**IDE used for evelopment:** Android Studio 2.1.2
+**IDE used for development:** Android Studio 2.1.2
 
 **Android SDK Build-tools used:** Android SDK Build-tools 24
 
@@ -13,7 +13,3 @@ This is the repository for the social engineering detection Android app develope
 **Java version used:** Java 8 update 92
 
 **Project web site:** http://www.social-engineer.co.za
-
-## External Libraries Used:
-
-**MySQL JDBC Driver 3.0.17** - http://dev.mysql.com/downloads/file/?id=13460
