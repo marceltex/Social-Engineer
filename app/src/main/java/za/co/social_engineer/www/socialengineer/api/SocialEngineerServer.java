@@ -1,7 +1,14 @@
 package za.co.social_engineer.www.socialengineer.api;
 
+import retrofit2.http.GET;
+
 /**
- * Created by Marcel on 2016/07/09.
+ * Interface that defines HTTP GET requests used by Retrofit.
+ *
+ * Created by Marcel Teixeira on 2016/07/09.
  */
 public interface SocialEngineerServer {
+
+    @GET("/GetFirstQuestion.php")
+    void getFirstQuestion();
 }
