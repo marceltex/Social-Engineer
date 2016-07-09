@@ -1,4 +1,4 @@
-package za.co.social_engineer.www.socialengineer.Model;
+package za.co.social_engineer.www.socialengineer.model;
 
 /**
  * State Transition class used to create state transition objects of each record in the

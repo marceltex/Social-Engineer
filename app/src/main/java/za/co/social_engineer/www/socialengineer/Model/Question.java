@@ -1,4 +1,4 @@
-package za.co.social_engineer.www.socialengineer.Model;
+package za.co.social_engineer.www.socialengineer.model;
 
 /**
  * Question class used to create question objects of each record in the questions database table.

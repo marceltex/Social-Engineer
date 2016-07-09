@@ -1,4 +1,4 @@
-package za.co.social_engineer.www.socialengineer.Model;
+package za.co.social_engineer.www.socialengineer.model;
 
 /**
  * Complex Question class used to create complex question objects of each record in the
