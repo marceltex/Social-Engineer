@@ -11,6 +11,6 @@ import za.co.social_engineer.www.socialengineer.model.Question;
  */
 public interface SocialEngineerAPI {
 
-    @GET("/GetFirstQuestion.php")
-    Call<Question> loadFirstQuestion();
+    @GET("GetFirstQuestion.php")
+    Call<Question> getFirstQuestion();
 }
