@@ -90,4 +90,12 @@ public class SEADMActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void yesButtonClicked(View view) {
+
+    }
+
+    public void noButtonClicked(View view) {
+        
+    }
 }
