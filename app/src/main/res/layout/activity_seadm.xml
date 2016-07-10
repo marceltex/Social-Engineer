@@ -30,6 +30,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="yesButtonClicked"
             android:text="@string/yes_btn_text"/>
 
         <TextView
@@ -42,6 +43,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="noButtonClicked"
             android:text="@string/no_btn_text"/>
 
     </LinearLayout>
