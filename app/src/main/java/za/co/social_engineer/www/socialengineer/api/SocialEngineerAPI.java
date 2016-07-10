@@ -7,7 +7,7 @@ import retrofit2.http.GET;
  *
  * Created by Marcel Teixeira on 2016/07/09.
  */
-public interface SocialEngineerServer {
+public interface SocialEngineerAPI {
 
     @GET("/GetFirstQuestion.php")
     void getFirstQuestion();
