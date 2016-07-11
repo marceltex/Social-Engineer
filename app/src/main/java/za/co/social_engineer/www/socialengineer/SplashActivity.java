@@ -4,6 +4,18 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import za.co.social_engineer.www.socialengineer.api.SocialEngineerAPI;
+import za.co.social_engineer.www.socialengineer.model.Question;
 
 /**
  * Activity to display the splash screen on app startup.
@@ -11,10 +23,12 @@ import android.support.v7.app.AppCompatActivity;
  * Created by Marcel Teixeira on 2016/06/19
  */
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends AppCompatActivity implements Callback<Question> {
 
     private static final String TAG = "SplashActivity";
     private static final String DISPLAYED = "DISPLAYED";
+    private static final String WEB_SERVICE_BASE_URL = "http://www.social-engineer.co.za/webservice/";
+    public static final String FIRST_QUESTION = "FIRST_QUESTION";
 
     // Activity object required so that the splash activity can be finished from the SEADM activity.
     public static Activity splash;
@@ -35,28 +49,47 @@ public class SplashActivity extends AppCompatActivity {
 
         splash = this;
 
+        if (!hasBeenDisplayed) {
+            Gson gson = new GsonBuilder()
+                    .setDateFormat("yyyy/MM/dd'T'HH:mm:ssZ")
+                    .create();
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(WEB_SERVICE_BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create(gson))
+                    .build();
+
+            // Prepare call in Retrofit 2.0
+            SocialEngineerAPI socialEngineerAPI = retrofit.create(SocialEngineerAPI.class);
+
+            Call<Question> call = socialEngineerAPI.getFirstQuestion();
+
+            // Asynchronous call
+            call.enqueue(this);
+        }
+
         /**
          * NB!!! The timerThread is temporary. Will be replaced eventually by code that pulls the
          * most recent version of the database from the web service and starts the SEADM activity,
          * once the database has been pulled.
          */
-        Thread timerThread = new Thread() { // Thread used to display splash for a fixed period of time
-            public void run(){
-                try {
-                    sleep(2000); // Display splash for 2 seconds
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } finally {
-                    // Prevents multiple instances of the SEADM activity being started if user rotates
-                    // the device while splash is being displayed
-                    if (!hasBeenDisplayed) {
-                        Intent intent = new Intent(SplashActivity.this, SEADMActivity.class);
-                        startActivity(intent);
-                    }
-                }
-            }
-        };
-        timerThread.start();
+//        Thread timerThread = new Thread() { // Thread used to display splash for a fixed period of time
+//            public void run(){
+//                try {
+//                    sleep(2000); // Display splash for 2 seconds
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                } finally {
+//                    // Prevents multiple instances of the SEADM activity being started if user rotates
+//                    // the device while splash is being displayed
+//                    if (!hasBeenDisplayed) {
+//                        Intent intent = new Intent(SplashActivity.this, SEADMActivity.class);
+//                        startActivity(intent);
+//                    }
+//                }
+//            }
+//        };
+//        timerThread.start();
     }
 
     @Override
@@ -64,5 +97,24 @@ public class SplashActivity extends AppCompatActivity {
         savedInstanceState.putBoolean(DISPLAYED, true);
 
         super.onSaveInstanceState(savedInstanceState);
+    }
+
+    @Override
+    public void onResponse(Call<Question> call, Response<Question> response) {
+        if (response.code() == 200) {
+            Question question = response.body();
+            if (!hasBeenDisplayed) {
+                Intent intent = new Intent(SplashActivity.this, SEADMActivity.class);
+                intent.putExtra(FIRST_QUESTION, question.getQuestion());
+                startActivity(intent);
+            }
+        } else {
+            Log.e(TAG, "Failed to fetch first question. Retrofit response code " + response.code());
+        }
+    }
+
+    @Override
+    public void onFailure(Call<Question> call, Throwable t) {
+        Log.e(TAG, "Failed to fetch first question");
     }
 }

@@ -1,24 +1,13 @@
 package za.co.social_engineer.www.socialengineer;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-import za.co.social_engineer.www.socialengineer.api.SocialEngineerAPI;
-import za.co.social_engineer.www.socialengineer.model.Question;
-
-public class SEADMActivity extends AppCompatActivity implements Callback<Question> {
+public class SEADMActivity extends AppCompatActivity {
 
     private static final String TAG = "SEADMActivity";
     private static final String WEB_SERVICE_BASE_URL = "http://www.social-engineer.co.za/webservice/";
@@ -28,9 +17,9 @@ public class SEADMActivity extends AppCompatActivity implements Callback<Questio
 
     private TextView questionTextView;
 
-    private Gson gson;
-
-    private Retrofit retrofit;
+//    private Gson gson;
+//
+//    private Retrofit retrofit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,22 +33,27 @@ public class SEADMActivity extends AppCompatActivity implements Callback<Questio
 
         questionTextView = (TextView) findViewById(R.id.text_view_question);
 
-        gson = new GsonBuilder()
-                .setDateFormat("yyyy/MM/dd'T'HH:mm:ssZ")
-                .create();
+        Intent intent = getIntent();
+        String question = intent.getExtras().getString(SplashActivity.FIRST_QUESTION);
 
-        retrofit = new Retrofit.Builder()
-                .baseUrl(WEB_SERVICE_BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
+        questionTextView.setText(question);
 
-        // Prepare call in Retrofit 2.0
-        SocialEngineerAPI socialEngineerAPI = retrofit.create(SocialEngineerAPI.class);
+//        Gson gson = new GsonBuilder()
+//                .setDateFormat("yyyy/MM/dd'T'HH:mm:ssZ")
+//                .create();
+//
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl(WEB_SERVICE_BASE_URL)
+//                .addConverterFactory(GsonConverterFactory.create(gson))
+//                .build();
 
-        Call<Question> call = socialEngineerAPI.getFirstQuestion();
+//        // Prepare call in Retrofit 2.0
+//        SocialEngineerAPI socialEngineerAPI = retrofit.create(SocialEngineerAPI.class);
+//
+//        Call<Question> call = socialEngineerAPI.getFirstQuestion();
 
-        // Asynchronous call
-        call.enqueue(this);
+//        // Asynchronous call
+//        call.enqueue(this);
 
 //        final DatabaseHandler databaseHandler = new DatabaseHandler("moutonf.co.za", "3306", "SEPTT",
 //                "septt", "toor");
@@ -122,18 +116,18 @@ public class SEADMActivity extends AppCompatActivity implements Callback<Questio
 
     }
 
-    @Override
-    public void onResponse(Call<Question> call, Response<Question> response) {
-        if (response.code() == 200) {
-            Question question = response.body();
-            questionTextView.setText(question.getQuestion());
-        } else {
-            Log.e(TAG, "Failed to fetch first question. Retrofit response code " + response.code());
-        }
-    }
-
-    @Override
-    public void onFailure(Call<Question> call, Throwable t) {
-        Log.e(TAG, "Failed to fetch first question");
-    }
+//    @Override
+//    public void onResponse(Call<Question> call, Response<Question> response) {
+//        if (response.code() == 200) {
+//            Question question = response.body();
+//            questionTextView.setText(question.getQuestion());
+//        } else {
+//            Log.e(TAG, "Failed to fetch first question. Retrofit response code " + response.code());
+//        }
+//    }
+//
+//    @Override
+//    public void onFailure(Call<Question> call, Throwable t) {
+//        Log.e(TAG, "Failed to fetch first question");
+//    }
 }
