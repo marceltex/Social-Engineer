@@ -1,5 +1,7 @@
 package za.co.social_engineer.www.socialengineer.api;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -16,5 +18,5 @@ public interface SocialEngineerAPI {
     Call<Question> getFirstQuestion();
 
     @GET("GetNextQuestion.php")
-    Call<Question[]> getNextQuestion(@Query("state") String state, @Query("match") String match);
+    Call<List<Question>> getNextQuestion(@Query("state") String state, @Query("match") String match);
 }
