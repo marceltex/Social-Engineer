@@ -2,6 +2,7 @@ package za.co.social_engineer.www.socialengineer.api;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 import za.co.social_engineer.www.socialengineer.model.Question;
 
 /**
@@ -13,4 +14,7 @@ public interface SocialEngineerAPI {
 
     @GET("GetFirstQuestion.php")
     Call<Question> getFirstQuestion();
+
+    @GET("GetNextQuestion.php")
+    Call<Question[]> getNextQuestion(@Query("state") String state, @Query("match") String match);
 }
