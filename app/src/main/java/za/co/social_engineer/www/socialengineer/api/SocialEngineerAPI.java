@@ -18,5 +18,5 @@ public interface SocialEngineerAPI {
     Call<Question> getFirstQuestion();
 
     @GET("GetNextQuestion.php")
-    Call<List<Question>> getNextQuestion(@Query("state") String state, @Query("match") String match);
+    Call<List<Question>> getNextQuestion(@Query("state") int state, @Query("match") int match);
 }
