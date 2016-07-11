@@ -1,11 +1,14 @@
 package za.co.social_engineer.www.socialengineer.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Question class used to create question objects of each record in the questions database table.
  *
  * Created by Marcel Teixeira on 2016/07/09.
  */
-public class Question {
+public class Question implements Parcelable {
 
     private String id;
     private String questionSet;
@@ -17,21 +20,6 @@ public class Question {
     private String isSkippable;
     private String isCount;
     private String isFinalCount;
-
-    public Question(String id, String questionSet, String question, String optionA, String returnA,
-                    String optionB, String returnB, String isSkippable, String isCount,
-                    String isFinalCount) {
-        this.id = id;
-        this.questionSet = questionSet;
-        this.question = question;
-        this.optionA = optionA;
-        this.returnA = returnA;
-        this.optionB = optionB;
-        this.returnB = returnB;
-        this.isSkippable = isSkippable;
-        this.isCount = isCount;
-        this.isFinalCount = isFinalCount;
-    }
 
     public String getId() {
         return id;
@@ -112,4 +100,50 @@ public class Question {
     public void setIsFinalCount(String isFinalCount) {
         this.isFinalCount = isFinalCount;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.id);
+        dest.writeString(this.questionSet);
+        dest.writeString(this.question);
+        dest.writeString(this.optionA);
+        dest.writeString(this.returnA);
+        dest.writeString(this.optionB);
+        dest.writeString(this.returnB);
+        dest.writeString(this.isSkippable);
+        dest.writeString(this.isCount);
+        dest.writeString(this.isFinalCount);
+    }
+
+    public Question() {
+
+    }
+
+    protected Question(Parcel in) {
+        this.id = in.readString();
+        this.questionSet = in.readString();
+        this.question = in.readString();
+        this.optionA = in.readString();
+        this.returnA = in.readString();
+        this.optionB = in.readString();
+        this.returnB = in.readString();
+        this.isSkippable = in.readString();
+        this.isCount = in.readString();
+        this.isFinalCount = in.readString();
+    }
+
+    public static final Parcelable.Creator<Question> CREATOR = new Parcelable.Creator<Question>() {
+        public Question createFromParcel(Parcel source) {
+            return new Question(source);
+        }
+
+        public Question[] newArray(int size) {
+            return new Question[size];
+        }
+    };
 }
