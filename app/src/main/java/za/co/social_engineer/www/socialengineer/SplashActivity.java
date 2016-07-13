@@ -62,6 +62,8 @@ public class SplashActivity extends AppCompatActivity {
 
         final Question firstQuestion = db.getFirstQuestion();
 
+        db.close();
+
         /**
          * NB!!! The timerThread is temporary. Will be replaced eventually by code that pulls the
          * most recent version of the database from the web service and starts the SEADM activity,
