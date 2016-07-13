@@ -17,6 +17,15 @@ public class ComplexQuestion implements Parcelable {
     private String count;
     private String _return;
 
+    public ComplexQuestion(String id, String questionSet, String questions, String count,
+                           String _return) {
+        this.id = id;
+        this.questionSet = questionSet;
+        this.questions = questions;
+        this.count = count;
+        this._return = _return;
+    }
+
     public String getId() {
         return id;
     }
@@ -69,10 +78,6 @@ public class ComplexQuestion implements Parcelable {
         dest.writeString(this.questions);
         dest.writeString(this.count);
         dest.writeString(this._return);
-    }
-
-    public ComplexQuestion() {
-
     }
 
     protected ComplexQuestion(Parcel in) {
