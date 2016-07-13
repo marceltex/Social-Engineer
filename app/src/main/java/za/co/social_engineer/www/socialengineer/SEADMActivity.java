@@ -7,23 +7,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-import za.co.social_engineer.www.socialengineer.api.SocialEngineerAPI;
 import za.co.social_engineer.www.socialengineer.model.Question;
 
-public class SEADMActivity extends AppCompatActivity implements Callback<List<Question>> {
+public class SEADMActivity extends AppCompatActivity {
 
     private static final String TAG = "SEADMActivity";
-    private static final String WEB_SERVICE_BASE_URL = "http://www.social-engineer.co.za/webservice/";
+    //private static final String WEB_SERVICE_BASE_URL = "http://www.social-engineer.co.za/webservice/";
 
     private Button yesButton;
     private Button noButton;
@@ -43,23 +32,23 @@ public class SEADMActivity extends AppCompatActivity implements Callback<List<Qu
         questionTextView = (TextView) findViewById(R.id.text_view_question);
 
         Intent intent = getIntent();
-        String question = intent.getExtras().getString(SplashActivity.FIRST_QUESTION);
+        Question firstQuestion = (Question) intent.getParcelableExtra(SplashActivity.FIRST_QUESTION);
 
-        questionTextView.setText(question);
+        questionTextView.setText(firstQuestion.getQuestion());
 
-        Gson gson = new GsonBuilder()
-                .setDateFormat("yyyy/MM/dd'T'HH:mm:ssZ")
-                .create();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(WEB_SERVICE_BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
+//        Gson gson = new GsonBuilder()
+//                .setDateFormat("yyyy/MM/dd'T'HH:mm:ssZ")
+//                .create();
+//
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl(WEB_SERVICE_BASE_URL)
+//                .addConverterFactory(GsonConverterFactory.create(gson))
+//                .build();
 
         // Prepare call in Retrofit 2.0
-        SocialEngineerAPI socialEngineerAPI = retrofit.create(SocialEngineerAPI.class);
-
-        Call<List<Question>> call = socialEngineerAPI.getNextQuestion(1,2);
+//        SocialEngineerAPI socialEngineerAPI = retrofit.create(SocialEngineerAPI.class);
+//
+//        Call<List<Question>> call = socialEngineerAPI.getNextQuestion(1,2);
 
 //        // Asynchronous call
 //        call.enqueue(this);
@@ -125,18 +114,18 @@ public class SEADMActivity extends AppCompatActivity implements Callback<List<Qu
 
     }
 
-    @Override
-    public void onResponse(Call<List<Question>> call, Response<List<Question>> response) {
-//        if (response.code() == 200) {
-//            Question question = response.body();
-//            questionTextView.setText(question.getQuestion());
-//        } else {
-//            Log.e(TAG, "Failed to fetch first question. Retrofit response code " + response.code());
-//        }
-    }
-
-    @Override
-    public void onFailure(Call<List<Question>> call, Throwable t) {
-//        Log.e(TAG, "Failed to fetch first question");
-    }
+//    @Override
+//    public void onResponse(Call<List<Question>> call, Response<List<Question>> response) {
+////        if (response.code() == 200) {
+////            Question question = response.body();
+////            questionTextView.setText(question.getQuestion());
+////        } else {
+////            Log.e(TAG, "Failed to fetch first question. Retrofit response code " + response.code());
+////        }
+//    }
+//
+//    @Override
+//    public void onFailure(Call<List<Question>> call, Throwable t) {
+////        Log.e(TAG, "Failed to fetch first question");
+//    }
 }
