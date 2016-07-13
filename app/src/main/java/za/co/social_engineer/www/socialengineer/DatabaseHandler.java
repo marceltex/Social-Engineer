@@ -4,11 +4,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
-
 /**
  * Class used to manage database CRUD
  *
@@ -98,7 +93,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     /**
-     * Method to create SQLite database
+     * Method to create SQLite database.
+     *
      * @param db
      */
     @Override
@@ -111,27 +107,43 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     /**
+     * Method to update SQLite database.
+     *
+     * @param db
+     * @param oldVersion
+     * @param newVersion
+     */
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // Drop older tables, if they existed
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_QUESTIONS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_STATE_TRANSITIONS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_STATE);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_COMPLEX_QUESTIONS);
+    }
+
+    /**
      * Method to get the first question from the questions table  of the SEPTT database and return it
      * as a ResultSet.
      *
      * @return ResultSet containing the first question to be displayed
      * @throws Exception If connection to database could not be established
      */
-    public ResultSet getFirstQuestion() throws Exception {
-        Class.forName("com.mysql.jdbc.Driver");
-
-        Connection conn = DriverManager.getConnection("jdbc:mysql://" + databaseUrl + ":" +
-                databasePort + "/" + databaseName, username, password);
-
-        Statement stmnt = conn.createStatement();
-
-        ResultSet firstQuestion = stmnt.executeQuery("SELECT * FROM " + TABLE_QUESTIONS +
-                " WHERE " + KEY_ID + " = " + FIRST_QUESTION_ID + ";");
-
-        conn.close();
-
-        return firstQuestion;
-    }
+//    public ResultSet getFirstQuestion() throws Exception {
+//        Class.forName("com.mysql.jdbc.Driver");
+//
+//        Connection conn = DriverManager.getConnection("jdbc:mysql://" + databaseUrl + ":" +
+//                databasePort + "/" + databaseName, username, password);
+//
+//        Statement stmnt = conn.createStatement();
+//
+//        ResultSet firstQuestion = stmnt.executeQuery("SELECT * FROM " + TABLE_QUESTIONS +
+//                " WHERE " + KEY_ID + " = " + FIRST_QUESTION_ID + ";");
+//
+//        conn.close();
+//
+//        return firstQuestion;
+//    }
 
     /**
      * Method to determine and return a ResultSet with the next question that must be displayed.
@@ -142,34 +154,34 @@ public class DatabaseHandler extends SQLiteOpenHelper {
      * @return ResultSet containing the next question to be displayed
      * @throws Exception If connection to database could not be established
      */
-    public ResultSet getNextQuestion(int questionId, int currentState, int nextState) throws Exception {
-        ResultSet nextQuestion = null;
-
-        Class.forName("com.mysql.jdbc.Driver");
-
-        Connection conn = DriverManager.getConnection("jdbc:mysql://" + databaseUrl + ":" +
-                databasePort + "/" + databaseName, username, password);
-
-        Statement stmnt = conn.createStatement();
-
-        ResultSet stateTransition = stmnt.executeQuery("SELECT * FROM " + TABLE_STATE_TRANSITIONS +
-                " WHERE " + KEY_STATE + " = " + currentState + " AND " + KEY_MATCH + " = " +
-                nextState + ";");
-
-        if (stateTransition.next()) {
-            int questionSet = stateTransition.getInt(4);
-
-            // If state doesn't change return next question in current state
-            if (questionSet == currentState) {
-                nextQuestion = stmnt.executeQuery("SELECT * FROM " + TABLE_QUESTIONS + " WHERE "
-                        + KEY_ID + " = " + (questionId++) + ";");
-            } else {
-                nextQuestion = stmnt.executeQuery("SELECT * FROM " + TABLE_QUESTIONS + " WHERE "
-                        + KEY_QUESTION_SET + " = " + questionSet + " ORDER BY " + KEY_ID + ";");
-            }
-        }
-        conn.close();
-
-        return nextQuestion;
-    }
+//    public ResultSet getNextQuestion(int questionId, int currentState, int nextState) throws Exception {
+//        ResultSet nextQuestion = null;
+//
+//        Class.forName("com.mysql.jdbc.Driver");
+//
+//        Connection conn = DriverManager.getConnection("jdbc:mysql://" + databaseUrl + ":" +
+//                databasePort + "/" + databaseName, username, password);
+//
+//        Statement stmnt = conn.createStatement();
+//
+//        ResultSet stateTransition = stmnt.executeQuery("SELECT * FROM " + TABLE_STATE_TRANSITIONS +
+//                " WHERE " + KEY_STATE + " = " + currentState + " AND " + KEY_MATCH + " = " +
+//                nextState + ";");
+//
+//        if (stateTransition.next()) {
+//            int questionSet = stateTransition.getInt(4);
+//
+//            // If state doesn't change return next question in current state
+//            if (questionSet == currentState) {
+//                nextQuestion = stmnt.executeQuery("SELECT * FROM " + TABLE_QUESTIONS + " WHERE "
+//                        + KEY_ID + " = " + (questionId++) + ";");
+//            } else {
+//                nextQuestion = stmnt.executeQuery("SELECT * FROM " + TABLE_QUESTIONS + " WHERE "
+//                        + KEY_QUESTION_SET + " = " + questionSet + " ORDER BY " + KEY_ID + ";");
+//            }
+//        }
+//        conn.close();
+//
+//        return nextQuestion;
+//    }
 }
