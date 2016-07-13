@@ -1,15 +1,24 @@
 package za.co.social_engineer.www.socialengineer;
 
-import java.sql.*;
+import android.content.Context;
+import android.database.sqlite.SQLiteOpenHelper;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 /**
  * Class used to manage database CRUD
  *
  * Created by Marcel Teixeira on 2016/07/03.
  */
-public class DatabaseHandler {
+public class DatabaseHandler extends SQLiteOpenHelper {
 
     private static final String TAG = "DatabaseHandler";
+
+    private static final int DATABASE_VERSION = 1;
+    private static final String DATABASE_NAME = "septt";
 
     // Table names
     private static final String TABLE_QUESTIONS = "questions";
@@ -31,34 +40,61 @@ public class DatabaseHandler {
     private static final String KEY_IS_COUNT = "isCount";
     private static final String KEY_IS_FINAL_COUNT = "isFinalCount";
 
+    private static final String[] TABLE_QUESTIONS_COLUMNS = {KEY_ID, KEY_QUESTION_SET, KEY_QUESTION,
+            KEY_OPTION_A, KEY_RETURN_A, KEY_OPTION_B, KEY_RETURN_B, KEY_IS_SKIPPABLE, KEY_IS_COUNT,
+            KEY_IS_FINAL_COUNT};
+
     // State transitions table column names
     private static final String KEY_STATE = "state";
     private static final String KEY_MATCH = "`match`";
     private static final String KEY_TRANSITION = "transition";
+    private static final String KEY_CIRCULAR = "circular";
+
+    private static final String[] TABLE_STATE_TRANSITIONS_COLUMNS = {KEY_ID, KEY_STATE, KEY_MATCH,
+            KEY_TRANSITION, KEY_CIRCULAR};
 
     // State table column names
     private static final String KEY_NAME = "name";
 
-    // Complex table column names
+    private static final String[] TABLE_STATE_COLUMNS = {KEY_ID, KEY_NAME};
+
+    // Complex questions table column names
     private static final String KEY_QUESTIONS = "questions";
     private static final String KEY_COUNT = "count";
     private static final String KEY_RETURN = "return";
 
+    private static final String[] TABLE_COMPLEX_QUESTIONS_COLUMNS = {KEY_ID, KEY_QUESTION_SET,
+            KEY_QUESTIONS, KEY_COUNT, KEY_RETURN};
+
+    //Table create statements
+    // Questions table create statement
+    private static final String CREATE_QUESTIONS_TABLE = "CREATE TABLE " + TABLE_QUESTIONS + " ( " +
+            KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + KEY_QUESTION_SET + " INTEGER, " +
+            KEY_QUESTION + " TEXT, " + KEY_OPTION_A + " TEXT, " + KEY_RETURN_A + " INTEGER " +
+            KEY_OPTION_B + " TEXT, " + KEY_RETURN_B + " INTEGER, " + KEY_IS_SKIPPABLE + " INTEGER," +
+            KEY_IS_COUNT + " INTEGER, " + KEY_IS_FINAL_COUNT + " INTEGER )";
+
+    // State transitions table create statement
+    private static final String CREATE_STATE_TRANSITIONS_TABLE = "CREATE TABLE " +
+            TABLE_STATE_TRANSITIONS + " ( " + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            KEY_STATE + " INTEGER, " + KEY_MATCH + " INTEGER, " + KEY_TRANSITION + " INTEGER, " +
+            KEY_CIRCULAR + " INTEGER )";
+
+    // State table create statement
+    private static final String CREATE_STATE_TABLE = "CREATE TABLE " + TABLE_STATE + " ( " + KEY_ID +
+            " INTEGER PRIMARY KEY AUTOINCREMENT, " + KEY_NAME + " TEXT )";
+
+    // Complex questions table create statement
+    private static final String CREATE_COMPLEX_QUESTIONS_TABLE = "CREATE TABLE " +
+            TABLE_COMPLEX_QUESTIONS + " ( " + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            KEY_QUESTION_SET + " INTEGER, " + KEY_QUESTIONS + " INTEGER, " + KEY_COUNT + " INTEGER, " +
+            KEY_RETURN + " INTEGER )";
+
     private static final int FIRST_QUESTION_ID = 2;
 
-    private String databaseUrl;
-    private String databasePort;
-    private String databaseName;
-    private String username;
-    private String password;
-
-    public DatabaseHandler(String databaseUrl, String databasePort, String databaseName, String username, String password) {
-        this.databaseUrl = databaseUrl;
-        this.databasePort = databasePort;
-        this.databaseName = databaseName;
-        this.username = username;
-        this.password = password;
-    }
+    public DatabaseHandler(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+}
 
     /**
      * Method to get the first question from the questions table  of the SEPTT database and return it
