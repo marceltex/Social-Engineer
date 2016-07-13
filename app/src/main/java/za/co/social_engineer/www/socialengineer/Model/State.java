@@ -13,6 +13,11 @@ public class State implements Parcelable {
     private String id;
     private String name;
 
+    public State(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public String getId() {
         return id;
     }
@@ -38,10 +43,6 @@ public class State implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.id);
         dest.writeString(this.name);
-    }
-
-    public State() {
-
     }
 
     protected State(Parcel in) {
