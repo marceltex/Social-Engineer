@@ -95,7 +95,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     /**
      * Method to create SQLite database.
      *
-     * @param db
+     * @param db Database in which tables must be added
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -109,9 +109,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     /**
      * Method to update SQLite database.
      *
-     * @param db
-     * @param oldVersion
-     * @param newVersion
+     * @param db Database to be updates
+     * @param oldVersion Old version of database
+     * @param newVersion New version of database
      */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -120,6 +120,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_STATE_TRANSITIONS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_STATE);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_COMPLEX_QUESTIONS);
+
+        // Create database tables again
+        onCreate(db);
     }
 
     /**
