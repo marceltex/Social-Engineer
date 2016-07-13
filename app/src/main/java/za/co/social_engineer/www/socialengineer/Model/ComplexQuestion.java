@@ -11,14 +11,13 @@ import android.os.Parcelable;
  */
 public class ComplexQuestion implements Parcelable {
 
-    private String id;
-    private String questionSet;
-    private String questions;
-    private String count;
-    private String _return;
+    private int id;
+    private int questionSet;
+    private int questions;
+    private int count;
+    private int _return;
 
-    public ComplexQuestion(String id, String questionSet, String questions, String count,
-                           String _return) {
+    public ComplexQuestion(int id, int questionSet, int questions, int count, int _return) {
         this.id = id;
         this.questionSet = questionSet;
         this.questions = questions;
@@ -26,43 +25,43 @@ public class ComplexQuestion implements Parcelable {
         this._return = _return;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getQuestionSet() {
+    public int getQuestionSet() {
         return questionSet;
     }
 
-    public void setQuestionSet(String questionSet) {
+    public void setQuestionSet(int questionSet) {
         this.questionSet = questionSet;
     }
 
-    public String getQuestions() {
+    public int getQuestions() {
         return questions;
     }
 
-    public void setQuestions(String questions) {
+    public void setQuestions(int questions) {
         this.questions = questions;
     }
 
-    public String getCount() {
+    public int getCount() {
         return count;
     }
 
-    public void setCount(String count) {
+    public void setCount(int count) {
         this.count = count;
     }
 
-    public String getReturn() {
+    public int getReturn() {
         return _return;
     }
 
-    public void setReturn(String _return) {
+    public void setReturn(int _return) {
         this._return = _return;
     }
 
@@ -73,19 +72,19 @@ public class ComplexQuestion implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.id);
-        dest.writeString(this.questionSet);
-        dest.writeString(this.questions);
-        dest.writeString(this.count);
-        dest.writeString(this._return);
+        dest.writeInt(this.id);
+        dest.writeInt(this.questionSet);
+        dest.writeInt(this.questions);
+        dest.writeInt(this.count);
+        dest.writeInt(this._return);
     }
 
     public ComplexQuestion(Parcel in) {
-        this.id = in.readString();
-        this.questionSet = in.readString();
-        this.questions = in.readString();
-        this.count = in.readString();
-        this._return = in.readString();
+        this.id = in.readInt();
+        this.questionSet = in.readInt();
+        this.questions = in.readInt();
+        this.count = in.readInt();
+        this._return = in.readInt();
     }
 
     public static final Parcelable.Creator<ComplexQuestion> CREATOR = new Parcelable.Creator<ComplexQuestion>(){
