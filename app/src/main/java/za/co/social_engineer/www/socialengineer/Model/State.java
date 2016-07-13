@@ -10,19 +10,19 @@ import android.os.Parcelable;
  */
 public class State implements Parcelable {
 
-    private String id;
+    private int id;
     private String name;
 
-    public State(String id, String name) {
+    public State(int id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -41,12 +41,12 @@ public class State implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.id);
+        dest.writeInt(this.id);
         dest.writeString(this.name);
     }
 
     public State(Parcel in) {
-        this.id = in.readString();
+        this.id = in.readInt();
         this.name = in.readString();
     }
 
