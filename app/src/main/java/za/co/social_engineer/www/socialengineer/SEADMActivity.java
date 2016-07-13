@@ -19,6 +19,8 @@ public class SEADMActivity extends AppCompatActivity {
 
     private TextView questionTextView;
 
+    private Question currentQuestion;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,9 +34,9 @@ public class SEADMActivity extends AppCompatActivity {
         questionTextView = (TextView) findViewById(R.id.text_view_question);
 
         Intent intent = getIntent();
-        Question firstQuestion = (Question) intent.getParcelableExtra(SplashActivity.FIRST_QUESTION);
+        currentQuestion = intent.getParcelableExtra(SplashActivity.FIRST_QUESTION);
 
-        questionTextView.setText(firstQuestion.getQuestion());
+        questionTextView.setText(currentQuestion.getQuestion());
 
 //        Gson gson = new GsonBuilder()
 //                .setDateFormat("yyyy/MM/dd'T'HH:mm:ssZ")
@@ -107,11 +109,36 @@ public class SEADMActivity extends AppCompatActivity {
     }
 
     public void yesButtonClicked(View view) {
+        int id = currentQuestion.getId();
+        int questionSet = currentQuestion.getQuestionSet();
+        int returnA = currentQuestion.getReturnA();
 
+        getNextQuestion(id, questionSet, returnA);
     }
 
     public void noButtonClicked(View view) {
+        int id = currentQuestion.getId();
+        int questionSet = currentQuestion.getQuestionSet();
+        int returnB = currentQuestion.getReturnB();
 
+        getNextQuestion(id, questionSet, returnB);
+    }
+
+    /**
+     * Method to get next question from database handler and update text of question displayed to user.
+     *
+     * @param id Question id of current question
+     * @param state State of current question
+     * @param match Matching integer used to determine next state
+     */
+    public void getNextQuestion(int id, int state, int match) {
+        DatabaseHandler db = new DatabaseHandler(this);
+
+        currentQuestion = db.getNextQuestion(id, state, match);
+
+        questionTextView.setText(currentQuestion.getQuestion());
+
+        db.close();
     }
 
 //    @Override
