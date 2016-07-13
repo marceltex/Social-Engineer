@@ -11,65 +11,80 @@ import android.os.Parcelable;
  */
 public class StateTransition implements Parcelable {
 
-    private String id;
-    private String state;
-    private String match;
-    private String transition;
+    private int id;
+    private int state;
+    private int match;
+    private int transition;
+    private int circular;
 
-    public String getId() {
+    public StateTransition(int id, int state, int match, int transition, int circular) {
+        this.id = id;
+        this.state = state;
+        this.match = match;
+        this.transition = transition;
+        this.circular = circular;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getState() {
+    public int getState() {
         return state;
     }
 
-    public void setState(String state) {
+    public void setState(int state) {
         this.state = state;
     }
 
-    public String getMatch() {
+    public int getMatch() {
         return match;
     }
 
-    public void setMatch(String match) {
+    public void setMatch(int match) {
         this.match = match;
     }
 
-    public String getTransition() {
+    public int getTransition() {
         return transition;
     }
 
-    public void setTransition(String transition) {
+    public void setTransition(int transition) {
         this.transition = transition;
+    }
+
+    public int getCircular() {
+        return circular;
+    }
+
+    public void setCircular(int circular) {
+        this.circular = circular;
     }
 
     @Override
     public int describeContents() {
-        return 0;
+        return hashCode();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.id);
-        dest.writeString(this.state);
-        dest.writeString(this.match);
-        dest.writeString(this.transition);
+        dest.writeInt(this.id);
+        dest.writeInt(this.state);
+        dest.writeInt(this.match);
+        dest.writeInt(this.transition);
+        dest.writeInt(this.circular);
     }
 
-    public StateTransition() {
-
-    }
-
-    protected StateTransition(Parcel in) {
-        this.id = in.readString();
-        this.state = in.readString();
-        this.match = in.readString();
-        this.transition = in.readString();
+    public StateTransition(Parcel in) {
+        this.id = in.readInt();
+        this.state = in.readInt();
+        this.match = in.readInt();
+        this.transition = in.readInt();
+        this.circular = in.readInt();
     }
 
     public static final Parcelable.Creator<StateTransition> CREATOR = new Parcelable.Creator<StateTransition>() {

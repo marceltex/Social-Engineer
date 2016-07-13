@@ -10,30 +10,44 @@ import android.os.Parcelable;
  */
 public class Question implements Parcelable {
 
-    private String id;
-    private String questionSet;
+    private int id;
+    private int questionSet;
     private String question;
     private String optionA;
-    private String returnA;
+    private int returnA;
     private String optionB;
-    private String returnB;
-    private String isSkippable;
-    private String isCount;
-    private String isFinalCount;
+    private int returnB;
+    private int isSkippable;
+    private int isCount;
+    private int isFinalCount;
 
-    public String getId() {
+    public Question(int id, int questionSet, String question, String optionA, int returnA,
+                    String optionB, int returnB, int isSkippable, int isCount, int isFinalCount) {
+        this.id = id;
+        this.questionSet = questionSet;
+        this.question = question;
+        this.optionA = optionA;
+        this.returnA = returnA;
+        this.optionB = optionB;
+        this.returnB = returnB;
+        this.isSkippable = isSkippable;
+        this.isCount = isCount;
+        this.isFinalCount = isFinalCount;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getQuestionSet() {
+    public int getQuestionSet() {
         return questionSet;
     }
 
-    public void setQuestionSet(String questionSet) {
+    public void setQuestionSet(int questionSet) {
         this.questionSet = questionSet;
     }
 
@@ -53,11 +67,11 @@ public class Question implements Parcelable {
         this.optionA = optionA;
     }
 
-    public String getReturnA() {
+    public int getReturnA() {
         return returnA;
     }
 
-    public void setReturnA(String returnA) {
+    public void setReturnA(int returnA) {
         this.returnA = returnA;
     }
 
@@ -69,72 +83,68 @@ public class Question implements Parcelable {
         this.optionB = optionB;
     }
 
-    public String getReturnB() {
+    public int getReturnB() {
         return returnB;
     }
 
-    public void setReturnB(String returnB) {
+    public void setReturnB(int returnB) {
         this.returnB = returnB;
     }
 
-    public String getIsSkippable() {
+    public int getIsSkippable() {
         return isSkippable;
     }
 
-    public void setIsSkippable(String isSkippable) {
+    public void setIsSkippable(int isSkippable) {
         this.isSkippable = isSkippable;
     }
 
-    public String getIsCount() {
+    public int getIsCount() {
         return isCount;
     }
 
-    public void setIsCount(String isCount) {
+    public void setIsCount(int isCount) {
         this.isCount = isCount;
     }
 
-    public String getIsFinalCount() {
+    public int getIsFinalCount() {
         return isFinalCount;
     }
 
-    public void setIsFinalCount(String isFinalCount) {
+    public void setIsFinalCount(int isFinalCount) {
         this.isFinalCount = isFinalCount;
     }
 
     @Override
     public int describeContents() {
-        return 0;
+        return hashCode();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.id);
-        dest.writeString(this.questionSet);
+        dest.writeInt(this.id);
+        dest.writeInt(this.questionSet);
         dest.writeString(this.question);
         dest.writeString(this.optionA);
-        dest.writeString(this.returnA);
+        dest.writeInt(this.returnA);
         dest.writeString(this.optionB);
-        dest.writeString(this.returnB);
-        dest.writeString(this.isSkippable);
-        dest.writeString(this.isCount);
-        dest.writeString(this.isFinalCount);
+        dest.writeInt(this.returnB);
+        dest.writeInt(this.isSkippable);
+        dest.writeInt(this.isCount);
+        dest.writeInt(this.isFinalCount);
     }
 
-    public Question() {
-
-    }
-
-    protected Question(Parcel in) {
-        this.id = in.readString();
-        this.questionSet = in.readString();
+    public Question(Parcel in) {
+        this.id = in.readInt();
+        this.questionSet = in.readInt();
         this.question = in.readString();
         this.optionA = in.readString();
-        this.returnA = in.readString();
+        this.returnA = in.readInt();
         this.optionB = in.readString();
-        this.returnB = in.readString();
-        this.isSkippable = in.readString();
-        this.isCount = in.readString();
-        this.isFinalCount = in.readString();
+        this.returnB = in.readInt();
+        this.isSkippable = in.readInt();
+        this.isCount = in.readInt();
+        this.isFinalCount = in.readInt();
     }
 
     public static final Parcelable.Creator<Question> CREATOR = new Parcelable.Creator<Question>() {
