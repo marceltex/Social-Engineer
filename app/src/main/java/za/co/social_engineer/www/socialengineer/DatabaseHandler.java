@@ -1,6 +1,7 @@
 package za.co.social_engineer.www.socialengineer;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -9,6 +10,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+
+import za.co.social_engineer.www.socialengineer.model.Question;
 
 /**
  * Class used to manage database CRUD
@@ -152,45 +155,35 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     /**
-     * Method to return a string representation of a file
+     * Method to get the first question from the questions table and return a question object of the
+     * first question.
      *
-     * @param inputStream Input Stream of the file
-     * @return String representation of the file
+     * @return Question object of the first question
      */
-    private String readTextFromInputStream(InputStream inputStream) throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-        StringBuilder stringBuilder = new StringBuilder();
-        String line;
-        while ((line = reader.readLine()) != null) {
-            stringBuilder.append(line);
-        }
-        inputStream.close();
-        reader.close();
-        return stringBuilder.toString();
-    }
+    public Question getFirstQuestion() {
+        // Get reference to readable database
+        SQLiteDatabase db = this.getReadableDatabase();
 
-    /**
-     * Method to get the first question from the questions table  of the SEPTT database and return it
-     * as a ResultSet.
-     *
-     * @return ResultSet containing the first question to be displayed
-     * @throws Exception If connection to database could not be established
-     */
-//    public ResultSet getFirstQuestion() throws Exception {
-//        Class.forName("com.mysql.jdbc.Driver");
-//
-//        Connection conn = DriverManager.getConnection("jdbc:mysql://" + databaseUrl + ":" +
-//                databasePort + "/" + databaseName, username, password);
-//
-//        Statement stmnt = conn.createStatement();
-//
-//        ResultSet firstQuestion = stmnt.executeQuery("SELECT * FROM " + TABLE_QUESTIONS +
-//                " WHERE " + KEY_ID + " = " + FIRST_QUESTION_ID + ";");
-//
-//        conn.close();
-//
-//        return firstQuestion;
-//    }
+        // Build query
+        String getFirstQuestionQuery = "SELECT * FROM " + TABLE_QUESTIONS + " WHERE " + KEY_ID +
+                " = " + FIRST_QUESTION_ID;
+
+        Cursor cursor = db.rawQuery(getFirstQuestionQuery, null);
+
+        if (!(cursor.moveToFirst()) || cursor.getCount() == 0) {
+            // Return null if question not found
+            return null;
+        } else {
+            // If results found, get the first one
+            cursor.moveToFirst();
+
+            Question firstQuestion = new Question(cursor.getInt(0), cursor.getInt(1), cursor.getString(2),
+                    cursor.getString(3), cursor.getInt(4), cursor.getString(5),
+                    cursor.getInt(6), cursor.getInt(7), cursor.getInt(8), cursor.getInt(9));
+
+            return firstQuestion;
+        }
+    }
 
     /**
      * Method to determine and return a ResultSet with the next question that must be displayed.
@@ -231,4 +224,22 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 //
 //        return nextQuestion;
 //    }
+
+    /**
+     * Method to return a string representation of a file
+     *
+     * @param inputStream Input Stream of the file
+     * @return String representation of the file
+     */
+    private String readTextFromInputStream(InputStream inputStream) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+        StringBuilder stringBuilder = new StringBuilder();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            stringBuilder.append(line);
+        }
+        inputStream.close();
+        reader.close();
+        return stringBuilder.toString();
+    }
 }
