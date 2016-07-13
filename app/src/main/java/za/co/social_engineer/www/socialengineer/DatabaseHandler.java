@@ -3,6 +3,12 @@ package za.co.social_engineer.www.socialengineer;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 /**
  * Class used to manage database CRUD
@@ -86,10 +92,18 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             KEY_QUESTION_SET + " INTEGER, " + KEY_QUESTIONS + " INTEGER, " + KEY_COUNT + " INTEGER, " +
             KEY_RETURN + " INTEGER )";
 
+    // Array of SQL files
+    private static final String[] SQL_FILES = {"complexQuestions.sql", "questions.sql", "State.sql",
+            "stateTransitions.sql"};
+
     private static final int FIRST_QUESTION_ID = 2;
+
+    private Context context;
 
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+
+        this.context = context;
     }
 
     /**
@@ -104,6 +118,18 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.execSQL(CREATE_STATE_TRANSITIONS_TABLE);
         db.execSQL(CREATE_STATE_TABLE);
         db.execSQL(CREATE_COMPLEX_QUESTIONS_TABLE);
+
+        // Add data from SQL files to tables
+        for (int i = 0; i < SQL_FILES.length; i++) {
+            try {
+                InputStream inputStream = context.getResources().getAssets().open(SQL_FILES[i]);
+
+                String sql = readTextFromInputStream(inputStream);
+                db.execSQL(sql);
+            } catch (IOException e) {
+                Log.e(TAG, e.getMessage());
+            }
+        }
     }
 
     /**
@@ -123,6 +149,24 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         // Create database tables again
         onCreate(db);
+    }
+
+    /**
+     * Method to return a string representation of a file
+     *
+     * @param inputStream Input Stream of the file
+     * @return String representation of the file
+     */
+    private String readTextFromInputStream(InputStream inputStream) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+        StringBuilder stringBuilder = new StringBuilder();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            stringBuilder.append(line);
+        }
+        inputStream.close();
+        reader.close();
+        return stringBuilder.toString();
     }
 
     /**
