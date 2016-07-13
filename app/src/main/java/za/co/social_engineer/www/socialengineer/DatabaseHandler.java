@@ -1,6 +1,7 @@
 package za.co.social_engineer.www.socialengineer;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.sql.Connection;
@@ -94,7 +95,20 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-}
+    }
+
+    /**
+     * Method to create SQLite database
+     * @param db
+     */
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        // Create required tables
+        db.execSQL(CREATE_QUESTIONS_TABLE);
+        db.execSQL(CREATE_STATE_TRANSITIONS_TABLE);
+        db.execSQL(CREATE_STATE_TABLE);
+        db.execSQL(CREATE_COMPLEX_QUESTIONS_TABLE);
+    }
 
     /**
      * Method to get the first question from the questions table  of the SEPTT database and return it
