@@ -21,6 +21,21 @@ public class Question implements Parcelable {
     private String isCount;
     private String isFinalCount;
 
+    public Question(String id, String questionSet, String question, String optionA, String returnA,
+                    String optionB, String returnB, String isSkippable, String isCount, String
+                            isFinalCount) {
+        this.id = id;
+        this.questionSet = questionSet;
+        this.question = question;
+        this.optionA = optionA;
+        this.returnA = returnA;
+        this.optionB = optionB;
+        this.returnB = returnB;
+        this.isSkippable = isSkippable;
+        this.isCount = isCount;
+        this.isFinalCount = isFinalCount;
+    }
+
     public String getId() {
         return id;
     }
@@ -118,10 +133,6 @@ public class Question implements Parcelable {
         dest.writeString(this.isSkippable);
         dest.writeString(this.isCount);
         dest.writeString(this.isFinalCount);
-    }
-
-    public Question() {
-
     }
 
     protected Question(Parcel in) {
