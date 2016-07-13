@@ -80,7 +80,7 @@ public class ComplexQuestion implements Parcelable {
         dest.writeString(this._return);
     }
 
-    protected ComplexQuestion(Parcel in) {
+    public ComplexQuestion(Parcel in) {
         this.id = in.readString();
         this.questionSet = in.readString();
         this.questions = in.readString();

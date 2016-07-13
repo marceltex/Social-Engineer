@@ -45,7 +45,7 @@ public class State implements Parcelable {
         dest.writeString(this.name);
     }
 
-    protected State(Parcel in) {
+    public State(Parcel in) {
         this.id = in.readString();
         this.name = in.readString();
     }

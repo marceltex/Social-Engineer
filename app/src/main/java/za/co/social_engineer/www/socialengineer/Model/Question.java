@@ -135,7 +135,7 @@ public class Question implements Parcelable {
         dest.writeString(this.isFinalCount);
     }
 
-    protected Question(Parcel in) {
+    public Question(Parcel in) {
         this.id = in.readString();
         this.questionSet = in.readString();
         this.question = in.readString();

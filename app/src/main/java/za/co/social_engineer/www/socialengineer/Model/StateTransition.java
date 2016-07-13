@@ -68,7 +68,7 @@ public class StateTransition implements Parcelable {
         dest.writeString(this.transition);
     }
 
-    protected StateTransition(Parcel in) {
+    public StateTransition(Parcel in) {
         this.id = in.readString();
         this.state = in.readString();
         this.match = in.readString();
