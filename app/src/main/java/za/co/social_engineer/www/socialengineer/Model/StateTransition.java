@@ -16,6 +16,13 @@ public class StateTransition implements Parcelable {
     private String match;
     private String transition;
 
+    public StateTransition(String id, String state, String match, String transition) {
+        this.id = id;
+        this.state = state;
+        this.match = match;
+        this.transition = transition;
+    }
+
     public String getId() {
         return id;
     }
@@ -59,10 +66,6 @@ public class StateTransition implements Parcelable {
         dest.writeString(this.state);
         dest.writeString(this.match);
         dest.writeString(this.transition);
-    }
-
-    public StateTransition() {
-
     }
 
     protected StateTransition(Parcel in) {
