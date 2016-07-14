@@ -14,6 +14,7 @@ public class SEADMActivity extends AppCompatActivity {
     private static final String TAG = "SEADMActivity";
     private static final String CURRENT_QUESTION = "CURRENT_QUESTION";
     public static final String FINAL_QUESTION = "FINAL_QUESTION";
+    private static final String COUNT = "COUNT";
     //private static final String WEB_SERVICE_BASE_URL = "http://www.social-engineer.co.za/webservice/";
 
     private Button yesButton;
@@ -22,6 +23,8 @@ public class SEADMActivity extends AppCompatActivity {
     private TextView questionTextView;
 
     private Question currentQuestion;
+
+    private int count;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +38,11 @@ public class SEADMActivity extends AppCompatActivity {
 
         if (savedInstanceState != null) {
             currentQuestion = savedInstanceState.getParcelable(CURRENT_QUESTION);
+            count = savedInstanceState.getInt(COUNT);
         } else {
             Intent intent = getIntent();
             currentQuestion = intent.getParcelableExtra(SplashActivity.FIRST_QUESTION);
+            count = 0;
         }
 
         questionTextView.setText(currentQuestion.getQuestion());
@@ -115,6 +120,7 @@ public class SEADMActivity extends AppCompatActivity {
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         savedInstanceState.putParcelable(CURRENT_QUESTION, currentQuestion);
+        savedInstanceState.putInt(COUNT, count);
 
         super.onSaveInstanceState(savedInstanceState);
     }
@@ -123,6 +129,10 @@ public class SEADMActivity extends AppCompatActivity {
         int id = currentQuestion.getId();
         int questionSet = currentQuestion.getQuestionSet();
         int returnA = currentQuestion.getReturnA();
+
+        if (currentQuestion.getIsCount() == 1) {
+            count++;
+        }
 
         getNextQuestion(id, questionSet, returnA);
     }
@@ -145,7 +155,13 @@ public class SEADMActivity extends AppCompatActivity {
     public void getNextQuestion(int id, int state, int match) {
         DatabaseHandler db = new DatabaseHandler(this);
 
-        currentQuestion = db.getNextQuestion(id, state, match);
+        int tempCount = count;
+
+        if (currentQuestion.getIsFinalCount() == 1) {
+            count = 0;
+        }
+
+        currentQuestion = db.getNextQuestion(id, state, match, tempCount);
 
         if ((currentQuestion.getQuestionSet() == 100) || (currentQuestion.getQuestionSet() == 200)) {
             Intent intent = new Intent(SEADMActivity.this, FinishActivity.class);

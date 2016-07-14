@@ -190,8 +190,24 @@ public class DatabaseHandler extends SQLiteOpenHelper {
      * @param match State that must be transitioned to
      * @return Next question to be displayed
      */
-    public Question getNextQuestion(int id, int state, int match) {
+    public Question getNextQuestion(int id, int state, int match, int count) {
         SQLiteDatabase db = this.getReadableDatabase();
+
+        if (match == -1) {
+            String complexQuestionQuery = "SELECT * FROM " + TABLE_COMPLEX_QUESTIONS +" WHERE " +
+                    KEY_QUESTION_SET + " = " + state + " AND " + KEY_COUNT + " = " + count;
+
+            Cursor complexQuestionCursor = db.rawQuery(complexQuestionQuery, null);
+
+            if (!(complexQuestionCursor.moveToFirst()) || complexQuestionCursor.getCount() == 0) {
+                // Return null if complex question not found
+                return null;
+            } else {
+                complexQuestionCursor.moveToFirst();
+
+                match = complexQuestionCursor.getInt(4);
+            }
+        }
 
         String stateTransitionQuery = "SELECT * FROM " + TABLE_STATE_TRANSITIONS +" WHERE " +
                 KEY_STATE + " = " + state + " AND " + KEY_MATCH + " = " + match;
@@ -204,13 +220,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         } else {
             stateTransitionCursor.moveToFirst();
 
-            int questionSet = stateTransitionCursor.getInt(3);
+            int questionSet  = stateTransitionCursor.getInt(3);
 
             if ((questionSet != 100) && (questionSet != 200)) {
                 String nextQuestionQuery;
 
-                // If state doesn't change return next question in current state
-                if (questionSet == state) {
+                // Circular dependency - Will be removed in next version of SEADM, so hard-coded for now
+                if ((id == 3) && (state == 2) && (match == 3)) {
+                    id = 2;
+                    nextQuestionQuery = "SELECT * FROM " + TABLE_QUESTIONS + " WHERE " + KEY_ID +
+                            " = " + id;
+                } else if (questionSet == state) { // If state doesn't change return next question in current state
                     id++;
                     nextQuestionQuery = "SELECT * FROM " + TABLE_QUESTIONS + " WHERE " + KEY_ID +
                             " = " + id;
@@ -238,7 +258,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             } else {
                 Question finalQuestion;
                 if (questionSet == 100) {
-                     finalQuestion = new Question(0, questionSet, "Defer or Refer Request",
+                    finalQuestion = new Question(0, questionSet, "Defer or Refer Request",
                             "", 0, "", 0, 0, 0, 0);
                 } else {
                     finalQuestion = new Question(0, questionSet, "Perform the Request",
