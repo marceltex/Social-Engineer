@@ -210,8 +210,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
             // If state doesn't change return next question in current state
             if (questionSet == state) {
+                id++;
                 nextQuestionQuery = "SELECT * FROM " + TABLE_QUESTIONS + " WHERE " + KEY_ID +
-                        " = " + (id++);
+                        " = " + id;
             } else {
                 nextQuestionQuery = "SELECT * FROM " + TABLE_QUESTIONS + " WHERE " +
                         KEY_QUESTION_SET + " = " + questionSet + " ORDER BY " + KEY_ID;
