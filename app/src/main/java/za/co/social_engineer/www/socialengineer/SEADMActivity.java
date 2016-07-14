@@ -155,7 +155,13 @@ public class SEADMActivity extends AppCompatActivity {
     public void getNextQuestion(int id, int state, int match) {
         DatabaseHandler db = new DatabaseHandler(this);
 
-        currentQuestion = db.getNextQuestion(id, state, match, count);
+        int tempCount = count;
+
+        if (currentQuestion.getIsFinalCount() == 1) {
+            count = 0;
+        }
+
+        currentQuestion = db.getNextQuestion(id, state, match, tempCount);
 
         if ((currentQuestion.getQuestionSet() == 100) || (currentQuestion.getQuestionSet() == 200)) {
             Intent intent = new Intent(SEADMActivity.this, FinishActivity.class);
