@@ -5,7 +5,7 @@ INSERT INTO questions (id, questionSet, question, optionA, returnA, optionB, ret
 (4, 3, 'Do you understand how to perform the request?', 'Yes', 3, 'No', 2, 0, 0, 0),
 (5, 3, 'Are you capable of performing the request?', 'Yes', 3, 'No', 2, 0, 0, 0),
 (6, 3, 'Do you have the authority to perform the request?', 'Yes', 1, 'No', 2, 0, 0, 0),
-(7, 4, 'Is the requested action or information available to the public', 'Yes', 2, 'No', 3, 0, 0, 0),
+(7, 4, 'Is the requested action or information available to the public?', 'Yes', 2, 'No', 3, 0, 0, 0),
 (8, 4, 'Is this a preapproved request that can be performed in a life threatening emergency?', 'Yes', 2, 'No', 3, 0, 0, 0),
 (9, 4, 'Are there any administrative reasons for refusal?', 'Yes', 1, 'No', 3, 0, 0, 0),
 (10, 4, 'Are there any procedural reasons for refusal?', 'Yes', 1, 'No', 3, 0, 0, 0),
