@@ -12,6 +12,7 @@ import za.co.social_engineer.www.socialengineer.model.Question;
 public class SEADMActivity extends AppCompatActivity {
 
     private static final String TAG = "SEADMActivity";
+    private static final String CURRENT_QUESTION = "CURRENT_QUESTION";
     //private static final String WEB_SERVICE_BASE_URL = "http://www.social-engineer.co.za/webservice/";
 
     private Button yesButton;
@@ -33,8 +34,12 @@ public class SEADMActivity extends AppCompatActivity {
 
         questionTextView = (TextView) findViewById(R.id.text_view_question);
 
-        Intent intent = getIntent();
-        currentQuestion = intent.getParcelableExtra(SplashActivity.FIRST_QUESTION);
+        if (savedInstanceState != null) {
+            currentQuestion = savedInstanceState.getParcelable(CURRENT_QUESTION);
+        } else {
+            Intent intent = getIntent();
+            currentQuestion = intent.getParcelableExtra(SplashActivity.FIRST_QUESTION);
+        }
 
         questionTextView.setText(currentQuestion.getQuestion());
 
@@ -106,6 +111,13 @@ public class SEADMActivity extends AppCompatActivity {
 //                }
 //            }
 //        });
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putParcelable(CURRENT_QUESTION, currentQuestion);
+
+        super.onSaveInstanceState(savedInstanceState);
     }
 
     public void yesButtonClicked(View view) {
