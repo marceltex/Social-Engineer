@@ -19,6 +19,8 @@ public class FinishActivity extends AppCompatActivity {
 
     private Question finalQuestion;
 
+    private Vibrator vibrator;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,18 +30,19 @@ public class FinishActivity extends AppCompatActivity {
 
         resultTextView = (TextView) findViewById(R.id.text_view_result);
 
-        Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-
         if (savedInstanceState != null) {
             finalQuestion = savedInstanceState.getParcelable(SEADMActivity.FINAL_QUESTION);
         } else {
             Intent intent = getIntent();
             finalQuestion = intent.getParcelableExtra(SEADMActivity.FINAL_QUESTION);
+            vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
         }
 
         if (finalQuestion.getQuestionSet() == 100) {
             resultTextView.setTextColor(Color.RED);
-            vibrator.vibrate(1000);
+            if (vibrator != null) {
+                vibrator.vibrate(1000);
+            }
         } else {
             resultTextView.setTextColor(Color.GREEN);
         }
