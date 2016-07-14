@@ -1,6 +1,5 @@
 package za.co.social_engineer.www.socialengineer;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -21,9 +20,6 @@ public class SplashActivity extends AppCompatActivity {
     // private static final String WEB_SERVICE_BASE_URL = "http://www.social-engineer.co.za/webservice/";
     public static final String FIRST_QUESTION = "FIRST_QUESTION";
 
-    // Activity object required so that the splash activity can be finished from the SEADM activity.
-    public static Activity splash;
-
     private boolean hasBeenDisplayed = false; // Boolean to keep track of whether the splash has been displayed or not
 
     @Override
@@ -37,8 +33,6 @@ public class SplashActivity extends AppCompatActivity {
         if (savedInstanceState != null) {
             hasBeenDisplayed = savedInstanceState.getBoolean(DISPLAYED);
         }
-
-        splash = this;
 
 //        if (!hasBeenDisplayed) {
 //            Gson gson = new GsonBuilder()
@@ -82,6 +76,7 @@ public class SplashActivity extends AppCompatActivity {
                         Intent intent = new Intent(SplashActivity.this, SEADMActivity.class);
                         intent.putExtra(FIRST_QUESTION, firstQuestion);
                         startActivity(intent);
+                        finish();
                     }
                 }
             }
