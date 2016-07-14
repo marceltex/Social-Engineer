@@ -225,8 +225,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             if ((questionSet != 100) && (questionSet != 200)) {
                 String nextQuestionQuery;
 
-                // If state doesn't change return next question in current state
-                if (questionSet == state) {
+                // Circular dependency - Will be removed in next version of SEADM, so hard-coded for now
+                if ((id == 3) && (state == 2) && (match == 3)) {
+                    id = 2;
+                    nextQuestionQuery = "SELECT * FROM " + TABLE_QUESTIONS + " WHERE " + KEY_ID +
+                            " = " + id;
+                } else if (questionSet == state) { // If state doesn't change return next question in current state
                     id++;
                     nextQuestionQuery = "SELECT * FROM " + TABLE_QUESTIONS + " WHERE " + KEY_ID +
                             " = " + id;
