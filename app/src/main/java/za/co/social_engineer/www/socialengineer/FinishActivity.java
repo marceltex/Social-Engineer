@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -51,5 +52,18 @@ public class FinishActivity extends AppCompatActivity {
         savedInstanceState.putParcelable(SEADMActivity.FINAL_QUESTION, finalQuestion);
 
         super.onSaveInstanceState(savedInstanceState);
+    }
+
+    public void restartButtonClicked(View view) {
+        DatabaseHandler db = new DatabaseHandler(this);
+
+        Question firstQuestion = db.getFirstQuestion();
+
+        db.close();
+
+        Intent intent = new Intent(FinishActivity.this, SEADMActivity.class);
+        intent.putExtra(SplashActivity.FIRST_QUESTION, firstQuestion);
+        startActivity(intent);
+        finish();
     }
 }
