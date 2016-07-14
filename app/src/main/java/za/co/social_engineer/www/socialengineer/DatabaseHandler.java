@@ -193,14 +193,24 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public Question getNextQuestion(int id, int state, int match, int count) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        String stateTransitionQuery;
         if (match == -1) {
-            stateTransitionQuery = "SELECT * FROM " + TABLE_COMPLEX_QUESTIONS +" WHERE " +
+            String complexQuestionQuery = "SELECT * FROM " + TABLE_COMPLEX_QUESTIONS +" WHERE " +
                     KEY_QUESTION_SET + " = " + state + " AND " + KEY_COUNT + " = " + count;
-        } else {
-            stateTransitionQuery = "SELECT * FROM " + TABLE_STATE_TRANSITIONS +" WHERE " +
-                    KEY_STATE + " = " + state + " AND " + KEY_MATCH + " = " + match;
+
+            Cursor complexQuestionCursor = db.rawQuery(complexQuestionQuery, null);
+
+            if (!(complexQuestionCursor.moveToFirst()) || complexQuestionCursor.getCount() == 0) {
+                // Return null if complex question not found
+                return null;
+            } else {
+                complexQuestionCursor.moveToFirst();
+
+                match = complexQuestionCursor.getInt(4);
+            }
         }
+
+        String stateTransitionQuery = "SELECT * FROM " + TABLE_STATE_TRANSITIONS +" WHERE " +
+                KEY_STATE + " = " + state + " AND " + KEY_MATCH + " = " + match;
 
         Cursor stateTransitionCursor = db.rawQuery(stateTransitionQuery, null);
 
@@ -210,12 +220,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         } else {
             stateTransitionCursor.moveToFirst();
 
-            int questionSet;
-            if (match == -1) {
-                questionSet  = stateTransitionCursor.getInt(4);
-            } else {
-                questionSet  = stateTransitionCursor.getInt(3);
-            }
+            int questionSet  = stateTransitionCursor.getInt(3);
 
             if ((questionSet != 100) && (questionSet != 200)) {
                 String nextQuestionQuery;
@@ -249,7 +254,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             } else {
                 Question finalQuestion;
                 if (questionSet == 100) {
-                     finalQuestion = new Question(0, questionSet, "Defer or Refer Request",
+                    finalQuestion = new Question(0, questionSet, "Defer or Refer Request",
                             "", 0, "", 0, 0, 0, 0);
                 } else {
                     finalQuestion = new Question(0, questionSet, "Perform the Request",
