@@ -23,6 +23,8 @@ public class SEADMActivity extends AppCompatActivity {
 
     private Question currentQuestion;
 
+    private int count;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +34,8 @@ public class SEADMActivity extends AppCompatActivity {
         noButton = (Button) findViewById(R.id.button_no);
 
         questionTextView = (TextView) findViewById(R.id.text_view_question);
+
+        count = 0;
 
         if (savedInstanceState != null) {
             currentQuestion = savedInstanceState.getParcelable(CURRENT_QUESTION);
@@ -124,6 +128,10 @@ public class SEADMActivity extends AppCompatActivity {
         int questionSet = currentQuestion.getQuestionSet();
         int returnA = currentQuestion.getReturnA();
 
+        if (currentQuestion.getIsCount() == 1) {
+            count++;
+        }
+
         getNextQuestion(id, questionSet, returnA);
     }
 
@@ -145,7 +153,7 @@ public class SEADMActivity extends AppCompatActivity {
     public void getNextQuestion(int id, int state, int match) {
         DatabaseHandler db = new DatabaseHandler(this);
 
-        currentQuestion = db.getNextQuestion(id, state, match);
+        currentQuestion = db.getNextQuestion(id, state, match, count);
 
         if ((currentQuestion.getQuestionSet() == 100) || (currentQuestion.getQuestionSet() == 200)) {
             Intent intent = new Intent(SEADMActivity.this, FinishActivity.class);
