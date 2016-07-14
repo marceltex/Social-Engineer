@@ -190,11 +190,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
      * @param match State that must be transitioned to
      * @return Next question to be displayed
      */
-    public Question getNextQuestion(int id, int state, int match) {
+    public Question getNextQuestion(int id, int state, int match, int count) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        String stateTransitionQuery = "SELECT * FROM " + TABLE_STATE_TRANSITIONS +" WHERE " +
-                KEY_STATE + " = " + state + " AND " + KEY_MATCH + " = " + match;
+        String stateTransitionQuery;
+        if (match == -1) {
+            stateTransitionQuery = "SELECT * FROM " + TABLE_COMPLEX_QUESTIONS +" WHERE " +
+                    KEY_QUESTION_SET + " = " + state + " AND " + KEY_COUNT + " = " + count;
+        } else {
+            stateTransitionQuery = "SELECT * FROM " + TABLE_STATE_TRANSITIONS +" WHERE " +
+                    KEY_STATE + " = " + state + " AND " + KEY_MATCH + " = " + match;
+        }
 
         Cursor stateTransitionCursor = db.rawQuery(stateTransitionQuery, null);
 
@@ -204,7 +210,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         } else {
             stateTransitionCursor.moveToFirst();
 
-            int questionSet = stateTransitionCursor.getInt(3);
+            int questionSet;
+            if (match == -1) {
+                questionSet  = stateTransitionCursor.getInt(4);
+            } else {
+                questionSet  = stateTransitionCursor.getInt(3);
+            }
 
             if ((questionSet != 100) && (questionSet != 200)) {
                 String nextQuestionQuery;
