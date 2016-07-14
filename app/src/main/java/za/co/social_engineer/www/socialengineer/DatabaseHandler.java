@@ -206,33 +206,45 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
             int questionSet = stateTransitionCursor.getInt(3);
 
-            String nextQuestionQuery;
+            if ((questionSet != 100) && (questionSet != 200)) {
+                String nextQuestionQuery;
 
-            // If state doesn't change return next question in current state
-            if (questionSet == state) {
-                id++;
-                nextQuestionQuery = "SELECT * FROM " + TABLE_QUESTIONS + " WHERE " + KEY_ID +
-                        " = " + id;
+                // If state doesn't change return next question in current state
+                if (questionSet == state) {
+                    id++;
+                    nextQuestionQuery = "SELECT * FROM " + TABLE_QUESTIONS + " WHERE " + KEY_ID +
+                            " = " + id;
+                } else {
+                    nextQuestionQuery = "SELECT * FROM " + TABLE_QUESTIONS + " WHERE " +
+                            KEY_QUESTION_SET + " = " + questionSet + " ORDER BY " + KEY_ID;
+                }
+
+                Cursor nextQuestionCursor = db.rawQuery(nextQuestionQuery, null);
+
+                if (!(nextQuestionCursor.moveToFirst()) || nextQuestionCursor.getCount() == 0) {
+                    // Return null if question not found
+                    return null;
+                } else {
+                    nextQuestionCursor.moveToFirst();
+
+                    Question nextQuestion = new Question(nextQuestionCursor.getInt(0), nextQuestionCursor.getInt(1),
+                            nextQuestionCursor.getString(2), nextQuestionCursor.getString(3),
+                            nextQuestionCursor.getInt(4), nextQuestionCursor.getString(5),
+                            nextQuestionCursor.getInt(6), nextQuestionCursor.getInt(7),
+                            nextQuestionCursor.getInt(8), nextQuestionCursor.getInt(9));
+
+                    return nextQuestion;
+                }
             } else {
-                nextQuestionQuery = "SELECT * FROM " + TABLE_QUESTIONS + " WHERE " +
-                        KEY_QUESTION_SET + " = " + questionSet + " ORDER BY " + KEY_ID;
-            }
-
-            Cursor nextQuestionCursor = db.rawQuery(nextQuestionQuery, null);
-
-            if (!(nextQuestionCursor.moveToFirst()) || nextQuestionCursor.getCount() == 0) {
-                // Return null if question not found
-                return null;
-            } else {
-                nextQuestionCursor.moveToFirst();
-
-                Question nextQuestion = new Question(nextQuestionCursor.getInt(0), nextQuestionCursor.getInt(1),
-                        nextQuestionCursor.getString(2), nextQuestionCursor.getString(3),
-                        nextQuestionCursor.getInt(4), nextQuestionCursor.getString(5),
-                        nextQuestionCursor.getInt(6), nextQuestionCursor.getInt(7),
-                        nextQuestionCursor.getInt(8), nextQuestionCursor.getInt(9));
-
-                return nextQuestion;
+                Question finalQuestion;
+                if (questionSet == 100) {
+                     finalQuestion = new Question(0, questionSet, "Defer or Refer Request",
+                            "", 0, "", 0, 0, 0, 0);
+                } else {
+                    finalQuestion = new Question(0, questionSet, "Perform the Request",
+                            "", 0, "", 0, 0, 0, 0);
+                }
+                return finalQuestion;
             }
         }
     }

@@ -13,6 +13,7 @@ public class SEADMActivity extends AppCompatActivity {
 
     private static final String TAG = "SEADMActivity";
     private static final String CURRENT_QUESTION = "CURRENT_QUESTION";
+    public static final String FINAL_QUESTION = "FINAL_QUESTION";
     //private static final String WEB_SERVICE_BASE_URL = "http://www.social-engineer.co.za/webservice/";
 
     private Button yesButton;
@@ -26,8 +27,6 @@ public class SEADMActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seadm);
-
-        SplashActivity.splash.finish(); // Finish Splash Activity, so that if user presses back button, it is not displayed
 
         yesButton = (Button) findViewById(R.id.button_yes);
         noButton = (Button) findViewById(R.id.button_no);
@@ -148,8 +147,14 @@ public class SEADMActivity extends AppCompatActivity {
 
         currentQuestion = db.getNextQuestion(id, state, match);
 
-        questionTextView.setText(currentQuestion.getQuestion());
-
+        if ((currentQuestion.getQuestionSet() == 100) || (currentQuestion.getQuestionSet() == 200)) {
+            Intent intent = new Intent(SEADMActivity.this, FinishActivity.class);
+            intent.putExtra(FINAL_QUESTION, currentQuestion);
+            startActivity(intent);
+            finish();
+        } else {
+            questionTextView.setText(currentQuestion.getQuestion());
+        }
         db.close();
     }
 
