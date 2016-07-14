@@ -12,12 +12,15 @@ import za.co.social_engineer.www.socialengineer.model.Question;
 public class SEADMActivity extends AppCompatActivity {
 
     private static final String TAG = "SEADMActivity";
+    private static final String CURRENT_QUESTION = "CURRENT_QUESTION";
     //private static final String WEB_SERVICE_BASE_URL = "http://www.social-engineer.co.za/webservice/";
 
     private Button yesButton;
     private Button noButton;
 
     private TextView questionTextView;
+
+    private Question currentQuestion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +34,14 @@ public class SEADMActivity extends AppCompatActivity {
 
         questionTextView = (TextView) findViewById(R.id.text_view_question);
 
-        Intent intent = getIntent();
-        Question firstQuestion = (Question) intent.getParcelableExtra(SplashActivity.FIRST_QUESTION);
+        if (savedInstanceState != null) {
+            currentQuestion = savedInstanceState.getParcelable(CURRENT_QUESTION);
+        } else {
+            Intent intent = getIntent();
+            currentQuestion = intent.getParcelableExtra(SplashActivity.FIRST_QUESTION);
+        }
 
-        questionTextView.setText(firstQuestion.getQuestion());
+        questionTextView.setText(currentQuestion.getQuestion());
 
 //        Gson gson = new GsonBuilder()
 //                .setDateFormat("yyyy/MM/dd'T'HH:mm:ssZ")
@@ -106,12 +113,44 @@ public class SEADMActivity extends AppCompatActivity {
 //        });
     }
 
-    public void yesButtonClicked(View view) {
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putParcelable(CURRENT_QUESTION, currentQuestion);
 
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
+    public void yesButtonClicked(View view) {
+        int id = currentQuestion.getId();
+        int questionSet = currentQuestion.getQuestionSet();
+        int returnA = currentQuestion.getReturnA();
+
+        getNextQuestion(id, questionSet, returnA);
     }
 
     public void noButtonClicked(View view) {
+        int id = currentQuestion.getId();
+        int questionSet = currentQuestion.getQuestionSet();
+        int returnB = currentQuestion.getReturnB();
 
+        getNextQuestion(id, questionSet, returnB);
+    }
+
+    /**
+     * Method to get next question from database handler and update text of question displayed to user.
+     *
+     * @param id Question id of current question
+     * @param state State of current question
+     * @param match Matching integer used to determine next state
+     */
+    public void getNextQuestion(int id, int state, int match) {
+        DatabaseHandler db = new DatabaseHandler(this);
+
+        currentQuestion = db.getNextQuestion(id, state, match);
+
+        questionTextView.setText(currentQuestion.getQuestion());
+
+        db.close();
     }
 
 //    @Override

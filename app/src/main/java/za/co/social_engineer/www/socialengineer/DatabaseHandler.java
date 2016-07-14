@@ -158,13 +158,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
      * Method to get the first question from the questions table and return a question object of the
      * first question.
      *
-     * @return Question object of the first question
+     * @return First question to be displayed
      */
     public Question getFirstQuestion() {
-        // Get reference to readable database
         SQLiteDatabase db = this.getReadableDatabase();
 
-        // Build query
         String getFirstQuestionQuery = "SELECT * FROM " + TABLE_QUESTIONS + " WHERE " + KEY_ID +
                 " = " + FIRST_QUESTION_ID;
 
@@ -174,7 +172,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             // Return null if question not found
             return null;
         } else {
-            // If results found, get the first one
             cursor.moveToFirst();
 
             Question firstQuestion = new Question(cursor.getInt(0), cursor.getInt(1), cursor.getString(2),
@@ -188,42 +185,57 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     /**
      * Method to determine and return a ResultSet with the next question that must be displayed.
      *
-     * @param questionId QuestionID of the question that is currently displayed to the user
-     * @param currentState State that the current question is in
-     * @param nextState State that must be transitioned to
-     * @return ResultSet containing the next question to be displayed
-     * @throws Exception If connection to database could not be established
+     * @param id ID of the question that is currently displayed to the user
+     * @param state State that the current question is in
+     * @param match State that must be transitioned to
+     * @return Next question to be displayed
      */
-//    public ResultSet getNextQuestion(int questionId, int currentState, int nextState) throws Exception {
-//        ResultSet nextQuestion = null;
-//
-//        Class.forName("com.mysql.jdbc.Driver");
-//
-//        Connection conn = DriverManager.getConnection("jdbc:mysql://" + databaseUrl + ":" +
-//                databasePort + "/" + databaseName, username, password);
-//
-//        Statement stmnt = conn.createStatement();
-//
-//        ResultSet stateTransition = stmnt.executeQuery("SELECT * FROM " + TABLE_STATE_TRANSITIONS +
-//                " WHERE " + KEY_STATE + " = " + currentState + " AND " + KEY_MATCH + " = " +
-//                nextState + ";");
-//
-//        if (stateTransition.next()) {
-//            int questionSet = stateTransition.getInt(4);
-//
-//            // If state doesn't change return next question in current state
-//            if (questionSet == currentState) {
-//                nextQuestion = stmnt.executeQuery("SELECT * FROM " + TABLE_QUESTIONS + " WHERE "
-//                        + KEY_ID + " = " + (questionId++) + ";");
-//            } else {
-//                nextQuestion = stmnt.executeQuery("SELECT * FROM " + TABLE_QUESTIONS + " WHERE "
-//                        + KEY_QUESTION_SET + " = " + questionSet + " ORDER BY " + KEY_ID + ";");
-//            }
-//        }
-//        conn.close();
-//
-//        return nextQuestion;
-//    }
+    public Question getNextQuestion(int id, int state, int match) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String stateTransitionQuery = "SELECT * FROM " + TABLE_STATE_TRANSITIONS +" WHERE " +
+                KEY_STATE + " = " + state + " AND " + KEY_MATCH + " = " + match;
+
+        Cursor stateTransitionCursor = db.rawQuery(stateTransitionQuery, null);
+
+        if (!(stateTransitionCursor.moveToFirst()) || stateTransitionCursor.getCount() == 0) {
+            // Return null if state transition not found
+            return null;
+        } else {
+            stateTransitionCursor.moveToFirst();
+
+            int questionSet = stateTransitionCursor.getInt(3);
+
+            String nextQuestionQuery;
+
+            // If state doesn't change return next question in current state
+            if (questionSet == state) {
+                id++;
+                nextQuestionQuery = "SELECT * FROM " + TABLE_QUESTIONS + " WHERE " + KEY_ID +
+                        " = " + id;
+            } else {
+                nextQuestionQuery = "SELECT * FROM " + TABLE_QUESTIONS + " WHERE " +
+                        KEY_QUESTION_SET + " = " + questionSet + " ORDER BY " + KEY_ID;
+            }
+
+            Cursor nextQuestionCursor = db.rawQuery(nextQuestionQuery, null);
+
+            if (!(nextQuestionCursor.moveToFirst()) || nextQuestionCursor.getCount() == 0) {
+                // Return null if question not found
+                return null;
+            } else {
+                nextQuestionCursor.moveToFirst();
+
+                Question nextQuestion = new Question(nextQuestionCursor.getInt(0), nextQuestionCursor.getInt(1),
+                        nextQuestionCursor.getString(2), nextQuestionCursor.getString(3),
+                        nextQuestionCursor.getInt(4), nextQuestionCursor.getString(5),
+                        nextQuestionCursor.getInt(6), nextQuestionCursor.getInt(7),
+                        nextQuestionCursor.getInt(8), nextQuestionCursor.getInt(9));
+
+                return nextQuestion;
+            }
+        }
+    }
 
     /**
      * Method to return a string representation of a file
