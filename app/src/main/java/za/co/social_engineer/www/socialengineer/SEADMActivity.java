@@ -15,7 +15,6 @@ public class SEADMActivity extends AppCompatActivity {
     private static final String CURRENT_QUESTION = "CURRENT_QUESTION";
     public static final String FINAL_QUESTION = "FINAL_QUESTION";
     private static final String COUNT = "COUNT";
-    //private static final String WEB_SERVICE_BASE_URL = "http://www.social-engineer.co.za/webservice/";
 
     private Button yesButton;
     private Button noButton;
@@ -46,75 +45,6 @@ public class SEADMActivity extends AppCompatActivity {
         }
 
         questionTextView.setText(currentQuestion.getQuestion());
-
-//        Gson gson = new GsonBuilder()
-//                .setDateFormat("yyyy/MM/dd'T'HH:mm:ssZ")
-//                .create();
-//
-//        Retrofit retrofit = new Retrofit.Builder()
-//                .baseUrl(WEB_SERVICE_BASE_URL)
-//                .addConverterFactory(GsonConverterFactory.create(gson))
-//                .build();
-
-        // Prepare call in Retrofit 2.0
-//        SocialEngineerAPI socialEngineerAPI = retrofit.create(SocialEngineerAPI.class);
-//
-//        Call<List<Question>> call = socialEngineerAPI.getNextQuestion(1,2);
-
-//        // Asynchronous call
-//        call.enqueue(this);
-
-//        final DatabaseHandler databaseHandler = new DatabaseHandler("moutonf.co.za", "3306", "SEPTT",
-//                "septt", "toor");
-
-        // Set text of questionTextView to the string of the first question of the SEADM
-//        try {
-//            currentQuestion = databaseHandler.getFirstQuestion();
-//
-//            if (currentQuestion.next()) {
-//                questionTextView.setText(currentQuestion.getString(3));
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-
-//        yesButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                try {
-//                    int questionId = currentQuestion.getInt(1);
-//                    int currentState = currentQuestion.getInt(2);
-//                    int nextState = currentQuestion.getInt(5);
-//
-//                    currentQuestion = databaseHandler.getNextQuestion(questionId, currentState, nextState);
-//
-//                    if (currentQuestion.next()) {
-//                        questionTextView.setText(currentQuestion.getString(3));
-//                    }
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
-
-//        noButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                try {
-//                    int questionId = currentQuestion.getInt(1);
-//                    int currentState = currentQuestion.getInt(2);
-//                    int nextState = currentQuestion.getInt(7);
-//
-//                    currentQuestion = databaseHandler.getNextQuestion(questionId, currentState, nextState);
-//
-//                    if (currentQuestion.next()) {
-//                        questionTextView.setText(currentQuestion.getString(3));
-//                    }
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
     }
 
     @Override
