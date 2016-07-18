@@ -103,19 +103,4 @@ public class SEADMActivity extends AppCompatActivity {
         }
         db.close();
     }
-
-//    @Override
-//    public void onResponse(Call<List<Question>> call, Response<List<Question>> response) {
-////        if (response.code() == 200) {
-////            Question question = response.body();
-////            questionTextView.setText(question.getQuestion());
-////        } else {
-////            Log.e(TAG, "Failed to fetch first question. Retrofit response code " + response.code());
-////        }
-//    }
-//
-//    @Override
-//    public void onFailure(Call<List<Question>> call, Throwable t) {
-////        Log.e(TAG, "Failed to fetch first question");
-//    }
 }
