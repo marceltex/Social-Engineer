@@ -6,7 +6,7 @@ This is the repository for the social engineering detection Android app develope
 
 **IDE used for development:** Android Studio 2.1.2
 
-**Android SDK Build-tools used:** Android SDK Build-tools 24
+**Android SDK Build-tools used:** Android SDK Build-tools 24.0.1
 
 **Gradle used to build app:** Gradle 2.1.2
 
