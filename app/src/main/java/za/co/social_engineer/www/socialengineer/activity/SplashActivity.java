@@ -1,9 +1,10 @@
-package za.co.social_engineer.www.socialengineer;
+package za.co.social_engineer.www.socialengineer.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import za.co.social_engineer.www.socialengineer.R;
 import za.co.social_engineer.www.socialengineer.api.DatabaseHandler;
 import za.co.social_engineer.www.socialengineer.model.Question;
 

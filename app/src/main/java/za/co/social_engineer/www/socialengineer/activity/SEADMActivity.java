@@ -1,4 +1,4 @@
-package za.co.social_engineer.www.socialengineer;
+package za.co.social_engineer.www.socialengineer.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import za.co.social_engineer.www.socialengineer.R;
 import za.co.social_engineer.www.socialengineer.api.DatabaseHandler;
 import za.co.social_engineer.www.socialengineer.model.Question;
 
