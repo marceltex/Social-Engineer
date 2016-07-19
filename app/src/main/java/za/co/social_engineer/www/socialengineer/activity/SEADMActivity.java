@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import za.co.social_engineer.www.socialengineer.R;
@@ -18,9 +17,6 @@ public class SEADMActivity extends AppCompatActivity {
     public static final String FINAL_QUESTION = "FINAL_QUESTION";
     private static final String COUNT = "COUNT";
 
-    private Button yesButton;
-    private Button noButton;
-
     private TextView questionTextView;
 
     private Question currentQuestion;
@@ -31,9 +27,6 @@ public class SEADMActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seadm);
-
-        yesButton = (Button) findViewById(R.id.button_yes);
-        noButton = (Button) findViewById(R.id.button_no);
 
         questionTextView = (TextView) findViewById(R.id.text_view_question);
 
