@@ -1,9 +1,11 @@
-package za.co.social_engineer.www.socialengineer;
+package za.co.social_engineer.www.socialengineer.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import za.co.social_engineer.www.socialengineer.R;
+import za.co.social_engineer.www.socialengineer.api.DatabaseHandler;
 import za.co.social_engineer.www.socialengineer.model.Question;
 
 /**
@@ -17,7 +19,6 @@ public class SplashActivity extends AppCompatActivity {
     private static final String TAG = "SplashActivity";
 
     private static final String DISPLAYED = "DISPLAYED";
-    // private static final String WEB_SERVICE_BASE_URL = "http://www.social-engineer.co.za/webservice/";
     public static final String FIRST_QUESTION = "FIRST_QUESTION";
 
     private boolean hasBeenDisplayed = false; // Boolean to keep track of whether the splash has been displayed or not
@@ -34,24 +35,6 @@ public class SplashActivity extends AppCompatActivity {
             hasBeenDisplayed = savedInstanceState.getBoolean(DISPLAYED);
         }
 
-//        if (!hasBeenDisplayed) {
-//            Gson gson = new GsonBuilder()
-//                    .setDateFormat("yyyy/MM/dd'T'HH:mm:ssZ")
-//                    .create();
-//
-//            Retrofit retrofit = new Retrofit.Builder()
-//                    .baseUrl(WEB_SERVICE_BASE_URL)
-//                    .addConverterFactory(GsonConverterFactory.create(gson))
-//                    .build();
-//
-//            // Prepare call in Retrofit 2.0
-//            SocialEngineerAPI socialEngineerAPI = retrofit.create(SocialEngineerAPI.class);
-//
-//            Call<Question> call = socialEngineerAPI.getFirstQuestion();
-//
-//            // Asynchronous call
-//            call.enqueue(this);
-//        }
         DatabaseHandler db = new DatabaseHandler(this);
 
         final Question firstQuestion = db.getFirstQuestion();
@@ -90,23 +73,4 @@ public class SplashActivity extends AppCompatActivity {
 
         super.onSaveInstanceState(savedInstanceState);
     }
-
-//    @Override
-//    public void onResponse(Call<Question> call, Response<Question> response) {
-//        if (response.code() == 200) {
-//            Question question = response.body();
-//            if (!hasBeenDisplayed) {
-//                Intent intent = new Intent(SplashActivity.this, SEADMActivity.class);
-//                intent.putExtra(FIRST_QUESTION, question.getQuestion());
-//                startActivity(intent);
-//            }
-//        } else {
-//            Log.e(TAG, "Failed to fetch first question. Retrofit response code " + response.code());
-//        }
-//    }
-//
-//    @Override
-//    public void onFailure(Call<Question> call, Throwable t) {
-//        Log.e(TAG, "Failed to fetch first question");
-//    }
 }

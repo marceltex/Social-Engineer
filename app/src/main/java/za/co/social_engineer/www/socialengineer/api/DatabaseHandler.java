@@ -1,4 +1,4 @@
-package za.co.social_engineer.www.socialengineer;
+package za.co.social_engineer.www.socialengineer.api;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -45,31 +45,19 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_IS_COUNT = "isCount";
     private static final String KEY_IS_FINAL_COUNT = "isFinalCount";
 
-    private static final String[] TABLE_QUESTIONS_COLUMNS = {KEY_ID, KEY_QUESTION_SET, KEY_QUESTION,
-            KEY_OPTION_A, KEY_RETURN_A, KEY_OPTION_B, KEY_RETURN_B, KEY_IS_SKIPPABLE, KEY_IS_COUNT,
-            KEY_IS_FINAL_COUNT};
-
     // State transitions table column names
     private static final String KEY_STATE = "state";
     private static final String KEY_MATCH = "`match`";
     private static final String KEY_TRANSITION = "transition";
     private static final String KEY_CIRCULAR = "circular";
 
-    private static final String[] TABLE_STATE_TRANSITIONS_COLUMNS = {KEY_ID, KEY_STATE, KEY_MATCH,
-            KEY_TRANSITION, KEY_CIRCULAR};
-
     // State table column names
     private static final String KEY_NAME = "name";
-
-    private static final String[] TABLE_STATE_COLUMNS = {KEY_ID, KEY_NAME};
 
     // Complex questions table column names
     private static final String KEY_QUESTIONS = "questions";
     private static final String KEY_COUNT = "count";
     private static final String KEY_RETURN = "return";
-
-    private static final String[] TABLE_COMPLEX_QUESTIONS_COLUMNS = {KEY_ID, KEY_QUESTION_SET,
-            KEY_QUESTIONS, KEY_COUNT, KEY_RETURN};
 
     //Table create statements
     // Questions table create statement
