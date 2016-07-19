@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import za.co.social_engineer.www.socialengineer.R;
@@ -14,8 +13,6 @@ import za.co.social_engineer.www.socialengineer.api.DatabaseHandler;
 import za.co.social_engineer.www.socialengineer.model.Question;
 
 public class FinishActivity extends AppCompatActivity {
-
-    private Button restartButton;
 
     private TextView resultTextView;
 
@@ -27,8 +24,6 @@ public class FinishActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finish);
-
-        restartButton = (Button) findViewById(R.id.button_restart);
 
         resultTextView = (TextView) findViewById(R.id.text_view_result);
 
