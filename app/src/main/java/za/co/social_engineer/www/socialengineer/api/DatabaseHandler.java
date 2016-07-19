@@ -1,4 +1,4 @@
-package za.co.social_engineer.www.socialengineer;
+package za.co.social_engineer.www.socialengineer.api;
 
 import android.content.Context;
 import android.database.Cursor;

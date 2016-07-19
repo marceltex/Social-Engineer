@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import za.co.social_engineer.www.socialengineer.api.DatabaseHandler;
 import za.co.social_engineer.www.socialengineer.model.Question;
 
 public class FinishActivity extends AppCompatActivity {
