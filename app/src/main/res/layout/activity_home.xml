@@ -30,7 +30,10 @@
             android:id="@+id/button_questions"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:onClick="questionsButtonClicked"
+            android:textSize="16sp"
+            android:text="@string/questions_btn_text"/>
 
         <TextView
             android:layout_width="0dp"
@@ -59,7 +62,10 @@
             android:id="@+id/button_picture_of_model"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:onClick="pictureOfModelButtonClicked"
+            android:textSize="16sp"
+            android:text="@string/picture_of_model_btn_text"/>
 
         <TextView
             android:layout_width="0dp"
@@ -88,7 +94,10 @@
             android:id="@+id/button_training"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:onClick="trainingButtonClicked"
+            android:textSize="16sp"
+            android:text="@string/training_btn_text"/>
 
         <TextView
             android:layout_width="0dp"
@@ -117,7 +126,10 @@
             android:id="@+id/button_about"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:onClick="aboutButtonClicked"
+            android:textSize="16sp"
+            android:text="@string/about_btn_text"/>
 
         <TextView
             android:layout_width="0dp"
