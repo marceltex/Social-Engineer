@@ -1,7 +1,9 @@
-package za.co.social_engineer.www.socialengineer;
+package za.co.social_engineer.www.socialengineer.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import za.co.social_engineer.www.socialengineer.R;
 
 public class HomeActivity extends AppCompatActivity {
 
