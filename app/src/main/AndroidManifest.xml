@@ -19,7 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.SEADMActivity" />
-        <activity android:name=".activity.FinishActivity"></activity>
+        <activity android:name=".activity.FinishActivity" />
+        <activity android:name=".HomeActivity"></activity>
     </application>
 
 </manifest>
