@@ -1,8 +1,10 @@
 <resources>
     <string name="app_name">Social Engineer</string>
-    <string name="help">Help</string>
-    <string name="about">About</string>
     <string name="yes_btn_text">Yes</string>
     <string name="no_btn_text">No</string>
     <string name="restart_btn_text">Restart</string>
+    <string name="questions_btn_text">Questions</string>
+    <string name="picture_of_model_btn_text">Picture of Model</string>
+    <string name="training_btn_text">Training</string>
+    <string name="about_btn_text">About</string>
 </resources>

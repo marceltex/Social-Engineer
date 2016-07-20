@@ -56,7 +56,7 @@ public class SplashActivity extends AppCompatActivity {
                     // Prevents multiple instances of the SEADM activity being started if user rotates
                     // the device while splash is being displayed
                     if (!hasBeenDisplayed) {
-                        Intent intent = new Intent(SplashActivity.this, SEADMActivity.class);
+                        Intent intent = new Intent(SplashActivity.this, HomeActivity.class);
                         intent.putExtra(FIRST_QUESTION, firstQuestion);
                         startActivity(intent);
                         finish();
