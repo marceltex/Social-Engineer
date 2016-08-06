@@ -33,7 +33,8 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void pictureOfModelButtonClicked(View view) {
-        todoToast.show();
+        Intent intent = new Intent(HomeActivity.this, PictureOfModelActivity.class);
+        startActivity(intent);
     }
 
     public void trainingButtonClicked(View view) {
