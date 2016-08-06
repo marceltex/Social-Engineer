@@ -33,9 +33,7 @@ public class FinishActivity extends AppCompatActivity {
 
         if (finalQuestion.getQuestionSet() == 100) {
             resultTextView.setTextColor(Color.RED);
-            if (vibrator != null) {
-                vibrator.vibrate(1000);
-            }
+            vibrator.vibrate(1000);
         } else {
             resultTextView.setTextColor(Color.GREEN);
         }
