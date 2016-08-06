@@ -27,13 +27,9 @@ public class FinishActivity extends AppCompatActivity {
 
         resultTextView = (TextView) findViewById(R.id.text_view_result);
 
-        if (savedInstanceState != null) {
-            finalQuestion = savedInstanceState.getParcelable(SEADMActivity.FINAL_QUESTION);
-        } else {
-            Intent intent = getIntent();
-            finalQuestion = intent.getParcelableExtra(SEADMActivity.FINAL_QUESTION);
-            vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-        }
+        Intent intent = getIntent();
+        finalQuestion = intent.getParcelableExtra(SEADMActivity.FINAL_QUESTION);
+        vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
 
         if (finalQuestion.getQuestionSet() == 100) {
             resultTextView.setTextColor(Color.RED);
@@ -45,13 +41,6 @@ public class FinishActivity extends AppCompatActivity {
         }
 
         resultTextView.setText(finalQuestion.getQuestion());
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-        savedInstanceState.putParcelable(SEADMActivity.FINAL_QUESTION, finalQuestion);
-
-        super.onSaveInstanceState(savedInstanceState);
     }
 
     public void restartButtonClicked(View view) {
