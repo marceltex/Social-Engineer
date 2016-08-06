@@ -29,8 +29,7 @@
         <activity
             android:name=".activity.HomeActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.PictureOfModelActivity"
-            android:screenOrientation="portrait" />
+        <activity android:name=".activity.PictureOfModelActivity" />
     </application>
 
 </manifest>
