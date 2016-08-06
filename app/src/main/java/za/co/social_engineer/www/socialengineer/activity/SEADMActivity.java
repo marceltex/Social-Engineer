@@ -13,9 +13,7 @@ import za.co.social_engineer.www.socialengineer.model.Question;
 public class SEADMActivity extends AppCompatActivity {
 
     private static final String TAG = "SEADMActivity";
-    private static final String CURRENT_QUESTION = "CURRENT_QUESTION";
     public static final String FINAL_QUESTION = "FINAL_QUESTION";
-    private static final String COUNT = "COUNT";
 
     private TextView questionTextView;
 
