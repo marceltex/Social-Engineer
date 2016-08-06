@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="za.co.social_engineer.www.socialengineer.PictureOfModelActivity">
+    tools:context=".activity.PictureOfModelActivity">
 
     <ImageView
         android:id="@+id/image_seadmv2"
