@@ -13,9 +13,7 @@ import za.co.social_engineer.www.socialengineer.model.Question;
 public class SEADMActivity extends AppCompatActivity {
 
     private static final String TAG = "SEADMActivity";
-    private static final String CURRENT_QUESTION = "CURRENT_QUESTION";
     public static final String FINAL_QUESTION = "FINAL_QUESTION";
-    private static final String COUNT = "COUNT";
 
     private TextView questionTextView;
 
@@ -30,24 +28,11 @@ public class SEADMActivity extends AppCompatActivity {
 
         questionTextView = (TextView) findViewById(R.id.text_view_question);
 
-        if (savedInstanceState != null) {
-            currentQuestion = savedInstanceState.getParcelable(CURRENT_QUESTION);
-            count = savedInstanceState.getInt(COUNT);
-        } else {
-            Intent intent = getIntent();
-            currentQuestion = intent.getParcelableExtra(SplashActivity.FIRST_QUESTION);
-            count = 0;
-        }
+        Intent intent = getIntent();
+        currentQuestion = intent.getParcelableExtra(SplashActivity.FIRST_QUESTION);
+        count = 0;
 
         questionTextView.setText(currentQuestion.getQuestion());
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-        savedInstanceState.putParcelable(CURRENT_QUESTION, currentQuestion);
-        savedInstanceState.putInt(COUNT, count);
-
-        super.onSaveInstanceState(savedInstanceState);
     }
 
     public void yesButtonClicked(View view) {
