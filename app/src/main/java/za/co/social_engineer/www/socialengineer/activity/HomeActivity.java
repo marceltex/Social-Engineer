@@ -42,7 +42,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void aboutButtonClicked(View view) {
-        Intent intent = new Intent(HomeActivity.this, HomeActivity.class);
+        Intent intent = new Intent(HomeActivity.this, AboutActivity.class);
         startActivity(intent);
     }
 }
