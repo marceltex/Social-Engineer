@@ -6,12 +6,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 
 import za.co.social_engineer.www.socialengineer.model.Question;
+import za.co.social_engineer.www.socialengineer.util.MiscUtil;
 
 /**
  * Class used to manage database CRUD
@@ -115,7 +114,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             try {
                 InputStream inputStream = context.getResources().getAssets().open(SQL_FILES[i]);
 
-                String sql = readTextFromInputStream(inputStream);
+                String sql = MiscUtil.readTextFromInputStream(inputStream);
                 db.execSQL(sql);
             } catch (IOException e) {
                 Log.e(TAG, e.getMessage());
@@ -255,23 +254,5 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 return finalQuestion;
             }
         }
-    }
-
-    /**
-     * Method to return a string representation of a file
-     *
-     * @param inputStream Input Stream of the file
-     * @return String representation of the file
-     */
-    private String readTextFromInputStream(InputStream inputStream) throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-        StringBuilder stringBuilder = new StringBuilder();
-        String line;
-        while ((line = reader.readLine()) != null) {
-            stringBuilder.append(line);
-        }
-        inputStream.close();
-        reader.close();
-        return stringBuilder.toString();
     }
 }

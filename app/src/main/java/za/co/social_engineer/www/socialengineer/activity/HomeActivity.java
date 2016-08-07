@@ -42,6 +42,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void aboutButtonClicked(View view) {
-        todoToast.show();
+        Intent intent = new Intent(HomeActivity.this, AboutActivity.class);
+        startActivity(intent);
     }
 }
