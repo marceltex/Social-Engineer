@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import za.co.social_engineer.www.socialengineer.R;
-import za.co.social_engineer.www.socialengineer.api.MiscAPI;
+import za.co.social_engineer.www.socialengineer.util.MiscUtil;
 
 public class AboutActivity extends AppCompatActivity {
 
@@ -29,7 +29,7 @@ public class AboutActivity extends AppCompatActivity {
         try {
             InputStream inputStream = getResources().getAssets().open("about.txt");
 
-            about = MiscAPI.readTextFromInputStream(inputStream);
+            about = MiscUtil.readTextFromInputStream(inputStream);
         } catch (IOException e) {
             Log.e(TAG, e.getMessage());
         }

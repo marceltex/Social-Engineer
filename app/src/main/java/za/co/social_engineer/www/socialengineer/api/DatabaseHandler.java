@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import za.co.social_engineer.www.socialengineer.model.Question;
+import za.co.social_engineer.www.socialengineer.util.MiscUtil;
 
 /**
  * Class used to manage database CRUD
@@ -113,7 +114,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             try {
                 InputStream inputStream = context.getResources().getAssets().open(SQL_FILES[i]);
 
-                String sql = MiscAPI.readTextFromInputStream(inputStream);
+                String sql = MiscUtil.readTextFromInputStream(inputStream);
                 db.execSQL(sql);
             } catch (IOException e) {
                 Log.e(TAG, e.getMessage());
