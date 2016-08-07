@@ -263,7 +263,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
      * @param inputStream Input Stream of the file
      * @return String representation of the file
      */
-    private String readTextFromInputStream(InputStream inputStream) throws IOException {
+    public String readTextFromInputStream(InputStream inputStream) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         StringBuilder stringBuilder = new StringBuilder();
         String line;
