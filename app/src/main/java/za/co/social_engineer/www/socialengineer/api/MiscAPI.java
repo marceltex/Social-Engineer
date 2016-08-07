@@ -25,6 +25,7 @@ public class MiscAPI {
         String line;
         while ((line = reader.readLine()) != null) {
             stringBuilder.append(line);
+            stringBuilder.append("\n");
         }
         inputStream.close();
         reader.close();
