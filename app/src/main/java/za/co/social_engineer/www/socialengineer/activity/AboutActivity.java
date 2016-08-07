@@ -5,11 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
+import java.io.IOException;
+import java.io.InputStream;
 
 import za.co.social_engineer.www.socialengineer.R;
+import za.co.social_engineer.www.socialengineer.api.MiscAPI;
 
 public class AboutActivity extends AppCompatActivity {
 
@@ -27,12 +27,10 @@ public class AboutActivity extends AppCompatActivity {
         String about = "";
 
         try {
-            Scanner read = new Scanner(new File("about.txt"));
+            InputStream inputStream = getResources().getAssets().open("about.txt");
 
-            while (read.hasNext()) {
-                about += read.next();
-            }
-        } catch (FileNotFoundException e) {
+            about = MiscAPI.readTextFromInputStream(inputStream);
+        } catch (IOException e) {
             Log.e(TAG, e.getMessage());
         }
 
