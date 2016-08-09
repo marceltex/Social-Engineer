@@ -142,4 +142,13 @@
 
     </LinearLayout>
 
+    <ImageButton
+        android:id="@+id/image_button_help"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="helpButtonClicked"
+        android:layout_gravity="center"
+        android:src="@drawable/help_icon"
+        android:background="@android:color/transparent"/>
+
 </LinearLayout>
