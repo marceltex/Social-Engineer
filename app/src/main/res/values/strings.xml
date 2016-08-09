@@ -7,4 +7,11 @@
     <string name="picture_of_model_btn_text">Picture of Model</string>
     <string name="training_btn_text">Training</string>
     <string name="about_btn_text">About</string>
+    <string name="state_1_btn_text">State 1</string>
+    <string name="state_2_btn_text">State 2</string>
+    <string name="state_3_btn_text">State 3</string>
+    <string name="state_4_btn_text">State 4</string>
+    <string name="state_5_btn_text">State 5</string>
+    <string name="state_6_btn_text">State 6</string>
+    <string name="final_state_btn_text">Final State</string>
 </resources>
