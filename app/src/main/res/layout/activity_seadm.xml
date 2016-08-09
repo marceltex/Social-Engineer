@@ -21,7 +21,7 @@
             android:layout_height="35dp"
             android:layout_weight="1"
             android:clickable="false"
-            android:background="@drawable/transparent_chevron"
+            android:background="@drawable/yellow_chevron"
             android:textSize="10sp"
             android:text="@string/state_1_btn_text"
             style="@style/Widget.AppCompat.Button.Borderless"/>
