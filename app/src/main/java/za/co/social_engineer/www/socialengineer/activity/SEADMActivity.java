@@ -55,7 +55,6 @@ public class SEADMActivity extends AppCompatActivity {
         count = 0;
 
         int stateId = currentQuestion.getQuestionSet();
-
         char colorChar = db.getStateColor(stateId);
 
         questionTextView.setText(currentQuestion.getQuestion());
@@ -114,7 +113,12 @@ public class SEADMActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         } else {
+            int stateId = currentQuestion.getQuestionSet();
+            char colorChar = db.getStateColor(stateId);
+            Button stateButton = getStateButton(stateId - 1);
+
             questionTextView.setText(currentQuestion.getQuestion());
+            setStateColor(stateButton, colorChar);
         }
         db.close();
     }
