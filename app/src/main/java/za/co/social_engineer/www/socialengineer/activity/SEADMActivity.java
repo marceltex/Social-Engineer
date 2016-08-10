@@ -2,8 +2,11 @@ package za.co.social_engineer.www.socialengineer.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +21,14 @@ public class SEADMActivity extends AppCompatActivity {
 
     private TextView questionTextView;
 
+    private Button state1Button;
+    private Button state2Button;
+    private Button state3Button;
+    private Button state4Button;
+    private Button state5Button;
+    private Button state6Button;
+    private Button finalStateButton;
+
     private Question currentQuestion;
 
     private int count;
@@ -27,13 +38,31 @@ public class SEADMActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seadm);
 
+        DatabaseHandler db = new DatabaseHandler(this);
+
         questionTextView = (TextView) findViewById(R.id.text_view_question);
+
+        state1Button = (Button) findViewById(R.id.button_state_1);
+        state2Button = (Button) findViewById(R.id.button_state_2);
+        state3Button = (Button) findViewById(R.id.button_state_3);
+        state4Button = (Button) findViewById(R.id.button_state_4);
+        state5Button = (Button) findViewById(R.id.button_state_5);
+        state6Button = (Button) findViewById(R.id.button_state_6);
+        finalStateButton = (Button) findViewById(R.id.button_final_state);
 
         Intent intent = getIntent();
         currentQuestion = intent.getParcelableExtra(SplashActivity.FIRST_QUESTION);
         count = 0;
 
         questionTextView.setText(currentQuestion.getQuestion());
+
+        int stateId = currentQuestion.getQuestionSet();
+
+        char colorChar = db.getStateColor(stateId);
+
+        setStateColor(state1Button, colorChar);
+
+        db.close();
     }
 
     public void yesButtonClicked(View view) {
@@ -89,5 +118,57 @@ public class SEADMActivity extends AppCompatActivity {
             questionTextView.setText(currentQuestion.getQuestion());
         }
         db.close();
+    }
+
+    /**
+     * Method used to retrieve the state button to which a given state ID refers.
+     *
+     * @param stateId The state ID of the current state
+     * @return State button which matches the provided state ID
+     */
+    public Button getStateButton(int stateId) {
+        switch (stateId) {
+            case 1:
+                return state1Button;
+            case 2:
+                return state2Button;
+            case 3:
+                return state3Button;
+            case 4:
+                return state4Button;
+            case 5:
+                return state5Button;
+            case 6:
+                return state6Button;
+            default:
+                Log.e(TAG, "Undefined state ID, " + stateId ", passed to getStateButton method.");
+                return null;
+        }
+    }
+
+    /**
+     * Method used to set the colour of the state buttons in the progress bar.
+     *
+     * @param stateButton State button which the colour needs to be changed
+     * @param colorChar A character representing the colour to which the state button should be changed
+     */
+    public void setStateColor(Button stateButton, char colorChar) {
+        switch (colorChar) {
+            case 'Y':
+                stateButton.setBackground(ContextCompat.getDrawable(this, R.drawable.yellow_chevron));
+                break;
+            case 'B':
+                stateButton.setBackground(ContextCompat.getDrawable(this, R.drawable.blue_chevron));
+                break;
+            case 'G':
+                stateButton.setBackground(ContextCompat.getDrawable(this, R.drawable.green_chevron));
+                break;
+            case 'R':
+                stateButton.setBackground(ContextCompat.getDrawable(this, R.drawable.red_chevron));
+                break;
+            default:
+                Log.e(TAG, "Undefined character, '" + colorChar + "', passed to setStateColor method.");
+                break;
+        }
     }
 }
