@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -14,6 +15,8 @@ import za.co.social_engineer.www.socialengineer.api.DatabaseHandler;
 import za.co.social_engineer.www.socialengineer.model.Question;
 
 public class FinishActivity extends AppCompatActivity {
+
+    private static final String TAG = "FinishActivity";
 
     private TextView resultTextView;
 
@@ -28,6 +31,8 @@ public class FinishActivity extends AppCompatActivity {
     private Question finalQuestion;
 
     private Vibrator vibrator;
+
+    private int[] visitedStates;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +51,7 @@ public class FinishActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         finalQuestion = intent.getParcelableExtra(SEADMActivity.FINAL_QUESTION);
+        visitedStates = intent.getIntArrayExtra(SEADMActivity.VISITED_STATES);
         vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
 
         if (finalQuestion.getQuestionSet() == 100) {
@@ -56,6 +62,15 @@ public class FinishActivity extends AppCompatActivity {
         vibrator.vibrate(1000);
 
         resultTextView.setText(finalQuestion.getQuestion());
+
+        // Set the colours of the state buttons in progress bar
+        for (int i = 0; i < visitedStates.length; i++) {
+            if (visitedStates[i] == 1) {
+
+            } else {
+                Button stateButton = SEADMActivity.get
+            }
+        }
     }
 
     public void restartButtonClicked(View view) {
@@ -69,5 +84,31 @@ public class FinishActivity extends AppCompatActivity {
         intent.putExtra(SplashActivity.FIRST_QUESTION, firstQuestion);
         startActivity(intent);
         finish();
+    }
+
+    /**
+     * Method used to retrieve the state button to which a given state ID refers.
+     *
+     * @param stateId The state ID of the current state
+     * @return State button which matches the provided state ID
+     */
+    public Button getStateButton(int stateId) {
+        switch (stateId) {
+            case 1:
+                return state1Button;
+            case 2:
+                return state2Button;
+            case 3:
+                return state3Button;
+            case 4:
+                return state4Button;
+            case 5:
+                return state5Button;
+            case 6:
+                return state6Button;
+            default:
+                Log.e(TAG, "Undefined state ID, " + stateId + ", passed to getStateButton method.");
+                return null;
+        }
     }
 }
