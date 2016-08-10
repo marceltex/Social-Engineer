@@ -255,4 +255,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             }
         }
     }
+
+    /**
+     * Method to get and return colour of given state
+     *
+     * @param id State id of state for which the colour is required
+     * @return String representation of the colour of the given state
+     */
+    public String getStateColour(int id) {
+
+    }
 }
