@@ -67,15 +67,16 @@ public class FinishActivity extends AppCompatActivity {
 
         // Set the colours of the state buttons in progress bar
         for (int i = 0; i < visitedStates.length; i++) {
-            int stateId = i + 1;
             Button stateButton = getStateButton(i + 1);
 
-            if (visitedStates[i] == 1) {
-                char colorChar = db.getStateColor(stateId);
-
+            if (((visitedStates[i] == 1) && (finalQuestion.getQuestionSet() == 100)) ||
+                    (visitedStates[i] == 100)) {
+                setStateColor(stateButton, 'R');
+            } else if (((visitedStates[i] == 1) && (finalQuestion.getQuestionSet() == 200)) ||
+                    (visitedStates[i] == 200)) {
+                setStateColor(stateButton, 'G');
             } else {
-
-
+                stateButton.setEnabled(false);
             }
         }
 
@@ -115,6 +116,8 @@ public class FinishActivity extends AppCompatActivity {
                 return state5Button;
             case 6:
                 return state6Button;
+            case 7:
+                return finalStateButton;
             default:
                 Log.e(TAG, "Undefined state ID, " + stateId + ", passed to getStateButton method.");
                 return null;
