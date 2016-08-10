@@ -33,6 +33,8 @@ public class SEADMActivity extends AppCompatActivity {
 
     private int count;
 
+    private int[] statesVisited;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,13 +54,17 @@ public class SEADMActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         currentQuestion = intent.getParcelableExtra(SplashActivity.FIRST_QUESTION);
+
         count = 0;
+
+        statesVisited = new int[7]; // Initialised to zeros according to the Java language spec
 
         int stateId = currentQuestion.getQuestionSet();
         char colorChar = db.getStateColor(stateId);
 
         questionTextView.setText(currentQuestion.getQuestion());
         setStateColor(state1Button, colorChar);
+        statesVisited[stateId - 2] = 1;
 
         db.close();
     }
@@ -119,6 +125,7 @@ public class SEADMActivity extends AppCompatActivity {
 
             questionTextView.setText(currentQuestion.getQuestion());
             setStateColor(stateButton, colorChar);
+            statesVisited[stateId - 2] = 1;
         }
         db.close();
     }
