@@ -39,6 +39,8 @@ public class FinishActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finish);
 
+        DatabaseHandler db = new DatabaseHandler(this);
+
         resultTextView = (TextView) findViewById(R.id.text_view_result);
 
         state1Button = (Button) findViewById(R.id.button_state_1);
@@ -65,12 +67,19 @@ public class FinishActivity extends AppCompatActivity {
 
         // Set the colours of the state buttons in progress bar
         for (int i = 0; i < visitedStates.length; i++) {
+            int stateId = i + 1;
+            Button stateButton = getStateButton(i + 1);
+
             if (visitedStates[i] == 1) {
+                char colorChar = db.getStateColor(stateId);
 
             } else {
-                Button stateButton = SEADMActivity.get
+
+
             }
         }
+
+        db.close();
     }
 
     public void restartButtonClicked(View view) {
@@ -109,6 +118,32 @@ public class FinishActivity extends AppCompatActivity {
             default:
                 Log.e(TAG, "Undefined state ID, " + stateId + ", passed to getStateButton method.");
                 return null;
+        }
+    }
+
+    /**
+     * Method used to set the colour of the state buttons in the progress bar.
+     *
+     * @param stateButton State button which the colour needs to be changed
+     * @param colorChar A character representing the colour to which the state button should be changed
+     */
+    public void setStateColor(Button stateButton, char colorChar) {
+        switch (colorChar) {
+            case 'Y':
+                stateButton.setBackground(ContextCompat.getDrawable(this, R.drawable.yellow_chevron));
+                break;
+            case 'B':
+                stateButton.setBackground(ContextCompat.getDrawable(this, R.drawable.blue_chevron));
+                break;
+            case 'G':
+                stateButton.setBackground(ContextCompat.getDrawable(this, R.drawable.green_chevron));
+                break;
+            case 'R':
+                stateButton.setBackground(ContextCompat.getDrawable(this, R.drawable.red_chevron));
+                break;
+            default:
+                Log.e(TAG, "Undefined character, '" + colorChar + "', passed to setStateColor method.");
+                break;
         }
     }
 }
