@@ -54,12 +54,11 @@ public class SEADMActivity extends AppCompatActivity {
         currentQuestion = intent.getParcelableExtra(SplashActivity.FIRST_QUESTION);
         count = 0;
 
-        questionTextView.setText(currentQuestion.getQuestion());
-
         int stateId = currentQuestion.getQuestionSet();
 
         char colorChar = db.getStateColor(stateId);
 
+        questionTextView.setText(currentQuestion.getQuestion());
         setStateColor(state1Button, colorChar);
 
         db.close();
@@ -141,7 +140,7 @@ public class SEADMActivity extends AppCompatActivity {
             case 6:
                 return state6Button;
             default:
-                Log.e(TAG, "Undefined state ID, " + stateId ", passed to getStateButton method.");
+                Log.e(TAG, "Undefined state ID, " + stateId + ", passed to getStateButton method.");
                 return null;
         }
     }
