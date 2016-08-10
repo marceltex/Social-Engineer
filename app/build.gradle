@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "za.co.social_engineer.www.socialengineer"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 24
         versionCode 1
         versionName "0.6"
