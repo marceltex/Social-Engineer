@@ -1,9 +1,9 @@
 package za.co.social_engineer.www.socialengineer.activity;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
@@ -32,11 +32,11 @@ public class FinishActivity extends AppCompatActivity {
         vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
 
         if (finalQuestion.getQuestionSet() == 100) {
-            resultTextView.setTextColor(Color.RED);
-            vibrator.vibrate(1000);
+            resultTextView.setTextColor(ContextCompat.getColor(this, R.color.red));
         } else {
-            resultTextView.setTextColor(Color.GREEN);
+            resultTextView.setTextColor(ContextCompat.getColor(this, R.color.green));
         }
+        vibrator.vibrate(1000);
 
         resultTextView.setText(finalQuestion.getQuestion());
     }
