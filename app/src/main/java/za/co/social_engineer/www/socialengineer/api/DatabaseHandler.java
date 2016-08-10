@@ -262,7 +262,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
      * @param id State id of state for which the colour is required
      * @return String representation of the colour of the given state
      */
-    public String getStateColour(int id) {
+    public String getStateColor(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         String stateQuery = "SELECT * FROM " + TABLE_STATE + " WHERE " + KEY_ID + " = " + id;
