@@ -18,6 +18,7 @@ public class SEADMActivity extends AppCompatActivity {
 
     private static final String TAG = "SEADMActivity";
     public static final String FINAL_QUESTION = "FINAL_QUESTION";
+    public static final String VISITED_STATES = "VISITED_STATES";
 
     private TextView questionTextView;
 
@@ -33,7 +34,7 @@ public class SEADMActivity extends AppCompatActivity {
 
     private int count;
 
-    private int[] statesVisited;
+    private int[] visitedStates;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,14 +58,14 @@ public class SEADMActivity extends AppCompatActivity {
 
         count = 0;
 
-        statesVisited = new int[7]; // Initialised to zeros according to the Java language spec
+        visitedStates = new int[7]; // Initialised to zeros according to the Java language spec
 
         int stateId = currentQuestion.getQuestionSet();
         char colorChar = db.getStateColor(stateId);
 
         questionTextView.setText(currentQuestion.getQuestion());
         setStateColor(state1Button, colorChar);
-        statesVisited[stateId - 2] = 1;
+        visitedStates[stateId - 2] = 1;
 
         db.close();
     }
@@ -114,8 +115,10 @@ public class SEADMActivity extends AppCompatActivity {
         currentQuestion = db.getNextQuestion(id, state, match, tempCount);
 
         if ((currentQuestion.getQuestionSet() == 100) || (currentQuestion.getQuestionSet() == 200)) {
+            visitedStates[visitedStates.length - 1] = currentQuestion.getQuestionSet();
             Intent intent = new Intent(SEADMActivity.this, FinishActivity.class);
             intent.putExtra(FINAL_QUESTION, currentQuestion);
+            intent.putExtra(VISITED_STATES, visitedStates);
             startActivity(intent);
             finish();
         } else {
@@ -125,7 +128,7 @@ public class SEADMActivity extends AppCompatActivity {
 
             questionTextView.setText(currentQuestion.getQuestion());
             setStateColor(stateButton, colorChar);
-            statesVisited[stateId - 2] = 1;
+            visitedStates[stateId - 2] = 1;
         }
         db.close();
     }
