@@ -153,6 +153,8 @@ public class SEADMActivity extends AppCompatActivity {
                 return state5Button;
             case 6:
                 return state6Button;
+            case 7:
+                return finalStateButton;
             default:
                 Log.e(TAG, "Undefined state ID, " + stateId + ", passed to getStateButton method.");
                 return null;
