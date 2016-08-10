@@ -14,6 +14,4 @@
     <string name="state_5_btn_text">State\n5</string>
     <string name="state_6_btn_text">State\n6</string>
     <string name="final_state_btn_text">Final\nState</string>
-    <string name="success_btn_text">Suc-\nces</string>
-    <string name="fail_btn_text">Fail\n</string>
 </resources>
