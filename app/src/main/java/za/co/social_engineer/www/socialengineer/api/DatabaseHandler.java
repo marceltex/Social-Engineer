@@ -260,9 +260,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
      * Method to get and return colour of given state
      *
      * @param id State id of state for which the colour is required
-     * @return String representation of the colour of the given state
+     * @return First letter of the colour of the state
      */
-    public String getStateColor(int id) {
+    public char getStateColor(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         String stateQuery = "SELECT * FROM " + TABLE_STATE + " WHERE " + KEY_ID + " = " + id;
@@ -273,21 +273,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         if (!(stateCursor.moveToFirst()) || stateCursor.getCount() == 0) {
             // Return null if state not found
-            return null;
+            return 0;
         } else {
             stateCursor.moveToFirst();
 
             name = stateCursor.getString(1);
         }
 
-        if (name.contains("Y")) {
-            return "yellow_chevron";
-        } else if (name.contains("B")) {
-            return "blue_chevron";
-        } else if (name.contains("G")) {
-            return "green_chevron";
-        } else {
-            return "red_chevron";
-        }
+        int posOfSpace = name.indexOf(' ');
+
+        return name.charAt(posOfSpace + 1);
     }
 }
