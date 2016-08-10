@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".activity.PictureOfModelActivity">
 
-    <za.co.social_engineer.www.socialengineer.api.TouchImageView
+    <za.co.social_engineer.www.socialengineer.util.TouchImageView
         android:id="@+id/image_seadmv2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
