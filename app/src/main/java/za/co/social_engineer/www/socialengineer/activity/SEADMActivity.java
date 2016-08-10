@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import za.co.social_engineer.www.socialengineer.R;
 import za.co.social_engineer.www.socialengineer.api.DatabaseHandler;
@@ -53,6 +54,11 @@ public class SEADMActivity extends AppCompatActivity {
         int returnB = currentQuestion.getReturnB();
 
         getNextQuestion(id, questionSet, returnB);
+    }
+
+    public void helpButtonClicked(View view) {
+        Toast helpToast = Toast.makeText(this, currentQuestion.getQuestion(), Toast.LENGTH_LONG);
+        helpToast.show();
     }
 
     /**
