@@ -10,10 +10,12 @@
     android:orientation="vertical"
     tools:context=".activity.HomeActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <Switch
+        android:id="@+id/toggle_button_progress_bar_color"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.5"/>
+        android:layout_weight="0.5"
+        android:text="Different Coloured States in Progress Bar"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -138,11 +140,9 @@
 
     </LinearLayout>
 
-    <Switch
-        android:id="@+id/toggle_button_progress_bar_color"
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="0.5"
-        android:text="Different Coloured States in Progress Bar"/>
+        android:layout_weight="0.5"/>
 
 </LinearLayout>
