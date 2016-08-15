@@ -11,7 +11,7 @@
     tools:context=".activity.HomeActivity">
 
     <Switch
-        android:id="@+id/toggle_button_progress_bar_color"
+        android:id="@+id/switch_progress_bar_color"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.5"
