@@ -36,6 +36,8 @@ public class SEADMActivity extends AppCompatActivity {
 
     private int[] visitedStates;
 
+    private boolean isMultiColoredProgressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +57,7 @@ public class SEADMActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         currentQuestion = intent.getParcelableExtra(SplashActivity.FIRST_QUESTION);
+        isMultiColoredProgressBar = intent.getBooleanExtra(HomeActivity.IS_MULTI_COLORED_PROGRESS_BAR, false);
 
         count = 0;
 
@@ -119,6 +122,7 @@ public class SEADMActivity extends AppCompatActivity {
             Intent intent = new Intent(SEADMActivity.this, FinishActivity.class);
             intent.putExtra(FINAL_QUESTION, currentQuestion);
             intent.putExtra(VISITED_STATES, visitedStates);
+            intent.putExtra(HomeActivity.IS_MULTI_COLORED_PROGRESS_BAR, isMultiColoredProgressBar);
             startActivity(intent);
             finish();
         } else {
@@ -168,22 +172,26 @@ public class SEADMActivity extends AppCompatActivity {
      * @param colorChar A character representing the colour to which the state button should be changed
      */
     public void setStateColor(Button stateButton, char colorChar) {
-        switch (colorChar) {
-            case 'Y':
-                stateButton.setBackground(ContextCompat.getDrawable(this, R.drawable.yellow_chevron));
-                break;
-            case 'B':
-                stateButton.setBackground(ContextCompat.getDrawable(this, R.drawable.blue_chevron));
-                break;
-            case 'G':
-                stateButton.setBackground(ContextCompat.getDrawable(this, R.drawable.green_chevron));
-                break;
-            case 'R':
-                stateButton.setBackground(ContextCompat.getDrawable(this, R.drawable.red_chevron));
-                break;
-            default:
-                Log.e(TAG, "Undefined character, '" + colorChar + "', passed to setStateColor method.");
-                break;
+        if (isMultiColoredProgressBar) {
+            switch (colorChar) {
+                case 'Y':
+                    stateButton.setBackground(ContextCompat.getDrawable(this, R.drawable.yellow_chevron));
+                    break;
+                case 'B':
+                    stateButton.setBackground(ContextCompat.getDrawable(this, R.drawable.blue_chevron));
+                    break;
+                case 'G':
+                    stateButton.setBackground(ContextCompat.getDrawable(this, R.drawable.green_chevron));
+                    break;
+                case 'R':
+                    stateButton.setBackground(ContextCompat.getDrawable(this, R.drawable.red_chevron));
+                    break;
+                default:
+                    Log.e(TAG, "Undefined character, '" + colorChar + "', passed to setStateColor method.");
+                    break;
+            }
+        } else {
+            stateButton.setBackground(ContextCompat.getDrawable(this, R.drawable.green_chevron));
         }
     }
 }

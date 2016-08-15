@@ -34,6 +34,8 @@ public class FinishActivity extends AppCompatActivity {
 
     private int[] visitedStates;
 
+    private boolean isMultiColoredProgressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +56,7 @@ public class FinishActivity extends AppCompatActivity {
         Intent intent = getIntent();
         finalQuestion = intent.getParcelableExtra(SEADMActivity.FINAL_QUESTION);
         visitedStates = intent.getIntArrayExtra(SEADMActivity.VISITED_STATES);
+        isMultiColoredProgressBar = intent.getBooleanExtra(HomeActivity.IS_MULTI_COLORED_PROGRESS_BAR, false);
         vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
 
         if (finalQuestion.getQuestionSet() == 100) {
@@ -92,6 +95,7 @@ public class FinishActivity extends AppCompatActivity {
 
         Intent intent = new Intent(FinishActivity.this, SEADMActivity.class);
         intent.putExtra(SplashActivity.FIRST_QUESTION, firstQuestion);
+        intent.putExtra(HomeActivity.IS_MULTI_COLORED_PROGRESS_BAR, isMultiColoredProgressBar);
         startActivity(intent);
         finish();
     }
