@@ -30,8 +30,10 @@
             android:name=".activity.HomeActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".activity.PictureOfModelActivity" />
-        <activity android:name=".activity.AboutActivity"
+        <activity
+            android:name=".activity.AboutActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".TrainingActivity"></activity>
     </application>
 
 </manifest>
