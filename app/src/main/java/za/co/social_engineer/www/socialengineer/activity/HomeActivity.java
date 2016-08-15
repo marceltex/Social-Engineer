@@ -11,6 +11,8 @@ import za.co.social_engineer.www.socialengineer.model.Question;
 
 public class HomeActivity extends AppCompatActivity {
 
+    private static final String TAG = "HomeActivity";
+
     private Question firstQuestion;
 
     private Toast todoToast;

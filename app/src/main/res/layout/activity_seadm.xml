@@ -10,6 +10,90 @@
     android:orientation="vertical"
     tools:context=".activity.SEADMActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_state_1"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_weight="1"
+            android:clickable="false"
+            android:background="@drawable/transparent_chevron"
+            android:textSize="10sp"
+            android:text="@string/state_1_btn_text"
+            style="@style/Widget.AppCompat.Button.Borderless"/>
+
+        <Button
+            android:id="@+id/button_state_2"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_weight="1"
+            android:clickable="false"
+            android:background="@drawable/transparent_chevron"
+            android:textSize="10sp"
+            android:text="@string/state_2_btn_text"
+            style="@style/Widget.AppCompat.Button.Borderless"/>
+
+        <Button
+            android:id="@+id/button_state_3"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_weight="1"
+            android:clickable="false"
+            android:background="@drawable/transparent_chevron"
+            android:textSize="10sp"
+            android:text="@string/state_3_btn_text"
+            style="@style/Widget.AppCompat.Button.Borderless"/>
+
+        <Button
+            android:id="@+id/button_state_4"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_weight="1"
+            android:clickable="false"
+            android:background="@drawable/transparent_chevron"
+            android:textSize="10sp"
+            android:text="@string/state_4_btn_text"
+            style="@style/Widget.AppCompat.Button.Borderless"/>
+
+        <Button
+            android:id="@+id/button_state_5"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_weight="1"
+            android:clickable="false"
+            android:background="@drawable/transparent_chevron"
+            android:textSize="10sp"
+            android:text="@string/state_5_btn_text"
+            style="@style/Widget.AppCompat.Button.Borderless"/>
+
+        <Button
+            android:id="@+id/button_state_6"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_weight="1"
+            android:clickable="false"
+            android:background="@drawable/transparent_chevron"
+            android:textSize="10sp"
+            android:text="@string/state_6_btn_text"
+            style="@style/Widget.AppCompat.Button.Borderless"/>
+
+        <Button
+            android:id="@+id/button_final_state"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_weight="1"
+            android:clickable="false"
+            android:background="@drawable/transparent_chevron"
+            android:textSize="10sp"
+            android:text="@string/final_state_btn_text"
+            style="@style/Widget.AppCompat.Button.Borderless"/>
+
+    </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -57,5 +141,14 @@
             android:text="@string/no_btn_text"/>
 
     </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/image_button_help"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="helpButtonClicked"
+        android:layout_gravity="center"
+        android:src="@drawable/help_icon"
+        android:background="@android:color/transparent"/>
 
 </LinearLayout>
