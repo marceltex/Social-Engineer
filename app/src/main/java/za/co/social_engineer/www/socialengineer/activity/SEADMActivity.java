@@ -68,6 +68,7 @@ public class SEADMActivity extends AppCompatActivity {
         char colorChar = db.getStateColor(stateId);
 
         questionTextView.setText(currentQuestion.getQuestion());
+        state1Button.setTextColor(Color.WHITE);
         setStateColor(state1Button, colorChar);
         visitedStates[stateId - 2] = 1;
 
