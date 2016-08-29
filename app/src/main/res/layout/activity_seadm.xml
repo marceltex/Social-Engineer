@@ -8,6 +8,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
+    android:background="@color/background"
     tools:context=".activity.SEADMActivity">
 
     <LinearLayout
@@ -21,7 +22,7 @@
             android:layout_height="35dp"
             android:layout_weight="1"
             android:clickable="false"
-            android:background="@drawable/transparent_chevron"
+            android:background="@drawable/white_chevron"
             android:textSize="10sp"
             android:text="@string/state_1_btn_text"
             style="@style/Widget.AppCompat.Button.Borderless"/>
@@ -32,7 +33,7 @@
             android:layout_height="35dp"
             android:layout_weight="1"
             android:clickable="false"
-            android:background="@drawable/transparent_chevron"
+            android:background="@drawable/white_chevron"
             android:textSize="10sp"
             android:text="@string/state_2_btn_text"
             style="@style/Widget.AppCompat.Button.Borderless"/>
@@ -43,7 +44,7 @@
             android:layout_height="35dp"
             android:layout_weight="1"
             android:clickable="false"
-            android:background="@drawable/transparent_chevron"
+            android:background="@drawable/white_chevron"
             android:textSize="10sp"
             android:text="@string/state_3_btn_text"
             style="@style/Widget.AppCompat.Button.Borderless"/>
@@ -54,7 +55,7 @@
             android:layout_height="35dp"
             android:layout_weight="1"
             android:clickable="false"
-            android:background="@drawable/transparent_chevron"
+            android:background="@drawable/white_chevron"
             android:textSize="10sp"
             android:text="@string/state_4_btn_text"
             style="@style/Widget.AppCompat.Button.Borderless"/>
@@ -65,7 +66,7 @@
             android:layout_height="35dp"
             android:layout_weight="1"
             android:clickable="false"
-            android:background="@drawable/transparent_chevron"
+            android:background="@drawable/white_chevron"
             android:textSize="10sp"
             android:text="@string/state_5_btn_text"
             style="@style/Widget.AppCompat.Button.Borderless"/>
@@ -76,7 +77,7 @@
             android:layout_height="35dp"
             android:layout_weight="1"
             android:clickable="false"
-            android:background="@drawable/transparent_chevron"
+            android:background="@drawable/white_chevron"
             android:textSize="10sp"
             android:text="@string/state_6_btn_text"
             style="@style/Widget.AppCompat.Button.Borderless"/>
@@ -87,7 +88,7 @@
             android:layout_height="35dp"
             android:layout_weight="1"
             android:clickable="false"
-            android:background="@drawable/transparent_chevron"
+            android:background="@drawable/white_chevron"
             android:textSize="10sp"
             android:text="@string/final_state_btn_text"
             style="@style/Widget.AppCompat.Button.Borderless"/>
@@ -101,9 +102,13 @@
 
         <TextView
             android:id="@+id/text_view_question"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:background="@color/text_view_background"
             android:textSize="40sp"
             android:textColor="@android:color/black"
             android:textStyle="bold" />
@@ -120,8 +125,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:backgroundTint="@color/green"
             android:onClick="yesButtonClicked"
             android:textSize="18sp"
+            android:textColor="@android:color/white"
             android:text="@string/yes_btn_text"/>
 
         <TextView
@@ -134,8 +141,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:backgroundTint="@color/red"
             android:onClick="noButtonClicked"
             android:textSize="18sp"
+            android:textColor="@android:color/white"
             android:text="@string/no_btn_text"/>
 
     </LinearLayout>
