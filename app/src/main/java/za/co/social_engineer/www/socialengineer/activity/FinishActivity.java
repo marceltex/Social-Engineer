@@ -1,6 +1,7 @@
 package za.co.social_engineer.www.socialengineer.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v4.content.ContextCompat;
@@ -60,9 +61,9 @@ public class FinishActivity extends AppCompatActivity {
         vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
 
         if (finalQuestion.getQuestionSet() == 100) {
-            resultTextView.setTextColor(ContextCompat.getColor(this, R.color.red));
+            resultTextView.setBackgroundColor(ContextCompat.getColor(this, R.color.red));
         } else {
-            resultTextView.setTextColor(ContextCompat.getColor(this, R.color.green));
+            resultTextView.setBackgroundColor(ContextCompat.getColor(this, R.color.green));
         }
         vibrator.vibrate(1000);
 
@@ -74,9 +75,11 @@ public class FinishActivity extends AppCompatActivity {
 
             if (((visitedStates[i] == 1) && (finalQuestion.getQuestionSet() == 100)) ||
                     (visitedStates[i] == 100)) {
+                stateButton.setTextColor(Color.WHITE);
                 setStateColor(stateButton, 'R');
             } else if (((visitedStates[i] == 1) && (finalQuestion.getQuestionSet() == 200)) ||
                     (visitedStates[i] == 200)) {
+                stateButton.setTextColor(Color.WHITE);
                 setStateColor(stateButton, 'G');
             } else {
                 stateButton.setEnabled(false);
