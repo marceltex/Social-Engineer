@@ -108,6 +108,7 @@
             android:gravity="center"
             android:layout_gravity="center"
             android:textSize="47sp"
+            android:textColor="@android:color/white"
             android:textStyle="bold" />
 
     </ScrollView>
@@ -127,6 +128,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:backgroundTint="@color/text_view_background"
             android:onClick="restartButtonClicked"
             android:textSize="18sp"
             android:text="@string/restart_btn_text"/>
@@ -137,5 +139,19 @@
             android:layout_weight="0.5"/>
 
     </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="0.02"/>
+
+    <ImageButton
+        android:id="@+id/image_button_help"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="helpButtonClicked"
+        android:layout_gravity="center"
+        android:src="@drawable/help_icon"
+        android:background="@android:color/transparent"/>
 
 </LinearLayout>
