@@ -2,9 +2,9 @@ package za.co.social_engineer.www.socialengineer.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +17,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import za.co.social_engineer.www.socialengineer.BuildConfig;
 import za.co.social_engineer.www.socialengineer.R;
 
 public class TrainingActivity extends AppCompatActivity {
@@ -80,7 +81,8 @@ public class TrainingActivity extends AppCompatActivity {
                     }
 
                     Intent intent = new Intent(Intent.ACTION_VIEW);
-                    intent.setDataAndType(Uri.fromFile(file), "application/pdf");
+                    intent.setDataAndType(FileProvider.getUriForFile(TrainingActivity.this,
+                            BuildConfig.APPLICATION_ID + ".provider", file), "application/pdf");
                     intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                     startActivity(intent);
                 }
