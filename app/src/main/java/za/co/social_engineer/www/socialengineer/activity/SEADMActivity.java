@@ -1,6 +1,7 @@
 package za.co.social_engineer.www.socialengineer.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -131,6 +132,7 @@ public class SEADMActivity extends AppCompatActivity {
             Button stateButton = getStateButton(stateId - 1);
 
             questionTextView.setText(currentQuestion.getQuestion());
+            stateButton.setTextColor(Color.WHITE);
             setStateColor(stateButton, colorChar);
             visitedStates[stateId - 2] = 1;
         }
