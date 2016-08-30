@@ -45,8 +45,8 @@ public class TrainingActivity extends AppCompatActivity {
             trainingDocumentList[i] = trainingDocumentList[i].substring(0, posOfPeriod);
         }
 
-        final ArrayAdapter<String> trainingDocumentAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
-                trainingDocumentList);
+        final ArrayAdapter<String> trainingDocumentAdapter = new ArrayAdapter<String>(this,
+                R.layout.list_item_white_text, R.id.list_item, trainingDocumentList);
 
         trainingDocumentsListView.setAdapter(trainingDocumentAdapter);
 
@@ -80,7 +80,10 @@ public class TrainingActivity extends AppCompatActivity {
                     }
 
                     Intent intent = new Intent(Intent.ACTION_VIEW);
-                    intent.setDataAndType(Uri.fromFile(file), "application/pdf");
+                    //intent.setDataAndType(FileProvider.getUriForFile(TrainingActivity.this,
+                            //BuildConfig.APPLICATION_ID + ".provider", file.get), "application/pdf");
+                    Uri uri = Uri.parse("content://za.co.social_engineer.www.socialengineer/" + file.getAbsolutePath());
+                    intent.setDataAndType(uri, "application/pdf");
                     intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                     startActivity(intent);
                 }
@@ -102,7 +105,7 @@ public class TrainingActivity extends AppCompatActivity {
         File file = new File(context.getExternalFilesDir(
                 Environment.DIRECTORY_DOCUMENTS), documentStorageSubDir);
         if (!file.mkdirs()) {
-            Log.e(TAG, "Directory not created");
+            Log.i(TAG, "Directory not created");
         }
         return file;
     }

@@ -8,12 +8,16 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
+    android:background="@color/background"
     tools:context=".activity.HomeActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <Switch
+        android:id="@+id/switch_progress_bar_color"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.5"/>
+        android:layout_weight="0.5"
+        android:textColor="@android:color/white"
+        android:text="Different Coloured States in Progress Bar"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,6 +35,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:backgroundTint="@color/text_view_background"
             android:onClick="questionsButtonClicked"
             android:textSize="16sp"
             android:text="@string/questions_btn_text"/>
@@ -63,6 +68,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:backgroundTint="@color/text_view_background"
             android:onClick="pictureOfModelButtonClicked"
             android:textSize="16sp"
             android:text="@string/picture_of_model_btn_text"/>
@@ -95,6 +101,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:backgroundTint="@color/text_view_background"
             android:onClick="trainingButtonClicked"
             android:textSize="16sp"
             android:text="@string/training_btn_text"/>
@@ -127,6 +134,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:backgroundTint="@color/text_view_background"
             android:onClick="aboutButtonClicked"
             android:textSize="16sp"
             android:text="@string/about_btn_text"/>

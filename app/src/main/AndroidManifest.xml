@@ -37,6 +37,12 @@
         <activity
             android:name=".activity.TrainingActivity"
             android:screenOrientation="portrait" />
+        <provider
+            android:authorities="za.co.social_engineer.www.socialengineer"
+            android:name=".util.PDFContentProvider"
+            android:exported="true"
+            android:grantUriPermissions="true">
+        </provider>
     </application>
 
 </manifest>
