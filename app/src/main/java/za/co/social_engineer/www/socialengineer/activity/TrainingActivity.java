@@ -105,7 +105,7 @@ public class TrainingActivity extends AppCompatActivity {
         File file = new File(context.getExternalFilesDir(
                 Environment.DIRECTORY_DOCUMENTS), documentStorageSubDir);
         if (!file.mkdirs()) {
-            Log.e(TAG, "Directory not created");
+            Log.i(TAG, "Directory not created");
         }
         return file;
     }
