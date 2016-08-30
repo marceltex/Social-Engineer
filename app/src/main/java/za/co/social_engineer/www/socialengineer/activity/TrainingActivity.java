@@ -45,8 +45,8 @@ public class TrainingActivity extends AppCompatActivity {
             trainingDocumentList[i] = trainingDocumentList[i].substring(0, posOfPeriod);
         }
 
-        final ArrayAdapter<String> trainingDocumentAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
-                trainingDocumentList);
+        final ArrayAdapter<String> trainingDocumentAdapter = new ArrayAdapter<String>(this,
+                R.layout.list_item_white_text, R.id.list_item, trainingDocumentList);
 
         trainingDocumentsListView.setAdapter(trainingDocumentAdapter);
 
