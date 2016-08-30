@@ -38,13 +38,10 @@
             android:name=".activity.TrainingActivity"
             android:screenOrientation="portrait" />
         <provider
-            android:authorities="${applicationId}.provider"
-            android:name="android.support.v4.content.FileProvider"
-            android:exported="false"
+            android:authorities="za.co.social_engineer.www.socialengineer"
+            android:name=".util.PDFContentProvider"
+            android:exported="true"
             android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths" />
         </provider>
     </application>
 
