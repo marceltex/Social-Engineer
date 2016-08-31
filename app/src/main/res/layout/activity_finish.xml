@@ -83,6 +83,17 @@
             style="@style/Widget.AppCompat.Button.Borderless"/>
 
         <Button
+            android:id="@+id/button_state_7"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_weight="1"
+            android:clickable="false"
+            android:background="@drawable/white_chevron"
+            android:textSize="10sp"
+            android:text="@string/state_7_btn_text"
+            style="@style/Widget.AppCompat.Button.Borderless"/>
+
+        <Button
             android:id="@+id/button_final_state"
             android:layout_width="0dp"
             android:layout_height="35dp"
