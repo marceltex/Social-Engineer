@@ -15,14 +15,12 @@ public class StateTransition implements Parcelable {
     private int state;
     private int match;
     private int transition;
-    private int circular;
 
-    public StateTransition(int id, int state, int match, int transition, int circular) {
+    public StateTransition(int id, int state, int match, int transition) {
         this.id = id;
         this.state = state;
         this.match = match;
         this.transition = transition;
-        this.circular = circular;
     }
 
     public int getId() {
@@ -57,14 +55,6 @@ public class StateTransition implements Parcelable {
         this.transition = transition;
     }
 
-    public int getCircular() {
-        return circular;
-    }
-
-    public void setCircular(int circular) {
-        this.circular = circular;
-    }
-
     @Override
     public int describeContents() {
         return hashCode();
@@ -76,7 +66,6 @@ public class StateTransition implements Parcelable {
         dest.writeInt(this.state);
         dest.writeInt(this.match);
         dest.writeInt(this.transition);
-        dest.writeInt(this.circular);
     }
 
     public StateTransition(Parcel in) {
@@ -84,7 +73,6 @@ public class StateTransition implements Parcelable {
         this.state = in.readInt();
         this.match = in.readInt();
         this.transition = in.readInt();
-        this.circular = in.readInt();
     }
 
     public static final Parcelable.Creator<StateTransition> CREATOR = new Parcelable.Creator<StateTransition>() {

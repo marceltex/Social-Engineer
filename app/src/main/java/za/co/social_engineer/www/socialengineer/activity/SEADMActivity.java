@@ -29,6 +29,7 @@ public class SEADMActivity extends AppCompatActivity {
     private Button state4Button;
     private Button state5Button;
     private Button state6Button;
+    private Button state7Button;
     private Button finalStateButton;
 
     private Question currentQuestion;
@@ -54,6 +55,7 @@ public class SEADMActivity extends AppCompatActivity {
         state4Button = (Button) findViewById(R.id.button_state_4);
         state5Button = (Button) findViewById(R.id.button_state_5);
         state6Button = (Button) findViewById(R.id.button_state_6);
+        state7Button = (Button) findViewById(R.id.button_state_7);
         finalStateButton = (Button) findViewById(R.id.button_final_state);
 
         Intent intent = getIntent();
@@ -62,15 +64,14 @@ public class SEADMActivity extends AppCompatActivity {
 
         count = 0;
 
-        visitedStates = new int[7]; // Initialised to zeros according to the Java language spec
+        visitedStates = new int[8]; // Initialised to zeros according to the Java language spec
 
         int stateId = currentQuestion.getQuestionSet();
-        char colorChar = db.getStateColor(stateId);
 
         questionTextView.setText(currentQuestion.getQuestion());
         state1Button.setTextColor(Color.WHITE);
-        setStateColor(state1Button, colorChar);
-        visitedStates[stateId - 2] = 1;
+        setStateColor(state1Button, stateId);
+        visitedStates[stateId - 1] = 1;
 
         db.close();
     }
@@ -95,9 +96,8 @@ public class SEADMActivity extends AppCompatActivity {
         getNextQuestion(id, questionSet, returnB);
     }
 
-    // Todo: Display appropriate help message and not just the same text as the question
     public void helpButtonClicked(View view) {
-        Toast helpToast = Toast.makeText(this, currentQuestion.getQuestion(), Toast.LENGTH_LONG);
+        Toast helpToast = Toast.makeText(this, currentQuestion.getQuestionExplained(), Toast.LENGTH_LONG);
         helpToast.show();
     }
 
@@ -129,13 +129,12 @@ public class SEADMActivity extends AppCompatActivity {
             finish();
         } else {
             int stateId = currentQuestion.getQuestionSet();
-            char colorChar = db.getStateColor(stateId);
-            Button stateButton = getStateButton(stateId - 1);
+            Button stateButton = getStateButton(stateId);
 
             questionTextView.setText(currentQuestion.getQuestion());
             stateButton.setTextColor(Color.WHITE);
-            setStateColor(stateButton, colorChar);
-            visitedStates[stateId - 2] = 1;
+            setStateColor(stateButton, stateId);
+            visitedStates[stateId - 1] = 1;
         }
         db.close();
     }
@@ -161,6 +160,8 @@ public class SEADMActivity extends AppCompatActivity {
             case 6:
                 return state6Button;
             case 7:
+                return state7Button;
+            case 8:
                 return finalStateButton;
             default:
                 Log.e(TAG, "Undefined state ID, " + stateId + ", passed to getStateButton method.");
@@ -172,25 +173,28 @@ public class SEADMActivity extends AppCompatActivity {
      * Method used to set the colour of the state buttons in the progress bar.
      *
      * @param stateButton State button which the colour needs to be changed
-     * @param colorChar A character representing the colour to which the state button should be changed
+     * @param stateId State ID of the current state
      */
-    public void setStateColor(Button stateButton, char colorChar) {
+    public void setStateColor(Button stateButton, int stateId) {
         if (isMultiColoredProgressBar) {
-            switch (colorChar) {
-                case 'Y':
+            switch (stateId) {
+                case 1:
+                case 2:
+                case 4:
                     stateButton.setBackground(ContextCompat.getDrawable(this, R.drawable.yellow_chevron));
                     break;
-                case 'B':
+                case 3:
                     stateButton.setBackground(ContextCompat.getDrawable(this, R.drawable.blue_chevron));
                     break;
-                case 'G':
+                case 5:
+                case 7:
                     stateButton.setBackground(ContextCompat.getDrawable(this, R.drawable.green_chevron));
                     break;
-                case 'R':
+                case 6:
                     stateButton.setBackground(ContextCompat.getDrawable(this, R.drawable.red_chevron));
                     break;
                 default:
-                    Log.e(TAG, "Undefined character, '" + colorChar + "', passed to setStateColor method.");
+                    Log.e(TAG, "Undefined state ID, '" + stateId + "', passed to setStateColor method.");
                     break;
             }
         } else {

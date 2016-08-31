@@ -21,7 +21,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     private static final String TAG = "DatabaseHandler";
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private static final String DATABASE_NAME = "septt";
 
     // Table names
@@ -40,15 +40,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_RETURN_A = "returnA";
     private static final String KEY_OPTION_B = "optionB";
     private static final String KEY_RETURN_B = "returnB";
-    private static final String KEY_IS_SKIPPABLE = "isSkippable";
     private static final String KEY_IS_COUNT = "isCount";
     private static final String KEY_IS_FINAL_COUNT = "isFinalCount";
+    private static final String KEY_QUESTION_EXPLAINED  = "questionExplained";
 
     // State transitions table column names
     private static final String KEY_STATE = "state";
     private static final String KEY_MATCH = "`match`";
     private static final String KEY_TRANSITION = "transition";
-    private static final String KEY_CIRCULAR = "circular";
 
     // State table column names
     private static final String KEY_NAME = "name";
@@ -63,14 +62,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String CREATE_QUESTIONS_TABLE = "CREATE TABLE " + TABLE_QUESTIONS + " ( " +
             KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + KEY_QUESTION_SET + " INTEGER, " +
             KEY_QUESTION + " TEXT, " + KEY_OPTION_A + " TEXT, " + KEY_RETURN_A + " INTEGER, " +
-            KEY_OPTION_B + " TEXT, " + KEY_RETURN_B + " INTEGER, " + KEY_IS_SKIPPABLE + " INTEGER," +
-            KEY_IS_COUNT + " INTEGER, " + KEY_IS_FINAL_COUNT + " INTEGER )";
+            KEY_OPTION_B + " TEXT, " + KEY_RETURN_B + " INTEGER, " + KEY_IS_COUNT + " INTEGER, " +
+            KEY_IS_FINAL_COUNT + " INTEGER, " + KEY_QUESTION_EXPLAINED + " TEXT ) ";
 
     // State transitions table create statement
     private static final String CREATE_STATE_TRANSITIONS_TABLE = "CREATE TABLE " +
             TABLE_STATE_TRANSITIONS + " ( " + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            KEY_STATE + " INTEGER, " + KEY_MATCH + " INTEGER, " + KEY_TRANSITION + " INTEGER, " +
-            KEY_CIRCULAR + " INTEGER )";
+            KEY_STATE + " INTEGER, " + KEY_MATCH + " INTEGER, " + KEY_TRANSITION + " INTEGER ) ";
 
     // State table create statement
     private static final String CREATE_STATE_TABLE = "CREATE TABLE " + TABLE_STATE + " ( " + KEY_ID +
@@ -86,7 +84,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String[] SQL_FILES = {"complexQuestions.sql", "questions.sql", "State.sql",
             "stateTransitions.sql"};
 
-    private static final int FIRST_QUESTION_ID = 2;
+    private static final int FIRST_QUESTION_ID = 1;
 
     private Context context;
 
@@ -163,7 +161,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
             Question firstQuestion = new Question(cursor.getInt(0), cursor.getInt(1), cursor.getString(2),
                     cursor.getString(3), cursor.getInt(4), cursor.getString(5),
-                    cursor.getInt(6), cursor.getInt(7), cursor.getInt(8), cursor.getInt(9));
+                    cursor.getInt(6), cursor.getInt(7), cursor.getInt(8), cursor.getString(9));
 
             return firstQuestion;
         }
@@ -212,12 +210,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             if ((questionSet != 100) && (questionSet != 200)) {
                 String nextQuestionQuery;
 
-                // Circular dependency - Will be removed in next version of SEADM, so hard-coded for now
-                if ((id == 3) && (state == 2) && (match == 3)) {
-                    id = 2;
-                    nextQuestionQuery = "SELECT * FROM " + TABLE_QUESTIONS + " WHERE " + KEY_ID +
-                            " = " + id;
-                } else if (questionSet == state) { // If state doesn't change return next question in current state
+                // If state doesn't change return next question in current state
+                if (questionSet == state) {
                     id++;
                     nextQuestionQuery = "SELECT * FROM " + TABLE_QUESTIONS + " WHERE " + KEY_ID +
                             " = " + id;
@@ -238,50 +232,21 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                             nextQuestionCursor.getString(2), nextQuestionCursor.getString(3),
                             nextQuestionCursor.getInt(4), nextQuestionCursor.getString(5),
                             nextQuestionCursor.getInt(6), nextQuestionCursor.getInt(7),
-                            nextQuestionCursor.getInt(8), nextQuestionCursor.getInt(9));
+                            nextQuestionCursor.getInt(8), nextQuestionCursor.getString(9));
 
                     return nextQuestion;
                 }
             } else {
                 Question finalQuestion;
                 if (questionSet == 100) {
-                    finalQuestion = new Question(0, questionSet, "Defer or Refer Request",
-                            "", 0, "", 0, 0, 0, 0);
+                    finalQuestion = new Question(0, questionSet, "Defer or Refer the Request",
+                            "", 0, "", 0, 0, 0, "");
                 } else {
                     finalQuestion = new Question(0, questionSet, "Perform the Request",
-                            "", 0, "", 0, 0, 0, 0);
+                            "", 0, "", 0, 0, 0, "");
                 }
                 return finalQuestion;
             }
         }
-    }
-
-    /**
-     * Method to get and return colour of given state
-     *
-     * @param id State id of state for which the colour is required
-     * @return First letter of the colour of the state
-     */
-    public char getStateColor(int id) {
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        String stateQuery = "SELECT * FROM " + TABLE_STATE + " WHERE " + KEY_ID + " = " + id;
-
-        Cursor stateCursor = db.rawQuery(stateQuery, null);
-
-        String name;
-
-        if (!(stateCursor.moveToFirst()) || stateCursor.getCount() == 0) {
-            // Return null if state not found
-            return 0;
-        } else {
-            stateCursor.moveToFirst();
-
-            name = stateCursor.getString(1);
-        }
-
-        int posOfSpace = name.indexOf(' ');
-
-        return name.charAt(posOfSpace + 1);
     }
 }
