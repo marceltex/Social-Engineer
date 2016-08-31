@@ -40,15 +40,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_RETURN_A = "returnA";
     private static final String KEY_OPTION_B = "optionB";
     private static final String KEY_RETURN_B = "returnB";
-    private static final String KEY_IS_SKIPPABLE = "isSkippable";
     private static final String KEY_IS_COUNT = "isCount";
     private static final String KEY_IS_FINAL_COUNT = "isFinalCount";
+    private static final String KEY_QUESTION_EXPLAINED  = "questionExplained";
 
     // State transitions table column names
     private static final String KEY_STATE = "state";
     private static final String KEY_MATCH = "`match`";
     private static final String KEY_TRANSITION = "transition";
-    private static final String KEY_CIRCULAR = "circular";
 
     // State table column names
     private static final String KEY_NAME = "name";
@@ -63,14 +62,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String CREATE_QUESTIONS_TABLE = "CREATE TABLE " + TABLE_QUESTIONS + " ( " +
             KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + KEY_QUESTION_SET + " INTEGER, " +
             KEY_QUESTION + " TEXT, " + KEY_OPTION_A + " TEXT, " + KEY_RETURN_A + " INTEGER, " +
-            KEY_OPTION_B + " TEXT, " + KEY_RETURN_B + " INTEGER, " + KEY_IS_SKIPPABLE + " INTEGER," +
-            KEY_IS_COUNT + " INTEGER, " + KEY_IS_FINAL_COUNT + " INTEGER )";
+            KEY_OPTION_B + " TEXT, " + KEY_RETURN_B + " INTEGER, " + KEY_IS_COUNT + " INTEGER, " +
+            KEY_IS_FINAL_COUNT + " INTEGER, " + KEY_QUESTION_EXPLAINED + " TEXT ) ";
 
     // State transitions table create statement
     private static final String CREATE_STATE_TRANSITIONS_TABLE = "CREATE TABLE " +
             TABLE_STATE_TRANSITIONS + " ( " + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            KEY_STATE + " INTEGER, " + KEY_MATCH + " INTEGER, " + KEY_TRANSITION + " INTEGER, " +
-            KEY_CIRCULAR + " INTEGER )";
+            KEY_STATE + " INTEGER, " + KEY_MATCH + " INTEGER, " + KEY_TRANSITION + " INTEGER ) ";
 
     // State table create statement
     private static final String CREATE_STATE_TABLE = "CREATE TABLE " + TABLE_STATE + " ( " + KEY_ID +
@@ -256,32 +254,32 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
     }
 
-    /**
-     * Method to get and return colour of given state
-     *
-     * @param id State id of state for which the colour is required
-     * @return First letter of the colour of the state
-     */
-    public char getStateColor(int id) {
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        String stateQuery = "SELECT * FROM " + TABLE_STATE + " WHERE " + KEY_ID + " = " + id;
-
-        Cursor stateCursor = db.rawQuery(stateQuery, null);
-
-        String name;
-
-        if (!(stateCursor.moveToFirst()) || stateCursor.getCount() == 0) {
-            // Return null if state not found
-            return 0;
-        } else {
-            stateCursor.moveToFirst();
-
-            name = stateCursor.getString(1);
-        }
-
-        int posOfSpace = name.indexOf(' ');
-
-        return name.charAt(posOfSpace + 1);
-    }
+//    /**
+//     * Method to get and return colour of given state
+//     *
+//     * @param id State id of state for which the colour is required
+//     * @return First letter of the colour of the state
+//     */
+//    public char getStateColor(int id) {
+//        SQLiteDatabase db = this.getReadableDatabase();
+//
+//        String stateQuery = "SELECT * FROM " + TABLE_STATE + " WHERE " + KEY_ID + " = " + id;
+//
+//        Cursor stateCursor = db.rawQuery(stateQuery, null);
+//
+//        String name;
+//
+//        if (!(stateCursor.moveToFirst()) || stateCursor.getCount() == 0) {
+//            // Return null if state not found
+//            return 0;
+//        } else {
+//            stateCursor.moveToFirst();
+//
+//            name = stateCursor.getString(1);
+//        }
+//
+//        int posOfSpace = name.indexOf(' ');
+//
+//        return name.charAt(posOfSpace + 1);
+//    }
 }
