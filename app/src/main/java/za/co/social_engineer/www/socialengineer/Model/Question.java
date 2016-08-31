@@ -17,12 +17,12 @@ public class Question implements Parcelable {
     private int returnA;
     private String optionB;
     private int returnB;
-    private int isSkippable;
     private int isCount;
     private int isFinalCount;
+    private String questionExplained;
 
     public Question(int id, int questionSet, String question, String optionA, int returnA,
-                    String optionB, int returnB, int isSkippable, int isCount, int isFinalCount) {
+                    String optionB, int returnB, int isCount, int isFinalCount, String questionExplained) {
         this.id = id;
         this.questionSet = questionSet;
         this.question = question;
@@ -30,9 +30,9 @@ public class Question implements Parcelable {
         this.returnA = returnA;
         this.optionB = optionB;
         this.returnB = returnB;
-        this.isSkippable = isSkippable;
         this.isCount = isCount;
         this.isFinalCount = isFinalCount;
+        this.questionExplained = questionExplained;
     }
 
     public int getId() {
@@ -91,14 +91,6 @@ public class Question implements Parcelable {
         this.returnB = returnB;
     }
 
-    public int getIsSkippable() {
-        return isSkippable;
-    }
-
-    public void setIsSkippable(int isSkippable) {
-        this.isSkippable = isSkippable;
-    }
-
     public int getIsCount() {
         return isCount;
     }
@@ -115,6 +107,14 @@ public class Question implements Parcelable {
         this.isFinalCount = isFinalCount;
     }
 
+    public String getQuestionExplained() {
+        return questionExplained;
+    }
+
+    public void setQuestionExplained(String questionExplained) {
+        this.questionExplained = questionExplained;
+    }
+
     @Override
     public int describeContents() {
         return hashCode();
@@ -129,9 +129,9 @@ public class Question implements Parcelable {
         dest.writeInt(this.returnA);
         dest.writeString(this.optionB);
         dest.writeInt(this.returnB);
-        dest.writeInt(this.isSkippable);
         dest.writeInt(this.isCount);
         dest.writeInt(this.isFinalCount);
+        dest.writeString(this.questionExplained);
     }
 
     public Question(Parcel in) {
@@ -142,9 +142,9 @@ public class Question implements Parcelable {
         this.returnA = in.readInt();
         this.optionB = in.readString();
         this.returnB = in.readInt();
-        this.isSkippable = in.readInt();
         this.isCount = in.readInt();
         this.isFinalCount = in.readInt();
+        this.questionExplained = in.readString();
     }
 
     public static final Parcelable.Creator<Question> CREATOR = new Parcelable.Creator<Question>() {
