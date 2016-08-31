@@ -29,6 +29,7 @@ public class SEADMActivity extends AppCompatActivity {
     private Button state4Button;
     private Button state5Button;
     private Button state6Button;
+    private Button state7Button;
     private Button finalStateButton;
 
     private Question currentQuestion;
@@ -54,6 +55,7 @@ public class SEADMActivity extends AppCompatActivity {
         state4Button = (Button) findViewById(R.id.button_state_4);
         state5Button = (Button) findViewById(R.id.button_state_5);
         state6Button = (Button) findViewById(R.id.button_state_6);
+        state7Button = (Button) findViewById(R.id.button_state_7);
         finalStateButton = (Button) findViewById(R.id.button_final_state);
 
         Intent intent = getIntent();
@@ -62,7 +64,7 @@ public class SEADMActivity extends AppCompatActivity {
 
         count = 0;
 
-        visitedStates = new int[7]; // Initialised to zeros according to the Java language spec
+        visitedStates = new int[8]; // Initialised to zeros according to the Java language spec
 
         int stateId = currentQuestion.getQuestionSet();
 
@@ -158,6 +160,8 @@ public class SEADMActivity extends AppCompatActivity {
             case 6:
                 return state6Button;
             case 7:
+                return state7Button;
+            case 8:
                 return finalStateButton;
             default:
                 Log.e(TAG, "Undefined state ID, " + stateId + ", passed to getStateButton method.");
