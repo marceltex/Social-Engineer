@@ -65,11 +65,10 @@ public class SEADMActivity extends AppCompatActivity {
         visitedStates = new int[7]; // Initialised to zeros according to the Java language spec
 
         int stateId = currentQuestion.getQuestionSet();
-        char colorChar = db.getStateColor(stateId);
 
         questionTextView.setText(currentQuestion.getQuestion());
         state1Button.setTextColor(Color.WHITE);
-        setStateColor(state1Button, colorChar);
+        setStateColor(state1Button, stateId);
         visitedStates[stateId - 2] = 1;
 
         db.close();
@@ -128,12 +127,11 @@ public class SEADMActivity extends AppCompatActivity {
             finish();
         } else {
             int stateId = currentQuestion.getQuestionSet();
-            char colorChar = db.getStateColor(stateId);
             Button stateButton = getStateButton(stateId - 1);
 
             questionTextView.setText(currentQuestion.getQuestion());
             stateButton.setTextColor(Color.WHITE);
-            setStateColor(stateButton, colorChar);
+            setStateColor(stateButton, stateId);
             visitedStates[stateId - 2] = 1;
         }
         db.close();
@@ -171,25 +169,28 @@ public class SEADMActivity extends AppCompatActivity {
      * Method used to set the colour of the state buttons in the progress bar.
      *
      * @param stateButton State button which the colour needs to be changed
-     * @param colorChar A character representing the colour to which the state button should be changed
+     * @param stateId State ID of the current state
      */
-    public void setStateColor(Button stateButton, char colorChar) {
+    public void setStateColor(Button stateButton, int stateId) {
         if (isMultiColoredProgressBar) {
-            switch (colorChar) {
-                case 'Y':
+            switch (stateId) {
+                case 1:
+                case 2:
+                case 4:
                     stateButton.setBackground(ContextCompat.getDrawable(this, R.drawable.yellow_chevron));
                     break;
-                case 'B':
+                case 3:
                     stateButton.setBackground(ContextCompat.getDrawable(this, R.drawable.blue_chevron));
                     break;
-                case 'G':
+                case 5:
+                case 7:
                     stateButton.setBackground(ContextCompat.getDrawable(this, R.drawable.green_chevron));
                     break;
-                case 'R':
+                case 6:
                     stateButton.setBackground(ContextCompat.getDrawable(this, R.drawable.red_chevron));
                     break;
                 default:
-                    Log.e(TAG, "Undefined character, '" + colorChar + "', passed to setStateColor method.");
+                    Log.e(TAG, "Undefined state ID, '" + stateId + "', passed to setStateColor method.");
                     break;
             }
         } else {
