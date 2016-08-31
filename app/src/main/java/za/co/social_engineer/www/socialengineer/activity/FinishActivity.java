@@ -78,11 +78,11 @@ public class FinishActivity extends AppCompatActivity {
             if (((visitedStates[i] == 1) && (finalQuestion.getQuestionSet() == 100)) ||
                     (visitedStates[i] == 100)) {
                 stateButton.setTextColor(Color.WHITE);
-                setStateColor(stateButton, 'R');
+                setStateColor(stateButton, 6);
             } else if (((visitedStates[i] == 1) && (finalQuestion.getQuestionSet() == 200)) ||
                     (visitedStates[i] == 200)) {
                 stateButton.setTextColor(Color.WHITE);
-                setStateColor(stateButton, 'G');
+                setStateColor(stateButton, 5);
             } else {
                 stateButton.setEnabled(false);
             }
@@ -142,29 +142,25 @@ public class FinishActivity extends AppCompatActivity {
      * @param stateId State ID of the current state
      */
     public void setStateColor(Button stateButton, int stateId) {
-        if (isMultiColoredProgressBar) {
-            switch (stateId) {
-                case 1:
-                case 2:
-                case 4:
-                    stateButton.setBackground(ContextCompat.getDrawable(this, R.drawable.yellow_chevron));
-                    break;
-                case 3:
-                    stateButton.setBackground(ContextCompat.getDrawable(this, R.drawable.blue_chevron));
-                    break;
-                case 5:
-                case 7:
-                    stateButton.setBackground(ContextCompat.getDrawable(this, R.drawable.green_chevron));
-                    break;
-                case 6:
-                    stateButton.setBackground(ContextCompat.getDrawable(this, R.drawable.red_chevron));
-                    break;
-                default:
-                    Log.e(TAG, "Undefined state ID, '" + stateId + "', passed to setStateColor method.");
-                    break;
-            }
-        } else {
-            stateButton.setBackground(ContextCompat.getDrawable(this, R.drawable.green_chevron));
+        switch (stateId) {
+            case 1:
+            case 2:
+            case 4:
+                stateButton.setBackground(ContextCompat.getDrawable(this, R.drawable.yellow_chevron));
+                break;
+            case 3:
+                stateButton.setBackground(ContextCompat.getDrawable(this, R.drawable.blue_chevron));
+                break;
+            case 5:
+            case 7:
+                stateButton.setBackground(ContextCompat.getDrawable(this, R.drawable.green_chevron));
+                break;
+            case 6:
+                stateButton.setBackground(ContextCompat.getDrawable(this, R.drawable.red_chevron));
+                break;
+            default:
+                Log.e(TAG, "Undefined state ID, '" + stateId + "', passed to setStateColor method.");
+                break;
         }
     }
 }

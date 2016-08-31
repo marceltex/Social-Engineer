@@ -71,7 +71,7 @@ public class SEADMActivity extends AppCompatActivity {
         questionTextView.setText(currentQuestion.getQuestion());
         state1Button.setTextColor(Color.WHITE);
         setStateColor(state1Button, stateId);
-        visitedStates[stateId - 2] = 1;
+        visitedStates[stateId - 1] = 1;
 
         db.close();
     }
@@ -129,12 +129,12 @@ public class SEADMActivity extends AppCompatActivity {
             finish();
         } else {
             int stateId = currentQuestion.getQuestionSet();
-            Button stateButton = getStateButton(stateId - 1);
+            Button stateButton = getStateButton(stateId);
 
             questionTextView.setText(currentQuestion.getQuestion());
             stateButton.setTextColor(Color.WHITE);
             setStateColor(stateButton, stateId);
-            visitedStates[stateId - 2] = 1;
+            visitedStates[stateId - 1] = 1;
         }
         db.close();
     }
