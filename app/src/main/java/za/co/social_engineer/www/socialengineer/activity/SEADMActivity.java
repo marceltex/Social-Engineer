@@ -95,9 +95,8 @@ public class SEADMActivity extends AppCompatActivity {
         getNextQuestion(id, questionSet, returnB);
     }
 
-    // Todo: Display appropriate help message and not just the same text as the question
     public void helpButtonClicked(View view) {
-        Toast helpToast = Toast.makeText(this, currentQuestion.getQuestion(), Toast.LENGTH_LONG);
+        Toast helpToast = Toast.makeText(this, currentQuestion.getQuestionExplained(), Toast.LENGTH_LONG);
         helpToast.show();
     }
 
