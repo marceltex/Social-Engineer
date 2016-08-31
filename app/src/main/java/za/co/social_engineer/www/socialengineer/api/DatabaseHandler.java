@@ -239,7 +239,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             } else {
                 Question finalQuestion;
                 if (questionSet == 100) {
-                    finalQuestion = new Question(0, questionSet, "Defer or Refer Request",
+                    finalQuestion = new Question(0, questionSet, "Defer or Refer the Request",
                             "", 0, "", 0, 0, 0, "");
                 } else {
                     finalQuestion = new Question(0, questionSet, "Perform the Request",
