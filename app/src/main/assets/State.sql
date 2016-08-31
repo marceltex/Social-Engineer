@@ -1,10 +1,10 @@
-INSERT INTO State (id, name) VALUES
-(1, 'Start State'),
-(2, 'State Y1'),
-(3, 'State Blue'),
-(4, 'State Y2'),
-(5, 'State G1'),
-(6, 'State R'),
-(7, 'State G2'),
-(100, 'Fail'),
-(200, 'Sucess');
+INSERT INTO `State` (`id`, `name`) VALUES
+(1, 'S_1'),
+(2, 'S_2'),
+(3, 'S_3'),
+(4, 'S_4'),
+(5, 'S_5'),
+(6, 'S_6'),
+(7, 'S_7'),
+(100, 'S_Fail'),
+(200, 'S_Success');
