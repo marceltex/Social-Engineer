@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import za.co.social_engineer.www.socialengineer.R;
 import za.co.social_engineer.www.socialengineer.api.DatabaseHandler;
@@ -37,6 +38,8 @@ public class FinishActivity extends AppCompatActivity {
     private int[] visitedStates;
 
     private boolean isMultiColoredProgressBar;
+
+    private String helpText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +74,8 @@ public class FinishActivity extends AppCompatActivity {
 
         resultTextView.setText(finalQuestion.getQuestion());
 
+        helpText = "You should " + finalQuestion.getQuestion() + ". Touch the Restart button to start again.";
+
         // Set the colours of the state buttons in progress bar
         for (int i = 0; i < visitedStates.length; i++) {
             Button stateButton = getStateButton(i + 1);
@@ -103,6 +108,11 @@ public class FinishActivity extends AppCompatActivity {
         intent.putExtra(HomeActivity.IS_MULTI_COLORED_PROGRESS_BAR, isMultiColoredProgressBar);
         startActivity(intent);
         finish();
+    }
+
+    public void helpButtonClicked(View view) {
+        Toast helpToast = Toast.makeText(this, helpText, Toast.LENGTH_LONG);
+        helpToast.show();
     }
 
     /**
