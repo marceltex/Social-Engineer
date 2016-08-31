@@ -13,5 +13,6 @@
     <string name="state_4_btn_text">State\n4</string>
     <string name="state_5_btn_text">State\n5</string>
     <string name="state_6_btn_text">State\n6</string>
+    <string name="state_7_btn_text">State\n7</string>
     <string name="final_state_btn_text">Final\nState</string>
 </resources>
