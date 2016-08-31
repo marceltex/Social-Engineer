@@ -86,7 +86,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String[] SQL_FILES = {"complexQuestions.sql", "questions.sql", "State.sql",
             "stateTransitions.sql"};
 
-    private static final int FIRST_QUESTION_ID = 2;
+    private static final int FIRST_QUESTION_ID = 1;
 
     private Context context;
 
@@ -163,7 +163,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
             Question firstQuestion = new Question(cursor.getInt(0), cursor.getInt(1), cursor.getString(2),
                     cursor.getString(3), cursor.getInt(4), cursor.getString(5),
-                    cursor.getInt(6), cursor.getInt(7), cursor.getInt(8), cursor.getInt(9));
+                    cursor.getInt(6), cursor.getInt(7), cursor.getInt(8), cursor.getString(9));
 
             return firstQuestion;
         }
@@ -238,7 +238,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                             nextQuestionCursor.getString(2), nextQuestionCursor.getString(3),
                             nextQuestionCursor.getInt(4), nextQuestionCursor.getString(5),
                             nextQuestionCursor.getInt(6), nextQuestionCursor.getInt(7),
-                            nextQuestionCursor.getInt(8), nextQuestionCursor.getInt(9));
+                            nextQuestionCursor.getInt(8), nextQuestionCursor.getString(9));
 
                     return nextQuestion;
                 }
@@ -246,10 +246,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 Question finalQuestion;
                 if (questionSet == 100) {
                     finalQuestion = new Question(0, questionSet, "Defer or Refer Request",
-                            "", 0, "", 0, 0, 0, 0);
+                            "", 0, "", 0, 0, 0, "");
                 } else {
                     finalQuestion = new Question(0, questionSet, "Perform the Request",
-                            "", 0, "", 0, 0, 0, 0);
+                            "", 0, "", 0, 0, 0, "");
                 }
                 return finalQuestion;
             }
