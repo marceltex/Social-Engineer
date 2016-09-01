@@ -4,13 +4,14 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import za.co.social_engineer.www.socialengineer.R;
 import za.co.social_engineer.www.socialengineer.api.DatabaseHandler;
@@ -30,6 +31,8 @@ public class FinishActivity extends AppCompatActivity {
     private Button state6Button;
     private Button state7Button;
     private Button finalStateButton;
+
+    private ImageButton helpImageButton;
 
     private Question finalQuestion;
 
@@ -58,6 +61,8 @@ public class FinishActivity extends AppCompatActivity {
         state6Button = (Button) findViewById(R.id.button_state_6);
         state7Button = (Button) findViewById(R.id.button_state_7);
         finalStateButton = (Button) findViewById(R.id.button_final_state);
+
+        helpImageButton = (ImageButton) findViewById(R.id.image_button_help);
 
         Intent intent = getIntent();
         finalQuestion = intent.getParcelableExtra(SEADMActivity.FINAL_QUESTION);
@@ -111,8 +116,18 @@ public class FinishActivity extends AppCompatActivity {
     }
 
     public void helpButtonClicked(View view) {
-        Toast helpToast = Toast.makeText(this, helpText, Toast.LENGTH_LONG);
-        helpToast.show();
+        helpImageButton.setVisibility(View.INVISIBLE);
+
+        Snackbar helpSnackbar = Snackbar.make(view, helpText, Snackbar.LENGTH_LONG);
+
+        helpSnackbar.setCallback(new Snackbar.Callback() {
+            @Override
+            public void onDismissed(Snackbar snackbar, int event) {
+                helpImageButton.setVisibility(View.VISIBLE);
+            }
+        });
+
+        helpSnackbar.show();
     }
 
     /**
