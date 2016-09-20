@@ -2,14 +2,14 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion "24.0.1"
+    buildToolsVersion "24.0.2"
 
     defaultConfig {
         applicationId "za.co.social_engineer.www.socialengineer"
         minSdkVersion 16
         targetSdkVersion 24
         versionCode 1
-        versionName "0.70"
+        versionName "0.73"
     }
     buildTypes {
         release {
