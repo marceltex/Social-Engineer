@@ -7,4 +7,5 @@
     <color name="red">#e11818</color>
     <color name="background">#29495c</color>
     <color name="text_view_background">#f2f2f2</color>
+    <color name="border_color">#74c52c</color>
 </resources>

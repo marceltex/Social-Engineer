@@ -143,13 +143,15 @@ public class SEADMActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         } else {
-            int stateId = currentQuestion.getQuestionSet();
-            Button stateButton = getStateButton(stateId);
-
             questionTextView.setText(currentQuestion.getQuestion());
-            stateButton.setTextColor(Color.WHITE);
-            setStateColor(stateButton, stateId);
-            visitedStates[stateId - 1] = 1;
+            int stateId = currentQuestion.getQuestionSet();
+
+            for (int i = 1; i <= stateId; i++) {
+                Button stateButton = getStateButton(i);
+                stateButton.setTextColor(Color.WHITE);
+                setStateColor(stateButton, stateId);
+                visitedStates[i - 1] = 1;
+            }
         }
         db.close();
     }
