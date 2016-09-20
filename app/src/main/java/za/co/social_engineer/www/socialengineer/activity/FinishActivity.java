@@ -82,19 +82,15 @@ public class FinishActivity extends AppCompatActivity {
         helpText = "You should " + finalQuestion.getQuestion() + ". Touch the Restart button to start again.";
 
         // Set the colours of the state buttons in progress bar
-        for (int i = 0; i < visitedStates.length; i++) {
-            Button stateButton = getStateButton(i + 1);
+        for (int i = 1; i <= 8; i++) {
+            Button stateButton = getStateButton(i);
 
-            if (((visitedStates[i] == 1) && (finalQuestion.getQuestionSet() == 100)) ||
-                    (visitedStates[i] == 100)) {
+            if (finalQuestion.getQuestionSet() == 100) {
                 stateButton.setTextColor(Color.WHITE);
                 setStateColor(stateButton, 6);
-            } else if (((visitedStates[i] == 1) && (finalQuestion.getQuestionSet() == 200)) ||
-                    (visitedStates[i] == 200)) {
+            } else if (finalQuestion.getQuestionSet() == 200) {
                 stateButton.setTextColor(Color.WHITE);
                 setStateColor(stateButton, 5);
-            } else {
-                stateButton.setEnabled(false);
             }
         }
 
