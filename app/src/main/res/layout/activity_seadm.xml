@@ -106,25 +106,37 @@
 
     </LinearLayout>
 
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.001"/>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:background="@drawable/question_border">
 
         <TextView
             android:id="@+id/text_view_question"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="20dp"
-            android:paddingBottom="20dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:gravity="center"
             android:layout_gravity="center"
-            android:background="@drawable/question_border"
             android:textSize="36sp"
             android:textColor="@android:color/white"
             android:textStyle="bold" />
 
     </ScrollView>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.001"/>
 
     <LinearLayout
         android:layout_width="match_parent"
