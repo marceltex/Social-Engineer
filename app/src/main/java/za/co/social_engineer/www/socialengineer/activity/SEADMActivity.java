@@ -104,7 +104,19 @@ public class SEADMActivity extends AppCompatActivity {
     public void helpButtonClicked(View view) {
         helpImageButton.setVisibility(View.INVISIBLE);
 
-        Snackbar helpSnackbar = Snackbar.make(view, currentQuestion.getQuestionExplained(), Snackbar.LENGTH_LONG);
+        final Snackbar helpSnackbar = Snackbar.make(view, currentQuestion.getQuestionExplained(), Snackbar.LENGTH_INDEFINITE);
+
+        helpSnackbar.setAction("Ok", new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                helpSnackbar.dismiss();
+            }
+        });
+
+        // Increment the maximum number of lines allowed in a Snackbar
+        View snackbarView = helpSnackbar.getView();
+        TextView textView = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+        textView.setMaxLines(10);
 
         helpSnackbar.setCallback(new Snackbar.Callback() {
             @Override
