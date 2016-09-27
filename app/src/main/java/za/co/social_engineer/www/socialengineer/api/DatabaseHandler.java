@@ -179,7 +179,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         if (match == -1) {
-            String complexQuestionQuery = "SELECT * FROM " + TABLE_COMPLEX_QUESTIONS +" WHERE " +
+            String complexQuestionQuery = "SELECT * FROM " + TABLE_COMPLEX_QUESTIONS + " WHERE " +
                     KEY_QUESTION_SET + " = " + state + " AND " + KEY_COUNT + " = " + count;
 
             Cursor complexQuestionCursor = db.rawQuery(complexQuestionQuery, null);
@@ -194,7 +194,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             }
         }
 
-        String stateTransitionQuery = "SELECT * FROM " + TABLE_STATE_TRANSITIONS +" WHERE " +
+        String stateTransitionQuery = "SELECT * FROM " + TABLE_STATE_TRANSITIONS + " WHERE " +
                 KEY_STATE + " = " + state + " AND " + KEY_MATCH + " = " + match;
 
         Cursor stateTransitionCursor = db.rawQuery(stateTransitionQuery, null);
