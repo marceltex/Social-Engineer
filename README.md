@@ -4,11 +4,11 @@ This is the repository for the social engineering detection Android app develope
 
 **Minimum Android version required:** Android 4.1 (Jelly Bean) (API 16)
 
-**IDE used for development:** Android Studio 2.2
+**IDE used for development:** Android Studio 2.2.1
 
-**Android SDK Build-tools used:** Android SDK Build-tools 24.0.2
+**Android SDK Build-tools used:** Android SDK Build-tools 24.0.3
 
-**Gradle used to build app:** Gradle 2.2.0
+**Gradle used to build app:** Gradle 2.2.1
 
 **Java version used:** Java 8 update 92
 
