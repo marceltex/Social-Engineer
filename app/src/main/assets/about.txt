@@ -4,5 +4,5 @@ This Social Engineering Protection Training Tool (SEPTT) Android app was develop
 App Version: 0.82
 
 Developers: Marcel Teixeira
-            Michael Pepper
-            Saleem Manjoo
+                        Michael Pepper
+                        Saleem Manjoo
