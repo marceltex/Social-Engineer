@@ -1,8 +1,13 @@
-This Social Engineering Protection Training Tool (SEPTT) Android app was developed as part of a Computer Science Honours project. This Android app uses the Social Engineering Attack Detection Model version 2 (SEADMv2) to help the user detect whether they are potentially the victim of a social engineering attack or not. The SEADMv2 is implemented in an online back-end system and the app makes calls to this web service. This allows for changes to be made to the Social Engineering Attack Detection Model at any time without the need to update the app, since these changes will all be server-side.
+<p>This Social Engineering Protection Training Tool (SEPTT) Android app was developed as part of a Computer Science Honours project. This Android app uses the Social Engineering Attack Detection Model version 2 (SEADMv2) to help the user detect whether they are potentially the victim of a social engineering attack or not. The SEADMv2 is implemented in an online back-end system and the app makes calls to this web service. This allows for changes to be made to the Social Engineering Attack Detection Model at any time without the need to update the app, since these changes will all be server-side.</p>
 
+<p>App Version: 0.82</p>
 
-App Version: 0.82
-
-Developers: Marcel Teixeira
-                      Michael Pepper
-                      Saleem Manjoo
+<p><u>Project Team:</u> 
+<ul>
+  <li>Marcel Teixeira (Android Developer)</li>
+  <li>Michael Pepper (Web Developer)</li>
+  <li>Saleem Manjoo (Database Design and Back-end Developer)</li>
+  <li>Francois Mouton (External Client)</li>
+  <li>Tommie Meyer (Project Supervisor)</li>
+</ul>    
+</p>                            
