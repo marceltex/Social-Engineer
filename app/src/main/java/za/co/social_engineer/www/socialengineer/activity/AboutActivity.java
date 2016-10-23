@@ -2,6 +2,8 @@ package za.co.social_engineer.www.socialengineer.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
+import android.text.Spanned;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -34,6 +36,14 @@ public class AboutActivity extends AppCompatActivity {
             Log.e(TAG, e.getMessage());
         }
 
-        aboutTextView.setText(about);
+        Spanned result;
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            result = Html.fromHtml(about, Html.FROM_HTML_MODE_LEGACY);
+        } else {
+            result = Html.fromHtml(about);
+        }
+
+        aboutTextView.setText(result);
     }
 }
