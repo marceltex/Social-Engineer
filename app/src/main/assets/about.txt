@@ -4,10 +4,10 @@
 
 <p><u>Project Team:</u> 
 <ul>
-  <li>Marcel Teixeira (Android Developer)</li>
-  <li>Michael Pepper (Web Developer)</li>
-  <li>Saleem Manjoo (Database Design and Back-end Developer)</li>
-  <li>Francois Mouton (External Client)</li>
-  <li>Tommie Meyer (Project Supervisor)</li>
+  <li>&nbsp;Marcel Teixeira (Android Developer)</li>
+  <li>&nbsp;Michael Pepper (Web Developer)</li>
+  <li>&nbsp;Saleem Manjoo (Database Design and Back-end Developer)</li>
+  <li>&nbsp;Francois Mouton (External Client)</li>
+  <li>&nbsp;Tommie Meyer (Project Supervisor)</li>
 </ul>    
 </p>                            
