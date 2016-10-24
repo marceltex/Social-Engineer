@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="questions"
+        android:enabled="true"
+        android:icon="@drawable/ic_launcher"
+        android:shortcutShortLabel="@string/questions_shortcut_short_label"
+        android:shortcutLongLabel="@string/questions_shortcut_long_label"
+        android:shortcutDisabledMessage="@string/questions_shortcut_disabled_message" >
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="za.co.social_engineer.www.socialengineer"
+            android:targetClass="za.co.social_engineer.www.socialengineer.activity.SEADMActivity"/>
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+
+    <shortcut
+        android:shortcutId="picture_of_model"
+        android:enabled="true"
+        android:icon="@drawable/ic_launcher"
+        android:shortcutShortLabel="@string/picture_of_model_shortcut_short_label"
+        android:shortcutLongLabel="@string/picture_of_model_shortcut_long_label"
+        android:shortcutDisabledMessage="@string/picture_of_model_shortcut_disabled_message" >
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="za.co.social_engineer.www.socialengineer"
+            android:targetClass="za.co.social_engineer.www.socialengineer.activity.PictureOfModelActivity"/>
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+
+    <shortcut
+        android:shortcutId="training"
+        android:enabled="true"
+        android:icon="@drawable/ic_launcher"
+        android:shortcutShortLabel="@string/training_shortcut_short_label"
+        android:shortcutLongLabel="@string/training_shortcut_long_label"
+        android:shortcutDisabledMessage="@string/training_shortcut_disabled_message" >
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="za.co.social_engineer.www.socialengineer"
+            android:targetClass="za.co.social_engineer.www.socialengineer.activity.TrainingActivity"/>
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+
+    <shortcut
+        android:shortcutId="about"
+        android:enabled="true"
+        android:icon="@drawable/ic_launcher"
+        android:shortcutShortLabel="@string/about_shortcut_short_label"
+        android:shortcutLongLabel="@string/about_shortcut_long_label"
+        android:shortcutDisabledMessage="@string/about_shortcut_disabled_message" >
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="za.co.social_engineer.www.socialengineer"
+            android:targetClass="za.co.social_engineer.www.socialengineer.activity.AboutActivity"/>
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+</shortcuts>
