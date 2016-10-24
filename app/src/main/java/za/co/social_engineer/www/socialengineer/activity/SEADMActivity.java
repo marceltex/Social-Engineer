@@ -64,7 +64,11 @@ public class SEADMActivity extends AppCompatActivity {
         helpImageButton = (ImageButton) findViewById(R.id.image_button_help);
 
         Intent intent = getIntent();
-        currentQuestion = intent.getParcelableExtra(SplashActivity.FIRST_QUESTION);
+        if (intent.getParcelableExtra(SplashActivity.FIRST_QUESTION) != null) {
+            currentQuestion = intent.getParcelableExtra(SplashActivity.FIRST_QUESTION);
+        } else {
+            currentQuestion = db.getFirstQuestion();
+        }
         isMultiColoredProgressBar = intent.getBooleanExtra(HomeActivity.IS_MULTI_COLORED_PROGRESS_BAR, false);
 
         count = 0;
