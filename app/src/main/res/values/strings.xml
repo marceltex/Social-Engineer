@@ -15,4 +15,16 @@
     <string name="state_6_btn_text">State\n6</string>
     <string name="state_7_btn_text">State\n7</string>
     <string name="final_state_btn_text">Final\nState</string>
+    <string name="questions_shortcut_short_label">Questions</string>
+    <string name="questions_shortcut_long_label">Questions</string>
+    <string name="questions_shortcut_disabled_message">Questions are disabled</string>
+    <string name="picture_of_model_shortcut_short_label">Pic of Model</string>
+    <string name="picture_of_model_shortcut_long_label">Picture of Model</string>
+    <string name="picture_of_model_shortcut_disabled_message">Picture of model is disabled</string>
+    <string name="training_shortcut_short_label">Training</string>
+    <string name="training_shortcut_long_label">Training</string>
+    <string name="training_shortcut_disabled_message">Training is diasbled</string>
+    <string name="about_shortcut_short_label">About</string>
+    <string name="about_shortcut_long_label">About</string>
+    <string name="about_shortcut_disabled_message">About is disabled</string>
 </resources>
