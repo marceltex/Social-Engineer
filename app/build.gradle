@@ -5,7 +5,7 @@ android {
         config {
             keyAlias 'SocialEngineer'
             keyPassword 'septtkey'
-            storeFile file('C:/Users/Marcel/keystores/android.jks')
+            storeFile file('C:/Users/Marcel/keystores/septt.jks')
             storePassword 'septtkeystore'
         }
     }
