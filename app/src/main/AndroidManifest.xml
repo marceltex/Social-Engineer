@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="za.co.social_engineer.www.socialengineer">
-    
+
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
@@ -38,10 +38,13 @@
             android:name=".activity.TrainingActivity"
             android:screenOrientation="portrait" />
         <provider
-            android:authorities="za.co.social_engineer.www.socialengineer"
-            android:name=".util.PDFContentProvider"
-            android:exported="true"
-            android:grantUriPermissions="true">
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="za.co.social_engineer.www.socialengineer.fileProvider"
+            android:grantUriPermissions="true"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
         </provider>
     </application>
 
