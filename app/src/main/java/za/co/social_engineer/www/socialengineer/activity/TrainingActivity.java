@@ -114,7 +114,7 @@ public class TrainingActivity extends AppCompatActivity {
 
             try {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                     Uri uri = FileProvider.getUriForFile(TrainingActivity.this,
                             "za.co.social_engineer.www.socialengineer.fileProvider", file);
