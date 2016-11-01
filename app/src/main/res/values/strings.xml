@@ -5,7 +5,7 @@
     <string name="restart_btn_text">Restart</string>
     <string name="questions_btn_text">Training Tool</string>
     <string name="picture_of_model_btn_text">Picture of Model</string>
-    <string name="training_btn_text">Training Presentations</string>
+    <string name="training_btn_text">Training Slides</string>
     <string name="about_btn_text">About</string>
     <string name="state_1_btn_text">State\n1</string>
     <string name="state_2_btn_text">State\n2</string>
@@ -17,13 +17,13 @@
     <string name="final_state_btn_text">Final\nState</string>
     <string name="questions_shortcut_short_label">Training Tool</string>
     <string name="questions_shortcut_long_label">Training Tool</string>
-    <string name="questions_shortcut_disabled_message">Questions are disabled</string>
+    <string name="questions_shortcut_disabled_message">Training tool is disabled</string>
     <string name="picture_of_model_shortcut_short_label">Pic of Model</string>
     <string name="picture_of_model_shortcut_long_label">Picture of Model</string>
     <string name="picture_of_model_shortcut_disabled_message">Picture of model is disabled</string>
-    <string name="training_shortcut_short_label">Training Presentations</string>
-    <string name="training_shortcut_long_label">Training Presentations</string>
-    <string name="training_shortcut_disabled_message">Training is disabled</string>
+    <string name="training_shortcut_short_label">Training Slides</string>
+    <string name="training_shortcut_long_label">Training Slides</string>
+    <string name="training_shortcut_disabled_message">Training slides are disabled</string>
     <string name="about_shortcut_short_label">About</string>
     <string name="about_shortcut_long_label">About</string>
     <string name="about_shortcut_disabled_message">About is disabled</string>
